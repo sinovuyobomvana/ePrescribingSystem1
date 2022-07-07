@@ -37,7 +37,7 @@ namespace EPrescribingSystem.Models
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
-        //public IEnumerable<Region> GetRegions { get; set; }
+       
       
     }
 }
