@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Models
 {
+    [Table("Pharmacy")]
     public class Pharmacy
     {
         [Key]

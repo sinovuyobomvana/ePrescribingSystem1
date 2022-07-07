@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Models
 {
+    [Table("Suburb")]
     public class Suburb
     {
         [Key]
