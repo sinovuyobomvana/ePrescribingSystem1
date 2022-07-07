@@ -8,7 +8,7 @@ namespace EPrescribingSystem.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string ParentID { get; set; }
+        public string UserID { get; set; }
 
         public string FirstName { get; set; }
 

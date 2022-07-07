@@ -22,5 +22,15 @@ namespace EPrescribingSystem.Models
         [ForeignKey("MedicationID")]
         public int MedicationID { get; set; }
         public MedicationModel MedicationModel { get; set; }
+
+        [ForeignKey("PharmacyID")]
+        public int PharmacyID { get; set; }
+        public PharmacyModel PharmacyModel { get; set; }
+
+        [ForeignKey("UserID")]
+        public int UserID { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+
+
     }
 }
