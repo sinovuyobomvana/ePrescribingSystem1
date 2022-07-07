@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,6 +22,8 @@ namespace EPrescribingSystem.Models
         [Required]
         public string LicenseNumber { get; set; }
 
-
+        [ForeignKey("SuburbID")]
+        public int SuburbID { get; set; }
+        public SuburbModel SuburbModel { get; set; }
     }
 }
