@@ -22,7 +22,7 @@ namespace EPrescribingSystem.Models
 
         [ForeignKey("MedicationID")]
         public int MedicationID { get; set; }
-        public MedicationModel MedicationModel { get; set; }
+        public Medication MedicationModel { get; set; }
 
     }
 }

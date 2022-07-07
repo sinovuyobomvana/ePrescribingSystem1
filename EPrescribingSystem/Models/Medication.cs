@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Models
 {
-    public class MedicationModel
+    public class Medication
     {
         [Key]
         public int MedicationID { get; set; }

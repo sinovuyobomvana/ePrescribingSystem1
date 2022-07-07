@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Models
 {
-    public class CityModel
+    public class ConditionDiagnosis
     {
         [Key]
-        public int CityID { get; set; }
-        [Required]
-        public string Name { get; set; }
-        
-        public string Abbreviation { get; set; }
+
+        public int ConditionID { get; set; }
+
+        public string ConditionName { get; set; }
+
+        public string symptoms { get; set; }
     }
 }

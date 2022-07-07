@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Models
 {
-    public class PrescriptionModel
+    public class Prescription
     {
         [Key]
         public int PrescriptionID { get; set; }
@@ -21,11 +21,11 @@ namespace EPrescribingSystem.Models
 
         [ForeignKey("MedicationID")]
         public int MedicationID { get; set; }
-        public MedicationModel MedicationModel { get; set; }
+        public Medication MedicationModel { get; set; }
 
         [ForeignKey("PharmacyID")]
         public int PharmacyID { get; set; }
-        public PharmacyModel PharmacyModel { get; set; }
+        public Pharmacy PharmacyModel { get; set; }
 
         [ForeignKey("UserID")]
         public int UserID { get; set; }

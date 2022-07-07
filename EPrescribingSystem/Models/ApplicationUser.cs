@@ -19,6 +19,6 @@ namespace EPrescribingSystem.Models
 
         [ForeignKey("SuburbID")]
         public int SuburbID { get; set; }
-        public SuburbModel SuburbModel { get; set; }
+        public Suburb SuburbModel { get; set; }
     }
 }

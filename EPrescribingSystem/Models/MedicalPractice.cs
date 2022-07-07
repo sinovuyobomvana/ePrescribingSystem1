@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Models
 {
-    public class MedicalPracticeModel
+    public class MedicalPractice
     { 
         [Key]
         public int practiceNum { get; set; }

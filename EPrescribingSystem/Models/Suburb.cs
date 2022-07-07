@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Models
 {
-    public class SuburbModel
+    public class Suburb
     {
         [Key]
         public int SuburbID { get; set; }
@@ -18,6 +18,6 @@ namespace EPrescribingSystem.Models
 
         [ForeignKey("CityID")]
         public int CityID { get; set; }
-        public CityModel CityModel { get; set; }
+        public City CityModel { get; set; }
     }
 }

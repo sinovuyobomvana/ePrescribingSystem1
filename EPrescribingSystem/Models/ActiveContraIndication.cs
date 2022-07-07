@@ -20,6 +20,6 @@ namespace EPrescribingSystem.Models
 
         [ForeignKey("ConditionID")]
         public int ConditionID { get; set; }
-        public ConditionDiagnosisModel ConditionDiagnosisModel { get; set; }
+        public ConditionDiagnosis ConditionDiagnosisModel { get; set; }
     }
 }

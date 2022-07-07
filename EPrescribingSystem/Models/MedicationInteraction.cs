@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Models
 {
-    public class ConditionDiagnosisModel
+    public class MedicationInteraction
     {
         [Key]
 
-        public int ConditionID { get; set; }
+        public int InteractionID { get; set; }
 
-        public string ConditionName { get; set; }
+        public string Name { get; set; }
 
-        public string symptoms { get; set; }
+        public string Type { get; set; }
+
+        public string Effect { get; set; }
     }
 }
