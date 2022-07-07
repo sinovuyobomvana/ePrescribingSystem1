@@ -1,0 +1,101 @@
+﻿@model EPrescribingSystem.Models.RegisterUserModel
+@{
+    ViewData["Title"] = "Account";
+    Layout = "_Layout1";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register - Brand</title>
+    <link rel="stylesheet" href="~/assets1/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="~/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="~/assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="~/assets/css/Bootstrap-4---Payment-Form.css">
+    <link rel="stylesheet" href="~/assets/css/Bootstrap-4-Calendar-No-Custom-Code.css">
+    <link rel="stylesheet" href="~/assets/css/Bootstrap-Calendar.css">
+    <link rel="stylesheet" href="~/assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="~/parent/pcalendar/assets/bootstrap/css/bootstrap.min.css">
+</head>
+
+<body class="bg-white">
+    <div class="container">
+        <div class="card shadow-lg o-hidden border-0 my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-flex" @*style="background: #00563f;"*@>
+                        @*<div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;assets/img/dogs/image2.jpeg&quot;);"></div>*@
+                        <div class="container text-center">
+                            <br />
+                            <br />
+                            <div class="signuppanel">
+                                <h3>Welcome to Chungwa </h3>
+                                <div class="subcontent">
+                                    <p>Please make sure that you read and undertand the following:</p><p><b>To apply for your child you have to create an account first. &nbsp;Please make sure you have a valid email address for verification and contact purposes<br /><span style="color: #FF0000;">(eg. someone@gmail.com)</span>.</b></p><p></p><p>
+                                        If you do not have an email address you can <a href="https://accounts.google.com/signup/v2/webcreateaccount?hl=en&flowName=GlifWebSignIn&flowEntry=SignUp">click here</a>
+                                        to create one.&nbsp; Your password should contain all of the following at least 6 characters, one non alphanumeric character ('#, *, +'), one lowercase ('a'-'z') and one uppercase ('A'-'Z'). If you are having dificulties please contact use here - 073 195 3257.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h3 class="text-dark mb-4">Create an Account.</h3>
+                            </div>
+                            <form class="user" asp-action="Account" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-label" asp-for="FirstName">First Name</label>
+                                        <input class="form-control form-control-user" tabindex="1" type="text" asp-for="FirstName" placeholder="First Name">
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" asp-for="LastName">Last Name</label>
+                                        <input class="form-control form-control-user" tabindex="2" type="text" asp-for="LastName" placeholder="Last Name">
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" asp-for="Email">Email</label>
+                                    <input class="form-control form-control-user" tabindex="3" type="email" asp-for="Email" aria-describedby="emailHelp" placeholder="Email Address">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-label" asp-for="Password">Password</label>
+                                        <input class="form-control form-control-user" tabindex="4" asp-for="Password" type="password" id="examplePasswordInput" placeholder="Password">
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label" asp-for="ConfirmPassword">Confirm Password</label>
+                                        <input class="form-control form-control-user" tabindex="5" asp-for="ConfirmPassword" type="password" placeholder="Confirm Password">
+                                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div><button class="btn btn-primary d-block btn-user w-100" type="submit" @*style="background: #00563f;"*@ asp-controller="AccountController" tabindex="6" asp-action="ApplicationForm">Create Account</button><br />
+                            </form>
+                            <div class="text-center"></div>
+                            <div class="text-center"><a class="small" tabindex="7" asp-area="" asp-controller="Account" asp-action="SignIn">Already have an account? SignIn!</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/chart.min.js"></script>
+    <script src="~/assets/js/bs-init.js"></script>
+    <script src="~/assets/js/Bootstrap-4---Payment-Form.js"></script>
+    <script src="~/assets/js/theme.js"></script>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+

@@ -1,0 +1,85 @@
+﻿
+@model EPrescribingSystem.Models.SignInModel
+@{
+    ViewData["Title"] = "View";
+    Layout = "_Layout1";
+}
+
+<head>
+    <meta charset="utf-8">;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login - Brand</title>
+    <link rel="stylesheet" href="~/assets1/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="~/assets1/css/Footer-Basic.css">
+    <link rel="stylesheet" href="~/assets1/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="~/parent/pcalendar/assets/bootstrap/css/bootstrap.min.css">
+</head>
+
+<body class="bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-12 col-xl-10">
+                <div class="card shadow-lg o-hidden border-0 my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-flex">
+
+                                <div class="container text-center">
+                                    <br />
+                                    <br />
+                                    <div class="signuppanel">
+                                        <h3>Welcome back to Chungwa </h3>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <div class="subcontent">
+                                            <p>
+                                                <b>If you have created and confirmed your email address. Please use your registered email address and password to sign in.</b>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h3 class="text-dark mb-4">Sign In</h3>
+                                    </div>
+                                    <form class="user" method="post" asp-action="SignIn">
+                                        <div  asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="mb-3">
+                                            <label class="form-label" asp-for="Email"></label>
+                                            <input class="form-control form-control-user" asp-for="Email" placeholder="Enter email address..." />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" asp-for="Password"></label>
+                                            <input class="form-control form-control-user" asp-for="Password" placeholder="Enter password..." />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                                            </label>
+                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit">Sign In</button><br />
+                                      
+                                    </form>
+                                    <div class="text-center"><a class="small" asp-action="ForgotPassword" asp-controller="Account">Forgot Password?</a></div>
+                                    <div class="text-center"><a class="small" asp-area="" asp-controller="Account" asp-action="Account">Create an Account!</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets1/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets1/js/theme.js"></script>
+</body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
