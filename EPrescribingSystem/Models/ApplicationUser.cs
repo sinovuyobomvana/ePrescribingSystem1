@@ -17,24 +17,45 @@ namespace EPrescribingSystem.Models
 
         public string LastName { get; set; }
 
+        public string IDNumber { get; set; }
+
         public byte[] ProfilePicture { get; set; }
 
         public string Gender { get; set; }
+
         [Required, EmailAddress]
         public string EmailAddress { get; set; }
 
-        public string DOB { get; set; }
+        public string DateOfBirth { get; set; }
+
+        public string Addressine1 { get; set; }
+
+        public string AddressLine2 { get; set; }
+
+        public string PostalCode { get; set; }
+
+        //Doctor
+        public string HealthCouncilRegistrationNumber { get; set; }
+
+        public string HighestQualification { get; set; }
+
+
         [Required, Phone]
-        public string ContactNum { get; set; }
-        public string RegistrationNum { get; set; }
-        public string PracticeNum { get; set; }
+        public string ContactNumber { get; set; }
+        public string RegistrationNumber { get; set; }
+
+        //Pharmacist
+        public string PracticeNumber { get; set; }
+
         [ForeignKey("SuburbID")]
         public string SuburbID { get; set; }
+
         public SuburbModel SuburbModel { get; set; }
 
         [ForeignKey("PharmacyID")]
         public string PharmacyID { get; set; }
-        public PharmacyModel pharmacyModel { get; set; }
+
+        public PharmacyModel PharmacyModel { get; set; }
 
     }
 }

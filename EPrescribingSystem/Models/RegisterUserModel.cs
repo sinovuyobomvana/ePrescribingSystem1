@@ -18,7 +18,6 @@ namespace EPrescribingSystem.Models
         [Required(ErrorMessage = "Please enter last name.")]
         [DataType(DataType.Text)]
         [Display(Name = "Last Name")]
-        //[StringLength(50)]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please enter your email")]
@@ -37,7 +36,20 @@ namespace EPrescribingSystem.Models
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
-       
-      
+        [Required(ErrorMessage = "Please enter address line 1.")]
+        [StringLength(50)]
+        [Display(Name = "Address Line 1")]
+        public string Addressine1 { get; set; }
+
+        [Required(ErrorMessage = "Please enter address line 2.")]
+        [StringLength(50)]
+        [Display(Name = "Address Line 2")]
+        public string AddressLine2 { get; set; }
+
+        [Required(ErrorMessage = "Please enter contact number.")]
+        public string ContactNumber { get; set; }
+
+
+
     }
 }
