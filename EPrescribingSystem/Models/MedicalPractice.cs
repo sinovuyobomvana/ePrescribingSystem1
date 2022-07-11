@@ -11,7 +11,10 @@ namespace EPrescribingSystem.Models
     public class MedicalPractice
     { 
         [Key]
-        public int practiceNum { get; set; }
+
+        public int PracticeID { get; set; }
+
+        public string PracticeNumber { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
