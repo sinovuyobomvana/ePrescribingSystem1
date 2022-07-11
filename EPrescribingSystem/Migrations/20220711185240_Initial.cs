@@ -3,28 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EPrescribingSystem.Migrations
 {
-    public partial class tablesV2 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUsers_SuburbModel_SuburbModelSuburbID",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "SuburbModel");
-
-            migrationBuilder.DropTable(
-                name: "CityModel");
-
-            migrationBuilder.DropIndex(
-                name: "IX_AspNetUsers_SuburbModelSuburbID",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "SuburbModelSuburbID",
-                table: "AspNetUsers");
-
             migrationBuilder.CreateTable(
                 name: "ActiveIngredient",
                 columns: table => new
@@ -36,6 +18,20 @@ namespace EPrescribingSystem.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActiveIngredient", x => x.ActiveIngredientID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoles",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,8 +81,9 @@ namespace EPrescribingSystem.Migrations
                 name: "MedicalPractice",
                 columns: table => new
                 {
-                    practiceNum = table.Column<int>(type: "int", nullable: false)
+                    MedicalPracticeID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    PracticeNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address1 = table.Column<int>(type: "int", nullable: false),
                     Address2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -95,7 +92,7 @@ namespace EPrescribingSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicalPractice", x => x.practiceNum);
+                    table.PrimaryKey("PK_MedicalPractice", x => x.MedicalPracticeID);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,6 +108,27 @@ namespace EPrescribingSystem.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MedicationInteraction", x => x.InteractionID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,6 +253,148 @@ namespace EPrescribingSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IDNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfBirth = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Addressine1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HealthCouncilRegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HighestQualification = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PracticeNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SuburbID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SuburbModelSuburbID = table.Column<int>(type: "int", nullable: true),
+                    PharmacyID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PharmacyModelPharmacyID = table.Column<int>(type: "int", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Pharmacy_PharmacyModelPharmacyID",
+                        column: x => x.PharmacyModelPharmacyID,
+                        principalTable: "Pharmacy",
+                        principalColumn: "PharmacyID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Suburb_SuburbModelSuburbID",
+                        column: x => x.SuburbModelSuburbID,
+                        principalTable: "Suburb",
+                        principalColumn: "SuburbID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Prescription",
                 columns: table => new
                 {
@@ -301,11 +461,6 @@ namespace EPrescribingSystem.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_SuburbID",
-                table: "AspNetUsers",
-                column: "SuburbID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ActiveContraIndication_ActiveIngredientID",
                 table: "ActiveContraIndication",
                 column: "ActiveIngredientID");
@@ -314,6 +469,55 @@ namespace EPrescribingSystem.Migrations
                 name: "IX_ActiveContraIndication_ConditionDiagnosisModelConditionID",
                 table: "ActiveContraIndication",
                 column: "ConditionDiagnosisModelConditionID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetRoleClaims_RoleId",
+                table: "AspNetRoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserClaims_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserLogins_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_RoleId",
+                table: "AspNetUserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_PharmacyModelPharmacyID",
+                table: "AspNetUsers",
+                column: "PharmacyModelPharmacyID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_SuburbModelSuburbID",
+                table: "AspNetUsers",
+                column: "SuburbModelSuburbID");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MedicalHistory_ConditionDiagnosisModelConditionID",
@@ -364,24 +568,27 @@ namespace EPrescribingSystem.Migrations
                 name: "IX_Suburb_CityID",
                 table: "Suburb",
                 column: "CityID");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUsers_Suburb_SuburbID",
-                table: "AspNetUsers",
-                column: "SuburbID",
-                principalTable: "Suburb",
-                principalColumn: "SuburbID",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUsers_Suburb_SuburbID",
-                table: "AspNetUsers");
-
             migrationBuilder.DropTable(
                 name: "ActiveContraIndication");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
                 name: "MedicalHistory");
@@ -396,6 +603,9 @@ namespace EPrescribingSystem.Migrations
                 name: "MedicationInteraction");
 
             migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
                 name: "ConditionDiagnosis");
 
             migrationBuilder.DropTable(
@@ -403,6 +613,9 @@ namespace EPrescribingSystem.Migrations
 
             migrationBuilder.DropTable(
                 name: "ActiveIngredient");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Medication");
@@ -418,70 +631,6 @@ namespace EPrescribingSystem.Migrations
 
             migrationBuilder.DropTable(
                 name: "City");
-
-            migrationBuilder.DropIndex(
-                name: "IX_AspNetUsers_SuburbID",
-                table: "AspNetUsers");
-
-            migrationBuilder.AddColumn<int>(
-                name: "SuburbModelSuburbID",
-                table: "AspNetUsers",
-                type: "int",
-                nullable: true);
-
-            migrationBuilder.CreateTable(
-                name: "CityModel",
-                columns: table => new
-                {
-                    CityID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Abbreviation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CityModel", x => x.CityID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SuburbModel",
-                columns: table => new
-                {
-                    SuburbID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CityID = table.Column<int>(type: "int", nullable: false),
-                    CityModelCityID = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SuburbModel", x => x.SuburbID);
-                    table.ForeignKey(
-                        name: "FK_SuburbModel_CityModel_CityModelCityID",
-                        column: x => x.CityModelCityID,
-                        principalTable: "CityModel",
-                        principalColumn: "CityID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_SuburbModelSuburbID",
-                table: "AspNetUsers",
-                column: "SuburbModelSuburbID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SuburbModel_CityModelCityID",
-                table: "SuburbModel",
-                column: "CityModelCityID");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUsers_SuburbModel_SuburbModelSuburbID",
-                table: "AspNetUsers",
-                column: "SuburbModelSuburbID",
-                principalTable: "SuburbModel",
-                principalColumn: "SuburbID",
-                onDelete: ReferentialAction.Restrict);
         }
     }
 }

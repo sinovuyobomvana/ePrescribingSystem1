@@ -11,7 +11,6 @@ namespace EPrescribingSystem.Models
     public class ActiveIngredient
     {
         [Key]
-
         public int ActiveIngredientID { get; set; }
 
         public string Name { get; set; }

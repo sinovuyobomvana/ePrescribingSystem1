@@ -67,18 +67,47 @@ namespace EPrescribingSystem.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Addressine1")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateOfBirth")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HealthCouncilRegistrationNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HighestQualification")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IDNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -101,19 +130,37 @@ namespace EPrescribingSystem.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PharmacyID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PharmacyModelPharmacyID")
+                        .HasColumnType("int");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PracticeNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("ProfilePicture")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("RegistrationNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SuburbID")
+                    b.Property<string>("SuburbID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SuburbModelSuburbID")
                         .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -136,7 +183,9 @@ namespace EPrescribingSystem.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("SuburbID");
+                    b.HasIndex("PharmacyModelPharmacyID");
+
+                    b.HasIndex("SuburbModelSuburbID");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -232,7 +281,7 @@ namespace EPrescribingSystem.Migrations
 
             modelBuilder.Entity("EPrescribingSystem.Models.MedicalPractice", b =>
                 {
-                    b.Property<int>("practiceNum")
+                    b.Property<int>("MedicalPracticeID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -255,7 +304,10 @@ namespace EPrescribingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("practiceNum");
+                    b.Property<string>("PracticeNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MedicalPracticeID");
 
                     b.ToTable("MedicalPractice");
                 });
@@ -586,11 +638,15 @@ namespace EPrescribingSystem.Migrations
 
             modelBuilder.Entity("EPrescribingSystem.Models.ApplicationUser", b =>
                 {
+                    b.HasOne("EPrescribingSystem.Models.Pharmacy", "PharmacyModel")
+                        .WithMany()
+                        .HasForeignKey("PharmacyModelPharmacyID");
+
                     b.HasOne("EPrescribingSystem.Models.Suburb", "SuburbModel")
                         .WithMany()
-                        .HasForeignKey("SuburbID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SuburbModelSuburbID");
+
+                    b.Navigation("PharmacyModel");
 
                     b.Navigation("SuburbModel");
                 });
