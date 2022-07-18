@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220714221015_updatedTablesV1")]
+    partial class updatedTablesV1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,6 +80,7 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -146,9 +149,6 @@ namespace EPrescribingSystem.Migrations
                     b.Property<byte[]>("ProfilePicture")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("RegistrationNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -157,9 +157,6 @@ namespace EPrescribingSystem.Migrations
 
                     b.Property<int>("SuburbID")
                         .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -281,9 +278,8 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Address1")
+                        .HasColumnType("int");
 
                     b.Property<string>("Address2")
                         .HasColumnType("nvarchar(max)");
@@ -470,9 +466,11 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SuburbID");

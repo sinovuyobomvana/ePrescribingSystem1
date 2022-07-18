@@ -17,7 +17,7 @@ namespace EPrescribingSystem.Data
 
         public DbSet<ActiveIngredient> ActiveIngredients { get; set; }
         public DbSet<ActiveContraIndication> ActiveContraIndications { get; set; }
-        public DbSet<City> CityModels { get; set; }
+        public DbSet<City> Cities { get; set; }
         public DbSet<ConditionDiagnosis> ConditionDiagnoses{ get; set; }
         public DbSet<ContraIndication> ContraIndications { get; set; }
         public DbSet<MedicalHistory> MedicalHistories { get; set; }

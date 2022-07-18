@@ -1,0 +1,172 @@
+﻿@model EPrescribingSystem.ViewModel.UserCreateModel
+@{
+    ViewData["Title"] = "Sign Up";
+    Layout = "_Layout";
+}
+<br/><br />
+     <br />
+     <div class="container">
+         @*<div class="card shadow-lg o-hidden border-0">
+             <div class="card-body">*@
+                 <form asp-action="SignUpForm2" method="post">
+                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                     <div class="form-row">
+                         <div class="form-group col-md-4">
+                             <label asp-for="@Model.RegisterUserModel.FirstName">First Name</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <input asp-for="@Model.RegisterUserModel.FirstName" type="text" class="form-control" placeholder="First Name">
+                             <span asp-validation-for="@Model.RegisterUserModel.FirstName" class="text-danger"></span>
+                         </div>
+                         <div class="form-group col-md-4">
+                             <label asp-for="@Model.RegisterUserModel.LastName">Last Name</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <input asp-for="@Model.RegisterUserModel.LastName" type="text" class="form-control" placeholder="Last Name">
+                             <span asp-validation-for="@Model.RegisterUserModel.LastName" class="text-danger"></span>
+                         </div>
+                         <div class="form-group col-md-2">
+                             <label asp-for="@Model.RegisterUserModel.IDNumber">ID Number</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <input asp-for="@Model.RegisterUserModel.IDNumber" type="text" class="form-control" placeholder="ID Number">
+                             <span asp-validation-for="@Model.RegisterUserModel.IDNumber" class="text-danger"></span>
+                         </div>
+
+                         <div class="form-group col-md-2">
+                             <label asp-for="@Model.RegisterUserModel.DateOfBirth">Date Of Birth</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <input asp-for="@Model.RegisterUserModel.DateOfBirth" type="date" class="form-control">
+                             <span asp-validation-for="@Model.RegisterUserModel.DateOfBirth" class="text-danger"></span>
+                         </div>
+
+                     </div>
+                     <div class="form-row">
+                         <div class="form-group col-md-2">
+                             <label asp-for="RegisterUserModel.Title">Title</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <select asp-for="RegisterUserModel.Title" class="form-control">
+                                 <option selected>Select title...</option>
+                                 <option>Mr</option>
+                                 <option>Mrs</option>
+                                 <option>Miss</option>
+                                 <option>Adv</option>
+                                 <option>Dr</option>
+                                 <option>Prof</option>
+                             </select>
+                             <span asp-validation-for="@Model.RegisterUserModel.Title" class="text-danger"></span>
+                         </div>
+                         <div class="form-group col-md-2">
+                             <label asp-for="@Model.RegisterUserModel.Gender">Gender</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <select asp-for="@Model.RegisterUserModel.Gender" class="form-control">
+                                 <option selected>Select gender...</option>
+                                 <option>Male</option>
+                                 <option>Female</option>
+                             </select>
+                             <span asp-validation-for="@Model.RegisterUserModel.Gender" class="text-danger"></span>
+                         </div>
+
+                         <div class="form-group col-md-4">
+                             <label asp-for="@Model.RegisterUserModel.Addressine1">Address Line 1</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <input asp-for="@Model.RegisterUserModel.Addressine1" type="text" class="form-control" placeholder="1234 Main St">
+                             <span asp-validation-for="@Model.RegisterUserModel.Addressine1" class="text-danger"></span>
+                         </div>
+                         <div class="form-group col-md-4">
+                             <label asp-for="@Model.RegisterUserModel.AddressLine2">Address Line 2</label>
+                             <input asp-for="@Model.RegisterUserModel.AddressLine2" type="text" class="form-control" placeholder="Apartment, studio, or floor">
+                             <span asp-validation-for="@Model.RegisterUserModel.AddressLine2" class="text-danger"></span>
+                         </div>
+                     </div>
+                     <div class="form-row">
+                         <div class="form-group col-md-4">
+                             <label>City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <select id="lstCity" asp-items="@Model.Cities" required class="form-control">
+                                 <option selected>Select city...</option>
+                             </select>
+                         </div>
+                         <div class="form-group col-md-4">
+                             <label asp-for="@Model.RegisterUserModel.Suburb.SuburbID">Suburb</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <select id="lstSuburb" asp-for="@Model.RegisterUserModel.Suburb.SuburbID" class="form-control" asp-items="@Model.Suburbs">
+                                 <option selected>Select suburb...</option>
+                             </select>
+                             <span asp-validation-for="@Model.RegisterUserModel.Suburb" class="text-danger"></span>
+                         </div>
+
+                         <div class="form-group col-md-2">
+                             <label asp-for="@Model.RegisterUserModel.PostalCode">Postal Code</label>
+                             <input asp-for="@Model.RegisterUserModel.PostalCode" type="text" class="form-control" placeholder="Postal Code">
+                             <span asp-validation-for="@Model.RegisterUserModel.PostalCode" class="text-danger"></span>
+                         </div>
+                         <div class="form-group col-md-2">
+                             <label asp-for="@Model.RegisterUserModel.ContactNumber">Contact Number</label>
+                             <input asp-for="@Model.RegisterUserModel.ContactNumber" type="text" class="form-control" placeholder="Contact Number">
+                             <span asp-validation-for="@Model.RegisterUserModel.ContactNumber" class="text-danger"></span>
+                         </div>
+                     </div>
+
+                     <div class="form-row">
+                         <div class="form-group col-md-4">
+                             <label asp-for="@Model.RegisterUserModel.Email">Email</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <input asp-for="@Model.RegisterUserModel.Email" type="email" class="form-control" placeholder="Email">
+                             <span asp-validation-for="@Model.RegisterUserModel.Email" class="text-danger"></span>
+                         </div>
+
+                         <div class="form-group col-md-4">
+                             <label asp-for="@Model.RegisterUserModel.Password">Password</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <input asp-for="@Model.RegisterUserModel.Password" type="password" class="form-control"  placeholder="Password">
+                             <span asp-validation-for="@Model.RegisterUserModel.Password" class="text-danger"></span>
+                         </div>
+
+                         <div class="form-group col-md-4">
+                             <label asp-for="@Model.RegisterUserModel.ConfirmPassword">Confirm Password</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <input asp-for="@Model.RegisterUserModel.ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+                             <span asp-validation-for="@Model.RegisterUserModel.ConfirmPassword" class="text-danger"></span>
+                         </div>
+                     </div>
+                     @*<div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                    Check me out
+                </label>
+            </div>
+        </div>*@
+                     <div class="container col-md-2">
+                         <div class="row">
+                             <button type="submit" class="btn btn-primary justify-content-center d-block btn-user w-100">Create Account</button>
+                             <div class="text-center"><a class="small" asp-controller="Account" asp-action="SignUpForm2">Already have an account? SignIn!</a></div>
+                         </div>
+                     </div>
+
+                 </form>
+             </div>
+         @*</div>
+     </div>*@
+
+@section Scripts{
+
+ @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+ 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#lstCity').change(function () {
+                var selectedCity = $('#lstCity').val();
+
+                var suburbSelect = $('#lstSuburb');
+                suburbSelect.empty();
+
+                if (selectedCity != null && selectedCity != '') {
+                    $.getJSON('@Url.Action("GetSuburbs")', { CityID: selectedCity }, function (suburbs) {
+                        if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
+                            suburbSelect.append($('<option/>', {
+                                value: null,
+                                text: "Select suburb..."
+                            }));
+                          /*  debugger;*/
+                            $.each(suburbs, function (index, suburb) {
+                                suburbSelect.append($('<option/>', {
+                                    value: suburb.value,
+                                    text: suburb.text
+                                }));
+                            });
+                        }
+                    });
+
+
+                }
+            })
+        })
+    </script>
+ }

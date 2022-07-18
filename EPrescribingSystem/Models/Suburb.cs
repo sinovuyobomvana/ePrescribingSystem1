@@ -12,9 +12,9 @@ namespace EPrescribingSystem.Models
     {
         [Key]
         public int SuburbID { get; set; }
-        [Required]
+  
         public string Name { get; set; }
-        [Required]
+   
         public string PostalCode { get; set; }
 
         [ForeignKey("CityID")]

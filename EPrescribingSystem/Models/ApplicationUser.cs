@@ -10,8 +10,8 @@ namespace EPrescribingSystem.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Key]
-        public string UserID { get; set; }
+        //[Key]
+        //public string UserID { get; set; }
 
         public string FirstName { get; set; }
 
@@ -19,14 +19,19 @@ namespace EPrescribingSystem.Models
 
         public string IDNumber { get; set; }
 
+        public string Title { get; set; }
+
         public byte[] ProfilePicture { get; set; }
 
         public string Gender { get; set; }
 
-        [Required, EmailAddress]
-        public string EmailAddress { get; set; }
+        //[Required, EmailAddress]
+        //public string EmailAddress { get; set; }
 
-        public string DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+        public DateTime RegistrationDate { get; set; }
+
 
         public string Addressine1 { get; set; }
 
@@ -40,7 +45,7 @@ namespace EPrescribingSystem.Models
         public string HighestQualification { get; set; }
 
 
-        [Required, Phone]
+        //[Required, Phone]
         public string ContactNumber { get; set; }
         public string RegistrationNumber { get; set; }
 
@@ -48,9 +53,9 @@ namespace EPrescribingSystem.Models
         public string PracticeNumber { get; set; }
 
         [ForeignKey("SuburbID")]
-        public string SuburbID { get; set; }
+        public int SuburbID { get; set; }
 
-        public Suburb SuburbModel { get; set; }
+        public Suburb Suburb { get; set; }
 
         [ForeignKey("PharmacyID")]
         public string PharmacyID { get; set; }

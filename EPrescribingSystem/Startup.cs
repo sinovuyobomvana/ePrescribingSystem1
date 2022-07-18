@@ -1,4 +1,6 @@
 using EPrescribingSystem.Data;
+using EPrescribingSystem.Models;
+using EPrescribingSystem.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,7 +30,11 @@ namespace EPrescribingSystem
         {
             services.AddControllersWithViews();
             services.AddDbContext<EprescribingDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<EprescribingDBContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<EprescribingDBContext>().AddDefaultTokenProviders();
+
+            services.AddSession();
+
+            services.AddScoped<IAccountRepository, AccountRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-//using Microsoft.AspNetCore.Identity;
 
 namespace EPrescribingSystem.Models
 {
@@ -19,6 +18,22 @@ namespace EPrescribingSystem.Models
         [DataType(DataType.Text)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please enter ID no.")]
+        [Display(Name = "ID Number")]
+        [StringLength(13, MinimumLength = 13, ErrorMessage = "A valid ID number must have 13 digits.")]
+        public string IDNumber { get; set; }
+
+        [Required(ErrorMessage = "Please select Title.")]
+        public string Title { get; set; }
+
+        [Required(ErrorMessage = "Please select enter date of birth.")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Date Of Birth")]
+        public DateTime DateOfBirth { get; set; }
+
+        [Required(ErrorMessage = "Please select gender.")]
+        public string Gender { get; set; }
 
         [Required(ErrorMessage = "Please enter your email")]
         [Display(Name = "Email address")]
@@ -46,10 +61,13 @@ namespace EPrescribingSystem.Models
         [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
 
-        [Required(ErrorMessage = "Please enter contact number.")]
+        [Required(ErrorMessage = "Please enter postal code.")]
+        public string PostalCode { get; set; }
+
+        [Required(ErrorMessage = "Please enter contact no.")]
         public string ContactNumber { get; set; }
 
-
+        public virtual Suburb Suburb { get; set; }
 
     }
 }

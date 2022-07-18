@@ -17,7 +17,7 @@ namespace EPrescribingSystem.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public int Address1 { get; set; }
+        public string Address1 { get; set; }
         
         public string Address2 { get; set; }
         [Required, Phone]
