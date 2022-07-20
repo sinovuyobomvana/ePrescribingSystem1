@@ -1,3 +1,4 @@
+using EPrescribingSystem.Areas.Admin.Data.Services;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
 using EPrescribingSystem.Repository;
@@ -42,6 +43,7 @@ namespace EPrescribingSystem
             services.AddSession();
 
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IMedicalPracticeService, MedicalPracticeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,7 +75,16 @@ namespace EPrescribingSystem
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Dashboard}/{id?}");
             });
+
+            //Seed Database
+            AppDBInitializer.Seed(app);
+
+
         }
     }
 }
