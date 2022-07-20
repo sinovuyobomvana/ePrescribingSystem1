@@ -1,0 +1,56 @@
+﻿@model MedicalPractice
+
+@{
+    ViewData["Title"] = "Delete Medical Practice";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Delete Confirmation for @Model.Name</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group">
+                    <label asp-for="PracticeNumber" class="control-label"></label>
+                    <input asp-for="PracticeNumber" class="form-control" readonly />
+                    <span asp-validation-for="PracticeNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address1" class="control-label"></label>
+                    <input asp-for="Address1" class="form-control" readonly />
+                    <span asp-validation-for="Address1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address2" class="control-label"></label>
+                    <input asp-for="Address2" class="form-control" readonly />
+                    <span asp-validation-for="Address2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactNum" class="control-label"></label>
+                    <input asp-for="ContactNum" class="form-control" readonly />
+                    <span asp-validation-for="ContactNum" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmailAddress" class="control-label"></label>
+                    <input asp-for="EmailAddress" class="form-control" readonly />
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="MedicalPracticeID" />
+                        <input type="submit" value="Confirm" class="btn btn-danger float-right" />
+                    </form>
+                    <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="MedicalPractice" asp-action="Index">Cancel</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
