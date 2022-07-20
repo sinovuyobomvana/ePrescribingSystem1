@@ -22,12 +22,6 @@ namespace EPrescribingSystem.Controllers
             _accountRepository = accountRepository;
         }
 
-        public IActionResult SignIn()
-        {
-
-            return View();
-        }
-
         public IActionResult Register()
         {
             return View();
@@ -63,22 +57,41 @@ namespace EPrescribingSystem.Controllers
         [HttpPost]
         public async Task<ActionResult> SignUpForm2(UserCreateModel userModel)
          {
+
+            UserCreateModel userCreateModel = new UserCreateModel();
+
+            userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
+            List<SelectListItem> Cities = _context.Cities
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.CityID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+            userCreateModel.Cities = Cities;
+            userCreateModel.Suburbs = new List<SelectListItem>();
+
+
+
             if (ModelState.IsValid)
             {
                 var result = await _accountRepository.CreateUserAsync(userModel);
 
-                if (result.Succeeded)
+                if (!result.Succeeded)
                 {
                     foreach(var errorMessage in result.Errors)
                     {
                         ModelState.AddModelError("", errorMessage.Description); 
                     }
+                    return View(userCreateModel);
                 }
-
-                ModelState.Clear();
+                return RedirectToAction("SignIn", userModel);
+                //ModelState.Clear();
             }
 
-            return View(userModel);
+            return View(userCreateModel);
         }
 
             [HttpGet]
@@ -99,6 +112,32 @@ namespace EPrescribingSystem.Controllers
                 return Json(suburbsSel);
             }
             return null;
+        }
+
+        [Route("signin")]
+        public IActionResult SignIn()
+        {
+
+            return View();
+        }
+
+        [Route("signin")]
+        [HttpPost]
+        public async Task<IActionResult> SignIn(SignInModel signInModel)
+        {
+            if (ModelState.IsValid)
+            {
+               var result = await _accountRepository.PasswordSignInAsync(signInModel);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction();
+                }
+
+                ModelState.AddModelError("", "Invalid Email/Password.");
+            }
+
+            return View(signInModel);
         }
     }
 }

@@ -32,6 +32,13 @@ namespace EPrescribingSystem
             services.AddDbContext<EprescribingDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<EprescribingDBContext>().AddDefaultTokenProviders();
 
+            //Password Configuration
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+            });
+
             services.AddSession();
 
             services.AddScoped<IAccountRepository, AccountRepository>();

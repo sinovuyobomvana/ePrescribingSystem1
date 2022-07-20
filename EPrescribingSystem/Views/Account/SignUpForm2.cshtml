@@ -29,7 +29,7 @@
 
                          <div class="form-group col-md-2">
                              <label asp-for="@Model.RegisterUserModel.DateOfBirth">Date Of Birth</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                             <input asp-for="@Model.RegisterUserModel.DateOfBirth" type="date" class="form-control">
+                             <input value="" asp-for="@Model.RegisterUserModel.DateOfBirth" type="date" class="form-control">
                              <span asp-validation-for="@Model.RegisterUserModel.DateOfBirth" class="text-danger"></span>
                          </div>
 
@@ -38,7 +38,7 @@
                          <div class="form-group col-md-2">
                              <label asp-for="RegisterUserModel.Title">Title</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
                              <select asp-for="RegisterUserModel.Title" class="form-control">
-                                 <option selected>Select title...</option>
+                                 <option value="" selected>Select title...</option>
                                  <option>Mr</option>
                                  <option>Mrs</option>
                                  <option>Miss</option>
@@ -51,7 +51,7 @@
                          <div class="form-group col-md-2">
                              <label asp-for="@Model.RegisterUserModel.Gender">Gender</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
                              <select asp-for="@Model.RegisterUserModel.Gender" class="form-control">
-                                 <option selected>Select gender...</option>
+                                 <option value="" selected>Select gender...</option>
                                  <option>Male</option>
                                  <option>Female</option>
                              </select>
@@ -71,17 +71,18 @@
                      </div>
                      <div class="form-row">
                          <div class="form-group col-md-4">
-                             <label>City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                             <select id="lstCity" asp-items="@Model.Cities" required class="form-control">
-                                 <option selected>Select city...</option>
+                             <label @Model.RegisterUserModel.City>City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                             <select asp-for="@Model.RegisterUserModel.City" id="lstCity" required asp-items="@Model.Cities" class="form-control">
+                                 <option value="" selected>Select city...</option>
                              </select>
+                             <span asp-validation-for="@Model.RegisterUserModel.City" class="text-danger"></span>
                          </div>
                          <div class="form-group col-md-4">
                              <label asp-for="@Model.RegisterUserModel.Suburb.SuburbID">Suburb</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                             <select id="lstSuburb" asp-for="@Model.RegisterUserModel.Suburb.SuburbID" class="form-control" asp-items="@Model.Suburbs">
-                                 <option selected>Select suburb...</option>
+                             <select id="lstSuburb" required asp-for="@Model.RegisterUserModel.Suburb.SuburbID" class="form-control" asp-items="@Model.Suburbs">
+                                 <option value="" selected>Select suburb...</option>
                              </select>
-                             <span asp-validation-for="@Model.RegisterUserModel.Suburb" class="text-danger"></span>
+                             <span asp-validation-for="@Model.RegisterUserModel.Suburb.SuburbID" class="text-danger"></span>
                          </div>
 
                          <div class="form-group col-md-2">
@@ -126,7 +127,7 @@
                      <div class="container col-md-2">
                          <div class="row">
                              <button type="submit" class="btn btn-primary justify-content-center d-block btn-user w-100">Create Account</button>
-                             <div class="text-center"><a class="small" asp-controller="Account" asp-action="SignUpForm2">Already have an account? SignIn!</a></div>
+                             <div class="text-center"><a class="small" asp-controller="Account" asp-action="SignIn">Already have an account? SignIn!</a></div>
                          </div>
                      </div>
 
@@ -151,7 +152,7 @@
                     $.getJSON('@Url.Action("GetSuburbs")', { CityID: selectedCity }, function (suburbs) {
                         if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
                             suburbSelect.append($('<option/>', {
-                                value: null,
+                                value: "",
                                 text: "Select suburb..."
                             }));
                           /*  debugger;*/

@@ -27,7 +27,7 @@ namespace EPrescribingSystem.Models
         [Required(ErrorMessage = "Please select Title.")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Please select enter date of birth.")]
+        [Required(ErrorMessage = "Please enter/select enter date of birth.")]
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
         public DateTime DateOfBirth { get; set; }
@@ -61,12 +61,16 @@ namespace EPrescribingSystem.Models
         [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
 
+        [Required(ErrorMessage = "Please select city.")]
+        public string City { get; set; }
+
         [Required(ErrorMessage = "Please enter postal code.")]
         public string PostalCode { get; set; }
 
         [Required(ErrorMessage = "Please enter contact no.")]
         public string ContactNumber { get; set; }
 
+      
         public virtual Suburb Suburb { get; set; }
 
     }
