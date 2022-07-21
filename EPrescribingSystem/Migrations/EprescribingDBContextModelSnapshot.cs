@@ -391,10 +391,6 @@ namespace EPrescribingSystem.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Address2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactNumber")
@@ -406,6 +402,10 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -1,3 +1,4 @@
+using EPrescribingSystem.Areas.Admin.Data.Repository;
 using EPrescribingSystem.Areas.Admin.Data.Services;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
@@ -36,7 +37,8 @@ namespace EPrescribingSystem
             services.AddSession();
 
             services.AddScoped<IAccountRepository, AccountRepository>();
-            services.AddScoped<IMedicalPracticeService, MedicalPracticeService>();
+            services.AddScoped<IMedicalPracticeRepository, MedicalPracticeRepository>();
+            services.AddScoped<IPharmacyRepository, PharmacyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

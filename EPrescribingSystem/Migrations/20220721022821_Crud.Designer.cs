@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    [Migration("20220720015641_Crud")]
+    [Migration("20220721022821_Crud")]
     partial class Crud
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -393,10 +393,6 @@ namespace EPrescribingSystem.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Address2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactNumber")
@@ -408,6 +404,10 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
