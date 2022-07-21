@@ -1,4 +1,5 @@
-﻿using EPrescribingSystem.Areas.Admin.Data.Services;
+﻿using EPrescribingSystem.Areas.Admin.Data.Repository;
+using EPrescribingSystem.Areas.Admin.Data.Services;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,14 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
     [Area("Admin")]
     public class MedicalPracticeController : Controller
     {
-        private readonly IMedicalPracticeService _service;
+        private readonly IMedicalPracticeRepository _service;
 
-        public MedicalPracticeController(IMedicalPracticeService service)
+
+        public MedicalPracticeController(IMedicalPracticeRepository service)
         {
             _service = service;
         }
-
+  
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Index()
         {
@@ -65,45 +67,80 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
 
             if (medicalPracticeDetails == null)
             {
-                return View("Not Found!!!");
+                return NotFound();
             }
-               
+
 
             return View(medicalPracticeDetails);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("MedicalPracticeID,PracticeNumber,Name,Address1,Address2,ContactNum,EmailAddress")] MedicalPractice medicalPractice)
+        public async Task<IActionResult> Edit(MedicalPractice medicalPractice)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(medicalPractice);
+                medicalPractice = await _service.UpdateAsync(medicalPractice);
             }
-            await _service.UpdateAsync(id, medicalPractice);
-            return RedirectToAction(nameof(Index));
+            catch
+            {
+
+            }
+
+            return RedirectToAction("Index");
         }
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(int id, [Bind("MedicalPracticeID,PracticeNumber,Name,Address1,Address2,ContactNum,EmailAddress")] MedicalPractice medicalPractice)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(medicalPractice);
+        //    }
+        //    await _service.UpdateAsync(id, medicalPractice);
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         //Get: Medical Practice/Delete
         [HttpGet]
         [Route("[area]/[controller]/[action]")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var medicalPracticeDetails = await _service.GetByIdAsync(id);
-
-            return View(medicalPracticeDetails);
+            var medicalPractice = _service.GetById(id);
+            return View(medicalPractice);
         }
 
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public IActionResult Delete(MedicalPractice medicalPractice)
         {
-            var medicalPracticeDetails = await _service.GetByIdAsync(id);
-            if (medicalPracticeDetails == null)
+            try
             {
-                return View("Not Found!!!");
+                medicalPractice = _service.Delete(medicalPractice);
             }
- 
-            await _service.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
+            catch
+            {
+
+            }
+            return RedirectToAction("Index");
         }
+        //[HttpGet]
+        //[Route("[area]/[controller]/[action]")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    var medicalPracticeDetails = await _service.GetByIdAsync(id);
+
+        //    return View(medicalPracticeDetails);
+        //}
+
+        //[HttpPost, ActionName("Delete")]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var medicalPracticeDetails = await _service.GetByIdAsync(id);
+        //    if (medicalPracticeDetails == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    await _service.DeleteAsync(id);
+        //    return RedirectToAction(nameof(Index));
+        //}
     }
 }
