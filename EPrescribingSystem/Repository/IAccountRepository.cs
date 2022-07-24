@@ -8,5 +8,6 @@ namespace EPrescribingSystem.Repository
     public interface IAccountRepository
     {
         Task<IdentityResult> CreateUserAsync(UserCreateModel userModel);
+        Task<SignInResult> PasswordSignInAsync(SignInModel signInModel);
     }
 }

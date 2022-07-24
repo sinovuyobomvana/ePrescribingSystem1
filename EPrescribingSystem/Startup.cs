@@ -1,3 +1,5 @@
+using EPrescribingSystem.Areas.Admin.Data.Repository;
+using EPrescribingSystem.Areas.Admin.Data.Services;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
 using EPrescribingSystem.Repository;
@@ -32,9 +34,18 @@ namespace EPrescribingSystem
             services.AddDbContext<EprescribingDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<EprescribingDBContext>().AddDefaultTokenProviders();
 
+            //Password Configuration
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+            });
+
             services.AddSession();
 
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IMedicalPracticeRepository, MedicalPracticeRepository>();
+            services.AddScoped<IPharmacyRepository, PharmacyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +77,16 @@ namespace EPrescribingSystem
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Dashboard}/{id?}");
             });
+
+            //Seed Database
+            AppDBInitializer.Seed(app);
+
+
         }
     }
 }
