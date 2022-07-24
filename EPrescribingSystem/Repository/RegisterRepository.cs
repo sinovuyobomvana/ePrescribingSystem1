@@ -2,7 +2,6 @@
 using EPrescribingSystem.Models;
 using EPrescribingSystem.ViewModel;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +12,12 @@ namespace EPrescribingSystem.Repository
     public class RegisterRepository : IAccountRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public RegisterRepository(UserManager<ApplicationUser> userManager)
+        public RegisterRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         public async Task<IdentityResult> CreateUserAsync(UserCreateModel userModel)
         {
@@ -54,6 +55,13 @@ namespace EPrescribingSystem.Repository
                     await _userManager.AddToRoleAsync(user, Enums.Roles.Pharmacist.ToString());
                 }
             }
+
+            return result;
+        }
+
+        public async Task<SignInResult> PasswordSignInAsync(SignInModel signInModel)
+        {
+            var result = await _signInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, signInModel.RememberMe, false);
 
             return result;
         }
