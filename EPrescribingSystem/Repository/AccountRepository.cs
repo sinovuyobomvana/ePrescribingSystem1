@@ -54,5 +54,10 @@ namespace EPrescribingSystem.Repository
             return result;
         }
 
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Repository
 {
-    public class RegisterRepository : IAccountRepository
+    public class RegisterRepository : IRegisterRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;

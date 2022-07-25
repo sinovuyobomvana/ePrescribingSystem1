@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using EPrescribingSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EPrescribingSystem.Controllers
 {
@@ -21,7 +22,9 @@ namespace EPrescribingSystem.Controllers
                 _roleManager = roleManager;
                 _userManager = userManager;
             }
+        //[Route("[area]/UserRoles")]
         [Route("[area]/[controller]/[action]")]
+        [Authorize]
         public async Task<IActionResult> Index()
         {
                 var users = await _userManager.Users.ToListAsync();
@@ -38,13 +41,16 @@ namespace EPrescribingSystem.Controllers
                 }
                 return View(userRolesViewModel);
         }
-        [Route("[area]/[controller]/[action]")]
+
+      
         private async Task<List<string>> GetUserRoles(ApplicationUser user)
         {
             return new List<string>(await _userManager.GetRolesAsync(user));
         }
 
+        //[Route("[area]/ManageUserRoles")]
         [Route("[area]/[controller]/[action]")]
+        [Authorize]
         public async Task<IActionResult> Manage(string userId)
         {
             ViewBag.userId = userId;
@@ -77,7 +83,9 @@ namespace EPrescribingSystem.Controllers
         }
 
         [HttpPost]
+        //[Route("[area]/ManageUserRoles")]
         [Route("[area]/[controller]/[action]")]
+        [Authorize]
         public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);

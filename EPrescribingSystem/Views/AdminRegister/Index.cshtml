@@ -8,7 +8,7 @@
 <link href="~/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
 
-<form action="Create" method="post">
+<form asp-action="Register" method="post">
     <div class="setupwizard">
         <div class="setupwizard-step">
             <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
@@ -177,7 +177,7 @@
             allWells = $('.setup-content'), // content div
             allNextBtn = $('.nextBtn'); // next button
 
-        allWells.hide(); // hide all contents by defauld
+       /* allWells.hide(); // hide all contents by defauld*/
 
         navListItems.click(function (e) {
             e.preventDefault();
