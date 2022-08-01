@@ -35,6 +35,9 @@ namespace EPrescribingSystem.Repository
                 RegistrationDate = DateTime.Now,
                 PostalCode = userModel.RegisterUserModel.PostalCode,
                 SuburbID = userModel.RegisterUserModel.Suburb.SuburbID,
+                HighestQualification = userModel.RegisterUserModel.HighestQualification,
+                HealthCouncilRegistrationNumber = userModel.RegisterUserModel.HealthCouncilRegistrationNumber,
+                RegistrationNumber = userModel.RegisterUserModel.RegistrationNumber,
             }; 
 
             var result = await _userManager.CreateAsync(user, userModel.RegisterUserModel.Password);

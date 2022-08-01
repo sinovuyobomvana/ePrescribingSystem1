@@ -23,6 +23,7 @@ namespace EPrescribingSystem.Repository
         {
             var user = new ApplicationUser()
             {
+                Title = userModel.RegisterUserModel.Title,
                 Email = userModel.RegisterUserModel.Email,
                 UserName = userModel.RegisterUserModel.Email,
                 FirstName = userModel.RegisterUserModel.FirstName,
