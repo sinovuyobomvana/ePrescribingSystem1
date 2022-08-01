@@ -121,7 +121,7 @@
                                     <div class="form-card">
                                         <h2 class="fs-title">Role</h2>
          
-                                        <select>
+                                        <select class="form-control">
                                             <option value="" selected>Select Role...</option>
                                             <option value="doc">Doctor</option>
                                             <option value="pharm">Pharmacist</option>
@@ -211,8 +211,8 @@
                                         </div>
                                     </div>
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                    <input type="button" name="make_payment" class="next action-button" value="Confirm" />
-</fieldset>
+                                    <input type="button" name="make_payment" class="next action-button" value="Next Step" />
+                                </fieldset>
                                 <fieldset>
                                     <div class="form-card">
                                         <h2 class="fs-title">Contact</h2>
@@ -224,7 +224,7 @@
                                         <span asp-validation-for="@Model.RegisterUserModel.Email" class="text-danger"></span>
                                     </div>
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                    <input type="button" name="make_payment" class="next action-button" value="Confirm" />
+                                    <input type="button" name="make_payment" class="next action-button" value="Next Step" />
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -242,7 +242,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
-                                        <h2 class="fs-title text-center">Success !</h2>
+                                        <h2 class="fs-title text-center">Success!</h2>
                                         <br><br>
                                         <div class="row justify-content-center">
                                             <div class="col-3">
