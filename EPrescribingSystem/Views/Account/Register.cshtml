@@ -4,7 +4,7 @@
     Layout = "_Layout1";
 }
 
-<head>
+<!--<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Register - Brand</title>
@@ -26,9 +26,9 @@
         <div class="card shadow-lg o-hidden border-0 my-5">
             <div class="card-body p-0">
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-flex" @*style="background: #00563f;"*@>
+                    <div class="col-lg-5 d-none d-lg-flex"--> @*style="background: #00563f;"*@<!-->-->
                         @*<div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;assets/img/dogs/image2.jpeg&quot;);"></div>*@
-                        <div class="container text-center">
+                        <!--<div class="container text-center">
                             <br />
                             <br />
                             <div class="signuppanel">
@@ -78,7 +78,7 @@
                                         <input class="form-control form-control-user" tabindex="5" asp-for="ConfirmPassword" type="password" placeholder="Confirm Password">
                                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                     </div>
-                                </div><button class="btn btn-primary d-block btn-user w-100" type="submit" @*style="background: #00563f;"*@ asp-controller="AccountController" tabindex="6" asp-action="ApplicationForm">Create Account</button><br />
+                                </div><button class="btn btn-primary d-block btn-user w-100" type="submit"--> @*style="background: #00563f;"*@ <!--asp-controller="AccountController" tabindex="6" asp-action="ApplicationForm">Create Account</button><br />
                             </form>
                             <div class="text-center"></div>
                             <div class="text-center"><a class="small" tabindex="7" asp-area="" asp-controller="Account" asp-action="SignIn">Already have an account? SignIn!</a></div>
@@ -94,8 +94,95 @@
     <script src="~/assets/js/Bootstrap-4---Payment-Form.js"></script>
     <script src="~/assets/js/theme.js"></script>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+
+</body>-->
+
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+    <section class="text-center">
+        <div class="p-5 bg-image" style="background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg'); height: 300px; ">  
+        </div>
+
+        <div class="card mx-4 mx-md-5 shadow-5-strong" style="margin-top: -100px;
+            background: hsla(0, 0%, 100%, 0.8);
+            backdrop-filter: blur(30px);
+            ">
+        </div>
+        <div class=" card-body py-5 px-md-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-5">Sign Up</h2>
+                    <form class="user" asp-action="Account" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+
+                                    <input class="form-control form-control-user" tabindex="1" type="text" asp-for="FirstName" placeholder="First Name">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <input class="form-control form-control-user" tabindex="2" type="text" asp-for="LastName" placeholder="Last Name">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <input class="form-control form-control-user" tabindex="3" type="email" asp-for="Email" aria-describedby="emailHelp" placeholder="Email Address">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <input class="form-control form-control-user" tabindex="4" asp-for="Password" type="password" id="examplePasswordInput" placeholder="Password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <input class="form-control form-control-user" tabindex="5" asp-for="ConfirmPassword" type="password" placeholder="Confirm Password">
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary d-block btn-user w-100" type="submit" asp-controller="AccountController" tabindex="6" asp-action="ApplicationForm">Create Account</button>
+                            <div class="text-center">
+                                <p>Sign up with:</p>
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-instagram"></i>
+                                </button>
+                            </div>
+                            
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

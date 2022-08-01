@@ -5,7 +5,7 @@
     Layout = "_Layout1";
 }
 
-<head>
+@*<head>
     <meta charset="utf-8">;
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Login - Brand</title>
@@ -79,6 +79,68 @@
     </div>
     <script src="assets1/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets1/js/theme.js"></script>
+</body>*@
+
+<head>
+    <title>Sign In</title>
+    <link href="~/css/sigin.css" rel="stylesheet" />
+</head>
+<body>
+    <section class="h-100 gradient-form" style="background-color: #b4b3b3">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
+
+                                    <div class="text-center">
+                                        <img src="~/assets/img/" style="width:185px;" alt="Our Logo" />
+                                        <h4 class="mt-1 mb-5 pb-1">Welcome to our System!</h4>
+                                    </div>
+
+                                    <form>
+                                        <p>Sign in to your account</p>
+
+                                        <div class="user" method="post" asp-action="SignIn">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="mb-3">
+                                                <label class="form-label" asp-for="Email"></label>
+                                                <input class="form-control form-control-user" asp-for="Email" placeholder="Enter email address..." />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" asp-for="Password"></label>
+                                                <input class="form-control form-control-user" asp-for="Password" placeholder="Enter password..." />
+                                                <span asp-validation-for="Password" class="text-danger"></span>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                                                </label>
+                                            </div>
+                                            <div class="justify-content-center">
+                                                <button class="text-center btn btn-primary d-block btn-user gradient-custom-2" type="submit">Sign In</button>
+                                            </div>
+                                            <div class="text-center"><a class="small" asp-action="ForgotPassword" asp-controller="Account">Forgot Password?</a></div>
+                                        </div>
+                                    </form>
+                                    <div class="text-center"><a class="small" asp-area="" asp-controller="Account" asp-action="Register">Create an Account!</a></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                <div class="text-white px-3 py-4 p-md-5 mc-md-4">
+                                    <h4 class="mb-4">Heres a medical tip of the day!</h4>
+                                    <p class="small mb-0">An apple a day keeps the doctor away!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
