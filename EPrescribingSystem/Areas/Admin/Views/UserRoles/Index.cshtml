@@ -39,12 +39,12 @@
     </table>
 </div>
 @*</div>>*@
-@*@section Scripts{
+@section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
     <script>
         $(document).ready(function () {
-            $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+            $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().hide
         });
     </script>
-}*@
+}

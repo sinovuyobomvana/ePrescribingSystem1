@@ -4,6 +4,7 @@ using EPrescribingSystem.Data;
 using EPrescribingSystem.Helpers;
 using EPrescribingSystem.Models;
 using EPrescribingSystem.Repository;
+using EPrescribingSystem.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -53,6 +54,7 @@ namespace EPrescribingSystem
             services.AddScoped<IMedicalPracticeRepository, MedicalPracticeRepository>();
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
             services.AddScoped<IRegisterRepository, RegisterRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
         }

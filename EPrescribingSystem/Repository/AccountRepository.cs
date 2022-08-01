@@ -1,4 +1,5 @@
 ﻿using EPrescribingSystem.Models;
+using EPrescribingSystem.Service;
 using EPrescribingSystem.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -12,11 +13,13 @@ namespace EPrescribingSystem.Repository
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserService _userService;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser>signInManager )
+        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser>signInManager, IUserService userService)
         {
              _userManager = userManager;
             _signInManager = signInManager;
+            _userService = userService;
         }
         public async Task<IdentityResult> CreateUserAsync(UserCreateModel userModel)
         {
@@ -57,6 +60,14 @@ namespace EPrescribingSystem.Repository
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel changePassword)
+        {
+            var userId = _userService.GetUserId();
+            var user = await _userManager.FindByIdAsync(userId);
+
+            return await _userManager.ChangePasswordAsync(user, changePassword.CurrentPassword, changePassword.NewPassword);
         }
 
     }
