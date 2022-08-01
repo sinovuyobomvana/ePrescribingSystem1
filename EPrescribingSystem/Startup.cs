@@ -1,6 +1,7 @@
 using EPrescribingSystem.Areas.Admin.Data.Repository;
 using EPrescribingSystem.Areas.Admin.Data.Services;
 using EPrescribingSystem.Data;
+using EPrescribingSystem.Helpers;
 using EPrescribingSystem.Models;
 using EPrescribingSystem.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -41,11 +42,19 @@ namespace EPrescribingSystem
                 options.Password.RequireNonAlphanumeric = false;
             });
 
+            services.ConfigureApplicationCookie(config => {
+                config.LoginPath = "/signin";
+            });
+
+            services.AddDistributedMemoryCache();
             services.AddSession();
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IMedicalPracticeRepository, MedicalPracticeRepository>();
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
+            services.AddScoped<IRegisterRepository, RegisterRepository>();
+
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +76,7 @@ namespace EPrescribingSystem
             app.UseRouting();
             app.UseAuthentication();
 
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

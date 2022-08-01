@@ -20,6 +20,8 @@ namespace EPrescribingSystem.Controllers
             _context = context;
             _registerRepository = registerRepository;
         }
+
+        [Route("signup")]
         public IActionResult Index()
         {
             return View();
@@ -47,7 +49,7 @@ namespace EPrescribingSystem.Controllers
         //    return View(userModel);
         //}
 		
-		[Route("register")]
+		[Route("signup")]
         [HttpPost]
         public async Task<ActionResult> Register(UserCreateModel userModel)
          {
