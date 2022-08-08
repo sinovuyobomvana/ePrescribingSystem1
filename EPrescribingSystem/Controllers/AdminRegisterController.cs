@@ -24,7 +24,22 @@ namespace EPrescribingSystem.Controllers
         [Route("signup")]
         public IActionResult Index()
         {
-            return View();
+            UserCreateModel userCreateModel = new UserCreateModel();
+
+            userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
+            List<SelectListItem> Cities = _context.Cities
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.CityID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+            userCreateModel.Cities = Cities;
+            userCreateModel.Suburbs = new List<SelectListItem>();
+
+            return View(userCreateModel);
         }
 
         //[Route("register")]
