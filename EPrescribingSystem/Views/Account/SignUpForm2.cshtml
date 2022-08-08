@@ -14,89 +14,7 @@
 <br />
 <br />
 <br />
-<!--<div class="container">-->
-@*<div class="card shadow-lg o-hidden border-0">
-    <div class="card-body">*@
-<!--<form asp-action="SignUpForm2" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
 
-        </div>
-        <div class="form-group col-md-4">
-
-        </div>
-        <div class="form-group col-md-2">
-
-        </div>
-
-        <div class="form-group col-md-2">
-
-        </div>
-
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-2">
-
-        </div>
-        <div class="form-group col-md-2">
-
-        </div>
-
-        <div class="form-group col-md-4">
-
-        </div>
-        <div class="form-group col-md-4">
-
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
-
-        </div>
-        <div class="form-group col-md-4">
-
-        </div>
-
-        <div class="form-group col-md-2">
-
-        </div>
-        <div class="form-group col-md-2">
-
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-4">
-
-        </div>
-
-        <div class="form-group col-md-4">
-
-        </div>
-
-        <div class="form-group col-md-4">
-
-        </div>
-    </div>-->
-@*<div class="form-group">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
-            <label class="form-check-label" for="gridCheck">
-                Check me out
-            </label>
-        </div>
-    </div>*@
-<!--<div class="container col-md-2">
-            <div class="row">
-
-            </div>
-        </div>
-
-    </form>
-</div>-->
-@*</div>
-    </div>*@
 
 
 <!-- MultiStep Form -->
@@ -112,8 +30,7 @@
                         <form id="msform">
                             <!-- progressbar -->
                             <ul id="progressbar">
-                                <li class="active" id="role"><strong>Role</strong></li>
-                                <li id="personal"><strong>Personal</strong></li>
+                                <li class="active" id="personal"><strong>Personal</strong></li>
                                 <li id="address"><strong>Address</strong></li>
                                 <li id="education"><strong>Education</strong></li>
                                 <li id="contact"><strong>Contact</strong></li>
@@ -121,19 +38,6 @@
                                 <li id="confirm"><strong>Finish</strong></li>
                             </ul>
                             <!-- fieldsets -->
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Role</h2>
-
-                                    <select id="role" class="form-control">
-                                        <option value="" selected>Select Role...</option>
-                                        <option value="doc">Doctor</option>
-                                        <option value="pharm">Pharmacist</option>
-                                    </select>
-                                </div>
-
-                                <input type="button" name="next" class="next action-button" value="Next Step" />
-                            </fieldset>
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Personal Information</h2>
@@ -197,26 +101,7 @@
                                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
                             </fieldset>
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Education</h2>
-                                    <label asp-for="@Model.RegisterUserModel.HighestQualification" class="control-label">Highest Qualification</label>
-                                    <input asp-for="@Model.RegisterUserModel.HighestQualification" class="form-control" />
-                                    <span asp-validation-for="@Model.RegisterUserModel.HighestQualification" class="text-danger"></span>
-                                    <div id="pharm">
-                                        <label asp-for="@Model.RegisterUserModel.RegistrationNumber" class="control-label">Registration Number</label>
-                                        <input asp-for="@Model.RegisterUserModel.RegistrationNumber" class="form-control" />
-                                        <span asp-validation-for="@Model.RegisterUserModel.RegistrationNumber" class="text-danger"></span>
-                                    </div>
-                                    <div id="doc">
-                                        <label asp-for="@Model.RegisterUserModel.HealthCouncilRegistrationNumber" class="control-label">Health Council Registration Number</label>
-                                        <input asp-for="@Model.RegisterUserModel.HealthCouncilRegistrationNumber" class="form-control" />
-                                        <span asp-validation-for="@Model.RegisterUserModel.HealthCouncilRegistrationNumber" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                <input type="button" name="make_payment" class="next action-button" value="Next Step" />
-                            </fieldset>
+
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Contact</h2>

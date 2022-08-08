@@ -1,239 +1,206 @@
-﻿@model RegisterUserModel
+﻿@model EPrescribingSystem.ViewModel.UserCreateModel
 
 @{
     ViewData["Title"] = "Register";
     Layout = "_Layout";
 }
 
-<link href="~/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-@*<script src="~/assets/bootstrap/js/bootstrap.min.js"></script>*@
-<script src="~/js/wizard.js"></script>
-<link href="~/css/wizard.css" rel="stylesheet" />
-<script src="~/js/cities.js"></script>
+<link href="~/css/wizard1.css" rel="stylesheet" />
+<script src="~/js/wizard1.js"></script>
+<script src="~/js/role.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="~/js/cityandsuburbs.js"></script>
 
-<form action="Create" method="post">
-    <div class="stepwizard">
-        <div class="stepwizard-row setup-panel">
-            <div class="stepwizard-step">
-                <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-                <p>Occupation</p>
-            </div>
+<div class="container-fluid" id="grad1">
+    <div class="row justify-content-center mt-0">
+        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+            @*<div class="col-20 col-sm-20 col-md-15 col-lg-10 text-center p-0 mt-3 mb-2">*@
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2><strong>Sign Up Your User Account</strong></h2>
+                <p>Fill all form field to go to next step</p>
+                <div class="row">
+                    <div class="col-md-12 mx-0">
+                        <form id="msform">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="role"><strong>Role</strong></li>
+                                <li id="personal"><strong>Personal</strong></li>
+                                <li id="address"><strong>Address</strong></li>
+                                <li id="education"><strong>Education</strong></li>
+                                <li id="contact"><strong>Contact</strong></li>
+                                <li id="confirm"><strong>Finish</strong></li>
+                            </ul>
+                            <!-- fieldsets -->
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Role</h2>
 
-            <div class="setupwizard-step">
-                <a href="#step-2" type="button" class="btn btn-primary btn-circle" disabled="disabled">2</a>
-                <p>Personal Details</p>
-            </div>
+                                    <select id="role" class="form-control">
+                                        <option value="" selected>Select Role...</option>
+                                        <option value="doc">Doctor</option>
+                                        <option value="pharm">Pharmacist</option>
+                                    </select>
+                                </div>
 
-            <div class="stepwizard-step">
-                <a href="#step-3" type="button" class="btn btn-primary btn-circle" disabled="disabled">3</a>
-                <p>Education</p>
-            </div>
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Personal Information</h2>
+                                    <label asp-for="RegisterUserModel.Title">Title</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <select asp-for="RegisterUserModel.Title" class="form-control">
+                                        <option value="" selected>Select title...</option>
+                                        <option>Mr</option>
+                                        <option>Mrs</option>
+                                        <option>Miss</option>
+                                        <option>Adv</option>
+                                        <option>Dr</option>
+                                        <option>Prof</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.RegisterUserModel.Title" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.FirstName">First Name</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <input asp-for="@Model.RegisterUserModel.FirstName" type="text" class="form-control" placeholder="First Name">
+                                    <span asp-validation-for="@Model.RegisterUserModel.FirstName" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.LastName">Last Name</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <input asp-for="@Model.RegisterUserModel.LastName" type="text" class="form-control" placeholder="Last Name">
+                                    <span asp-validation-for="@Model.RegisterUserModel.LastName" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.IDNumber">ID Number</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <input asp-for="@Model.RegisterUserModel.IDNumber" type="text" class="form-control" placeholder="ID Number">
+                                    <span asp-validation-for="@Model.RegisterUserModel.IDNumber" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.DateOfBirth">Date Of Birth</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <input value="" asp-for="@Model.RegisterUserModel.DateOfBirth" type="date" class="form-control">
+                                    <span asp-validation-for="@Model.RegisterUserModel.DateOfBirth" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.Gender">Gender</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <select asp-for="@Model.RegisterUserModel.Gender" class="form-control">
+                                        <option value="" selected>Select gender...</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.RegisterUserModel.Gender" class="text-danger"></span>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Address Details</h2>
+                                    <label asp-for="@Model.RegisterUserModel.Addressine1">Address Line 1</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <input asp-for="@Model.RegisterUserModel.Addressine1" type="text" class="form-control" placeholder="1234 Main St">
+                                    <span asp-validation-for="@Model.RegisterUserModel.Addressine1" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.AddressLine2">Address Line 2</label>
+                                    <input asp-for="@Model.RegisterUserModel.AddressLine2" type="text" class="form-control" placeholder="Apartment, studio, or floor">
+                                    <span asp-validation-for="@Model.RegisterUserModel.AddressLine2" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.City">City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <select asp-for="@Model.RegisterUserModel.City" id="lstCity" required asp-items="@Model.Cities" class="form-control">
+                                        <option value="" selected>Select city...</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.RegisterUserModel.City" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.Suburb.SuburbID">Suburb</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <select id="lstSuburb" required asp-for="@Model.RegisterUserModel.Suburb.SuburbID" class="form-control" asp-items="@Model.Suburbs">
+                                        <option value="1" selected>Select suburb...</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.RegisterUserModel.Suburb.SuburbID" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.PostalCode">Postal Code</label>
+                                    <input asp-for="@Model.RegisterUserModel.PostalCode" type="text" class="form-control" placeholder="Postal Code">
+                                    <span asp-validation-for="@Model.RegisterUserModel.PostalCode" class="text-danger"></span>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Education</h2>
+                                    <label asp-for="@Model.RegisterUserModel.HighestQualification" class="control-label">Highest Qualification</label>
+                                    <input asp-for="@Model.RegisterUserModel.HighestQualification" class="form-control" />
+                                    <span asp-validation-for="@Model.RegisterUserModel.HighestQualification" class="text-danger"></span>
+                                    <div id="pharm">
+                                        <label asp-for="@Model.RegisterUserModel.RegistrationNumber" class="control-label">Registration Number</label>
+                                        <input asp-for="@Model.RegisterUserModel.RegistrationNumber" class="form-control" />
+                                        <span asp-validation-for="@Model.RegisterUserModel.RegistrationNumber" class="text-danger"></span>
+                                    </div>
+                                    <div id="doc">
+                                        <label asp-for="@Model.RegisterUserModel.HealthCouncilRegistrationNumber" class="control-label">Health Council Registration Number</label>
+                                        <input asp-for="@Model.RegisterUserModel.HealthCouncilRegistrationNumber" class="form-control" />
+                                        <span asp-validation-for="@Model.RegisterUserModel.HealthCouncilRegistrationNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <input type="button" name="make_payment" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Contact</h2>
+                                    <label asp-for="@Model.RegisterUserModel.ContactNumber">Contact Number</label>
+                                    <input asp-for="@Model.RegisterUserModel.ContactNumber" type="text" class="form-control" placeholder="Contact Number">
+                                    <span asp-validation-for="@Model.RegisterUserModel.ContactNumber" class="text-danger"></span>
+                                    <label asp-for="@Model.RegisterUserModel.Email">Email</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <input asp-for="@Model.RegisterUserModel.Email" type="email" class="form-control" placeholder="Email">
+                                    <span asp-validation-for="@Model.RegisterUserModel.Email" class="text-danger"></span>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <input type="button" name="make_payment" class="next action-button" value="Next Step" />
+                            </fieldset>
 
-            <div class="stepwizard-step">
-                <a href="#step-4" type="button" class="btn btn-primary btn-circle" disabled="disabled">4</a>
-                <p>Address Details</p>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="row setup-content" id="step-1">
-            <div class="col-xs-12">
-                <div class="col-md-8">
-                    <fieldset>
-                        <div class="form-card">
-                            <h3> Register User</h3>
-                            <div class="form-group">
-                                <label asp-for="Title" class="control-label"></label>
-                                <select asp-for="Title" class="form-control">
-                                    <option selected disabled>---Select---</option>
-                                    <option>Mr</option>
-                                    <option>Mrs</option>
-                                    <option>Miss</option>
-                                    <option>Dr</option>
-                                    <option>Prof</option>
-                                </select>
-                                <span asp-validation-for="Title" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="FirstName" class="control-label">First Names</label>
-                                <input asp-for="FirstName" class="form-control" />
-                                <span class="glyphicon glyphicon-question-sign append text-info tip" data-tip="tip-first"></span>
-                                <span asp-validation-for="FirstName" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="LastName" class="control-label">Last Name</label>
-                                <input asp-for="LastName" class="form-control" />
-                                <span class="glyphicon glyphicon-question-sign append text-info tip" data-tip="tip-two"></span>
-                                <span asp-validation-for="LastName" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="Role"></label>
-                                <select asp-for="Role" class="form-control">
-                                    <option selected disabled>---Select---</option>
-                                    <option>Doctor</option>
-                                    <option>Pharmacist</option>
-                                </select>
-                                <span asp-validation-for="Role" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="Email" class="control-label"> </label>
-                                <input asp-for="Email" type="text" class="form-control" />
-                                <span class="glyphicon glyphicon-question-sign append text-info tip" data-tip="tip-four"></span>
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="ContactNumber" class="control-label"> </label>
-                                <input asp-for="ContactNumber" type="text" class="form-control" />
-                                <span class="glyphicon glyphicon-question-sign append text-info tip" data-tip="tip-four"></span>
-                                <span asp-validation-for="ContactNumber" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary btn-block nextBtn pull-right" type="button">Next</button>
-                    </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title text-center">Success!</h2>
+                                    <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3">
+                                            <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image">
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-7 text-center">
+                                            <h5>You Have Successfully Signed Up</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row setup-content" id="step-2">
-        <div class="col-xs-12">
-            <div class="col-md-8">
-                <fieldset>
-                    <div class="form-card">
-                        <h3>Personal Details</h3>
-                        <div class="form-group">
-                            <label asp-for="IDNumber" class="control-label">Identity Number</label>
-                            <input asp-for="IDNumber" class="form-control" />
-                            <span class="glyphicon glyphicon-question-sign append text-info tip" data-tip="tip-three"></span>
-                            <span asp-validation-for="IDNumber" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="DateOfBirth" class="control-label">Date of birth</label>
-                            <input asp-for="DateOfBirth" class="form-control" />
-                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Gender" class="control-label"></label>
-                            <select class="form-control" asp-for="Gender">
-                                <option selected disabled>---Select Gender---</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
-                            <span asp-validation-for="Gender" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-block nextBtn pull-right" type="button">Next</button> @*//Delete later*@
-                </fieldset>
-                @*<div class="form-group">
-                        <label asp-for="MaritalStatus" class="control-label">Marital Status</label>
-                        <select class="form-control" asp-for="MaritalStatus">
-                            <option selected disabled>---Select Marital Status---</option>
-                            <option>Single</option>
-                            <option>Divorced</option>
-                            <option>Married</option>
-                            <option>Widow</option>
-                        </select>
-                        <span asp-validation-for="MaritalStatus" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Race" class="control-label"></label>
-                        <select class="form-control" asp-for="Race">
-                            <option selected disabled>---Select Race---</option>
-                            <option>White</option>
-                            <option>Black</option>
-                            <option>Coloured</option>
-                            <option>Asian</option>
-                        </select>
-                        <span asp-validation-for="Race" class="text-danger"></span>
-                    </div>
-                    <button class="btn btn-primary btn-block nextBtn pull-right" type="button">Next</button>*@
-            </div>
-        </div>
-    </div>
-
-    <div class="row setup-content" id="step-3">
-        <div class="col-xs-12">
-            <div class="col-md-8">
-                <fieldset>
-                    <div class="form-card">
-                        <h3>Education</h3>
-
-                        <div class="form-group">
-                            <label asp-for="HighestQualification" class="control-label">Highest Qualification</label>
-                            <input asp-for="HighestQualification" class="form-control" />
-                            <span asp-validation-for="HighestQualification" class="text-danger"></span>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label asp-for="RegistrationNumber" class="control-label">Registration Number</label>
-                            <input asp-for="RegistrationNumber" class="form-control" />
-                            <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
-                        </div>
+</div>
 
 
 
-                        <div class="form-group">
-                            <label asp-for="HealthCouncilRegistrationNumber" class="control-label">Health Council Registration Number</label>
-                            <input asp-for="HealthCouncilRegistrationNumber" class="form-control" />
-                            <span asp-validation-for="HealthCouncilRegistrationNumber" class="text-danger"></span>
-                        </div>
 
-                    </div>
+@section Scripts{
 
-                    <button class="btn btn-primary btn-block nextBtn pull-right" type="button">Next</button>
-                </fieldset>
-            </div>
-        </div>
-    </div>
-    <div class="row setup-content" id="step-4">
-        <div class="col-xs-12">
-            <div class="col-md-8">
-                <fieldset>
-                    <div class="form-card">
-                        <h3>Address</h3>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
-                        <div class="form-group">
-                            <label asp-for="Addressine1" class="control-label">Address Line 1</label>
-                            <input asp-for="Addressine1" class="form-control" />
-                            <span asp-validation-for="Addressine1" class="text-danger"></span>
-                        </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#lstCity').change(function () {
+                var selectedCity = $('#lstCity').val();
+
+                var suburbSelect = $('#lstSuburb');
+                suburbSelect.empty();
+
+                if (selectedCity != null && selectedCity != '') {
+                    $.getJSON('@Url.Action("GetSuburbs")', { CityID: selectedCity }, function (suburbs) {
+                        if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
+                            suburbSelect.append($('<option/>', {
+                                value: "1",
+                                text: "Select suburb..."
+                            }));
+                          /*  debugger;*/
+                            $.each(suburbs, function (index, suburb) {
+                                suburbSelect.append($('<option/>', {
+                                    value: suburb.value,
+                                    text: suburb.text
+                                }));
+                            });
+                        }
+                    });
 
 
-                        <div class="form-group">
-                            <label asp-for="AddressLine2" class="control-label">Address Line 2</label>
-                            <input asp-for="AddressLine2" class="form-control" />
-                            <span asp-validation-for="AddressLine2" class="text-danger"></span>
-                        </div>
-                        @*<div class="form-group">
-                            <label asp-for="City">City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                            <select asp-for="City" id="lstCity" required asp-items="Cities" class="form-control">
-                                <option value="" selected>Select city...</option>
-                            </select>
-                            <span asp-validation-for="City" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label asp-for="Suburb">Suburb</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                            <select id="lstSuburb" required asp-for="Suburb" class="form-control" asp-items="Suburbs">
-                                <option value="" selected>Select suburb...</option>
-                            </select>
-                            <span asp-validation-for="Suburb" class="text-danger"></span>
-                        </div>*@
-                        <div class="form-group col-md-2">
-                            <label asp-for="PostalCode">Postal Code</label>
-                            <input asp-for="PostalCode" type="text" class="form-control" placeholder="Postal Code">
-                            <span asp-validation-for="PostalCode" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-success nextBtn btn-block pull-right" type="submit">Finish!</button>
-                </fieldset>
-            </div>
-        </div>
-    </div>
-</form>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                }
+            })
+        })
+    </script>
 }
