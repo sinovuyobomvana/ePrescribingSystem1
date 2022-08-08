@@ -187,7 +187,7 @@
                                     <span asp-validation-for="@Model.RegisterUserModel.City" class="text-danger"></span>
                                     <label asp-for="@Model.RegisterUserModel.Suburb.SuburbID">Suburb</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
                                     <select id="lstSuburb" required asp-for="@Model.RegisterUserModel.Suburb.SuburbID" class="form-control" asp-items="@Model.Suburbs">
-                                        <option value="1" selected>Select suburb...</option>
+                                        <option value="" selected>Select suburb...</option>
                                     </select>
                                     <span asp-validation-for="@Model.RegisterUserModel.Suburb.SuburbID" class="text-danger"></span>
                                     <label asp-for="@Model.RegisterUserModel.PostalCode">Postal Code</label>
@@ -288,7 +288,7 @@
                     $.getJSON('@Url.Action("GetSuburbs")', { CityID: selectedCity }, function (suburbs) {
                         if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
                             suburbSelect.append($('<option/>', {
-                                value: "1",
+                                value: "",
                                 text: "Select suburb..."
                             }));
                           /*  debugger;*/
