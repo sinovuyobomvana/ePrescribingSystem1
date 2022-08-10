@@ -50,8 +50,8 @@
                             @Html.DisplayFor(modelItem => item.EmailAddress)
                         </td>
                         <td class="align-middle">
-                            <a asp-controller="MedicalPractice" asp-action="Edit" asp-route-id="@item.PharmacyID" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit </a> |
-                            <a asp-controller="MedicalPractice" asp-action="Details" asp-route-id="@item.PharmacyID" class="btn btn-outline-info"><i class="bi bi-eye"></i>Details </a> |
+                            <a asp-controller="Pharmacy" asp-action="Edit" asp-route-id="@item.PharmacyID" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit </a> |
+                            <a asp-controller="Pharmacy" asp-action="Details" asp-route-id="@item.PharmacyID" class="btn btn-outline-info"><i class="bi bi-eye"></i>Details </a> |
                             <a asp-action="Delete" asp-route-id="@item.PharmacyID" class="btn btn-danger text-white"><i class="bi bi-trash"></i>Delete </a>
                         </td>
                     </tr>
@@ -64,5 +64,5 @@
 </div>
 
 <div style="position: fixed; right: 25px;" class="text-white">
-    <a asp-controller="MedicalPractice" asp-action="Create" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Add New Pharmacy </a>
+    <a asp-controller="Pharmacy" asp-action="Create" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Add New Pharmacy </a>
 </div>

@@ -1,21 +1,21 @@
-﻿@model MedicalPractice
+﻿@model Pharmacy
 
 @{
-    ViewData["Title"] = "Update Medical Practice";
+    ViewData["Title"] = "Update Pharmacy";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Update Medical Practice</h1>
+            <h1>Update Pharmacy</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
                 <form asp-action="Edit" method="post">
                     <div class="form-group">
-                        <label asp-for="PracticeNumber" class="control-label"></label>
-                        <input asp-for="PracticeNumber" class="form-control" />
-                        <span asp-validation-for="PracticeNumber" class="text-danger"></span>
+                        <label asp-for="LicenseNumber" class="control-label"></label>
+                        <input asp-for="LicenseNumber" class="form-control" />
+                        <span asp-validation-for="LicenseNumber" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
@@ -28,14 +28,14 @@
                         <span asp-validation-for="Address1" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Address2" class="control-label"></label>
-                        <input asp-for="Address2" class="form-control" />
-                        <span asp-validation-for="Address2" class="text-danger"></span>
+                        <label asp-for="SuburbID" class="control-label"></label>
+                        <input asp-for="SuburbID" class="form-control" />
+                        <span asp-validation-for="SuburbID" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ContactNum" class="control-label"></label>
-                        <input asp-for="ContactNum" class="form-control" />
-                        <span asp-validation-for="ContactNum" class="text-danger"></span>
+                        <label asp-for="ContactNumber" class="control-label"></label>
+                        <input asp-for="ContactNumber" class="form-control" />
+                        <span asp-validation-for="ContactNumber" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EmailAddress" class="control-label"></label>
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="hidden" asp-for="MedicalPracticeID" />
+                        <input type="hidden" asp-for="PharmacyID" />
                         <input type="submit" value="Update" class="btn btn-outline-success float-right" />
                         <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
                     </div>

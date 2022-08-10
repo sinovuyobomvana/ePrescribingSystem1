@@ -1,0 +1,48 @@
+﻿@model Medication
+
+@{
+    ViewData["Title"] = "Update Medication";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Update Medication</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit" method="post">
+                    
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DosageForm" class="control-label"></label>
+                        <input asp-for="DosageForm" class="form-control" />
+                        <span asp-validation-for="DosageForm" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Schedule" class="control-label"></label>
+                        <input asp-for="Schedule" class="form-control" />
+                        <span asp-validation-for="Schedule" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContraIndicationID" class="control-label"></label>
+                        <input asp-for="ContraIndicationID" class="form-control" />
+                        <span asp-validation-for="ContraIndicationID" class="text-danger"></span>
+                    </div>
+                  
+
+                    <div class="form-group">
+                        <input type="hidden" asp-for="MedicationID" />
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
