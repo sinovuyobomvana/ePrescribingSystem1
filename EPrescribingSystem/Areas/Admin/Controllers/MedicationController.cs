@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace EPrescribingSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class PharmacyController : Controller
+    public class MedicationController : Controller
     {
-        private readonly IPharmacyRepository _service;
+        private readonly IMedicationRepository _service;
 
 
-        public PharmacyController(IPharmacyRepository service)
+        public MedicationController(IMedicationRepository service)
         {
             _service = service;
         }
@@ -37,13 +37,13 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Name,Address1,ContactNumber,EmailAddress,LicenseNumber,SuburbID")] Pharmacy pharmacy)
+        public async Task<IActionResult> Create([Bind("Name,DosageForm,Schedule,ContraIndicationID")] Medication medication)
         {
             if (!ModelState.IsValid)
             {
-                return View(pharmacy);
+                return View(medication);
             }
-            await _service.AddAsync(pharmacy);
+            await _service.AddAsync(medication);
             return RedirectToAction(nameof(Index));
         }
 
@@ -52,40 +52,34 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Details(int id)
         {
-            var pharmacyDetails = await _service.GetByIdAsync(id);
+            var medicationDetails = await _service.GetByIdAsync(id);
 
-            if (pharmacyDetails == null) return View("Not Found!!!");
-            return View(pharmacyDetails);
+            if (medicationDetails == null) return View("Not Found!!!");
+            return View(medicationDetails);
         }
 
         //Get: Pharmacy/Update
         [HttpGet]
         [Route("[area]/[controller]/[action]")]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
+            var medicationDetails = await _service.GetByIdAsync(id);
 
-            Pharmacy pharmacy = _service.GetById(id);
-            return View(pharmacy);
+            if (medicationDetails == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(medicationDetails);
         }
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    var pharmacyDetails = await _service.GetByIdAsync(id);
-
-        //    if (pharmacyDetails == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-
-        //    return View(pharmacyDetails);
-        //}
 
         [HttpPost]
-        public IActionResult Edit(Pharmacy pharmacy)
+        public async Task<IActionResult> Edit(Medication medication)
         {
             try
             {
-                pharmacy = _service.Update(pharmacy);
+                medication = await _service.UpdateAsync(medication);
             }
             catch
             {
@@ -101,16 +95,16 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         [Route("[area]/[controller]/[action]")]
         public IActionResult Delete(int id)
         {
-            var pharmacy = _service.GetById(id);
-            return View(pharmacy);
+            var medication = _service.GetById(id);
+            return View(medication);
         }
 
         [HttpPost]
-        public IActionResult Delete(Pharmacy pharmacy)
+        public IActionResult Delete(Medication medication)
         {
             try
             {
-                pharmacy = _service.Delete(pharmacy);
+                medication = _service.Delete(medication);
             }
             catch
             {

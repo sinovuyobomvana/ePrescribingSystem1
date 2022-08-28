@@ -52,6 +52,7 @@ namespace EPrescribingSystem
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IMedicalPracticeRepository, MedicalPracticeRepository>();
+            services.AddScoped<IMedicationRepository, MedicationRepository>();
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
             services.AddScoped<IRegisterRepository, RegisterRepository>();
             services.AddScoped<IUserService, UserService>();

@@ -1,4 +1,6 @@
-﻿using EPrescribingSystem.Models;
+﻿using EPrescribingSystem.Data;
+using EPrescribingSystem.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,66 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
 {
     public class PharmacyRepository : IPharmacyRepository
     {
-        public Task<IEnumerable<Pharmacy>> GetAllAsync()
+        private readonly EprescribingDBContext _context;
+
+        public PharmacyRepository(EprescribingDBContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<Pharmacy>> GetAllAsync()
+        {
+            var result = await _context.Pharmacies.ToListAsync();
+            return result;
+        }
+
+        public async Task AddAsync(Pharmacy pharmacy)
+        {
+            await _context.Pharmacies.AddAsync(pharmacy);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Pharmacy> GetByIdAsync(int id)
+        {
+            var result = await _context.Pharmacies.FirstOrDefaultAsync(n => n.PharmacyID == id);
+            return result;
+        }
+
+        public Pharmacy GetById(int id)
+        {
+            Pharmacy pharmacy = _context.Pharmacies.Where(c => c.PharmacyID == id).FirstOrDefault();
+            return pharmacy;
+        }
+
+        public Task<Pharmacy> UpdateAsync(Pharmacy pharmacy)
         {
             throw new NotImplementedException();
         }
+        public Pharmacy Update(Pharmacy pharmacy)
+        {
+            _context.Pharmacies.Attach(pharmacy);
+            _context.Entry(pharmacy).State = EntityState.Modified;
+            _context.SaveChanges();
+            return pharmacy;
+        }
+
+        public Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Pharmacy Delete(Pharmacy pharmacy)
+        {
+            _context.Pharmacies.Attach(pharmacy);
+            _context.Entry(pharmacy).State = EntityState.Deleted;
+            _context.SaveChanges();
+            return pharmacy;
+        }
+
+        
+
+       
+
+      
     }
 }

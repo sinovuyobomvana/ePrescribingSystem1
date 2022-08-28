@@ -9,5 +9,15 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
     public interface IPharmacyRepository
     {
         Task<IEnumerable<Pharmacy>> GetAllAsync();
+
+        Task<Pharmacy> GetByIdAsync(int id);
+        Pharmacy GetById(int id);
+        Task AddAsync(Pharmacy pharmacy);
+        Task<Pharmacy> UpdateAsync(Pharmacy pharmacy);
+        //Task<pharmacy> UpdateAsync(int id, Pharmacy pharmacy);
+        Pharmacy Update(Pharmacy pharmacy);
+        Task DeleteAsync(int id);
+
+        Pharmacy Delete(Pharmacy pharmacy);
     }
 }
