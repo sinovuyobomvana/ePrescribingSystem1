@@ -61,6 +61,9 @@ namespace EPrescribingSystem.Models
         [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
 
+        [Required(ErrorMessage = "Please select provice.")]
+        public string Province { get; set; }
+
         [Required(ErrorMessage = "Please select city.")]
         public string City { get; set; }
 
@@ -70,8 +73,7 @@ namespace EPrescribingSystem.Models
         [Required(ErrorMessage = "Please enter contact no.")]
         public string ContactNumber { get; set; }
 
-      
-        public virtual Suburb Suburb { get; set; }
+        public Suburb Suburb { get; set; }
 
         [Required(ErrorMessage = "Please select enter Highest Qualification.")]
         [Display(Name = "Highest Qualification")]

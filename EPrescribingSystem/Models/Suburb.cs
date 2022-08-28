@@ -21,6 +21,6 @@ namespace EPrescribingSystem.Models
 
         [ForeignKey("CityID")]
         public int CityID { get; set; }
-        public City CityModel { get; set; }
+        public City City { get; set; }
     }
 }

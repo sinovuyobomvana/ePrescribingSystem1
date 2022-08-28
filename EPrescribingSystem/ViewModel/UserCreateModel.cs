@@ -10,6 +10,7 @@ namespace EPrescribingSystem.ViewModel
     public class UserCreateModel
     {
         public RegisterUserModel RegisterUserModel { get; set; }
+        public IEnumerable<SelectListItem> Provinces { get; set; }
         public IEnumerable<SelectListItem> Cities { get; set;  }
         public IEnumerable<SelectListItem> Suburbs { get; set; }
     }

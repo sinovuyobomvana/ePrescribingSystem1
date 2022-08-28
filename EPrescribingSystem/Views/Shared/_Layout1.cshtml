@@ -45,41 +45,46 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-0">
             <div class="container-fluid">
-                <a class="navbar-brand logo" asp-controller="Home" asp-action="Index"><img width="180" height="60" src="~/assets/img/logo.png" />EPrescribing System</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navcol-1">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index1">Help</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="" asp-action="">Contact</a></li>
-                        <li class="nav-item dropdown no-arrow mx-1">
-                        <li class="nav-item dropdown no-arrow mx-1">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EPrescribingSystem</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
     </header>
-    <br />
-    <br />
-    <div class="container-fluid">
-        <main role="main" class="pb-3">
+
+
+    <div>
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="footer-basic">
-        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="fab fa-whatsapp-square"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-            <li class="list-inline-item"><a asp-area="" asp-controller="Account" asp-action="SignIn">Sign In</a></li>
-            <li class="list-inline-item"><a asp-area="" asp-controller="Account" asp-action="Account">Sign Up</a></li>
-            <li class="list-inline-item"><a href="#">About</a></li>
-            <li class="list-inline-item"><a href="#">Team</a></li>
-        </ul>
-        <p class="copyright">Chungwa Pre-primary School © 2021</p>
-    </footer>
+    @*<footer class="footer-basic">
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="fab fa-whatsapp-square"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="list-inline-item"><a asp-area="" asp-controller="Account" asp-action="SignIn">Sign In</a></li>
+                <li class="list-inline-item"><a asp-area="" asp-controller="Account" asp-action="Account">Sign Up</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Team</a></li>
+            </ul>
+                <p class="copyright">Eprescribing System © @DateTime.Now.Year</p>
+        </footer>*@
     <script src="~/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="~/assets/js/creative.js"></script>

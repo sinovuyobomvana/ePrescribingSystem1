@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Models
 {
-    [Table("City")]
-    public class City
+    [Table("Province")]
+    public class Province
     {
         [Key]
-        public int CityID { get; set; }
+        public int ProvinceID { get; set; }
         [Required]
         public string Name { get; set; }
-        
+
         public string Abbreviation { get; set; }
 
-       
-        [ForeignKey("ProvinceID")]
-        public int? ProvinceID { get; set; }
-        public Province Province { get; set; }
     }
 }

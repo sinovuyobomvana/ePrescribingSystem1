@@ -20,6 +20,9 @@ namespace EPrescribingSystem.Models
         public string ContactNumber { get; set; }
         [Required, EmailAddress]
         public string EmailAddress { get; set; }
+       
+        public string PostalCode { get; set; }
+
         [Required]
         public string LicenseNumber { get; set; }
 

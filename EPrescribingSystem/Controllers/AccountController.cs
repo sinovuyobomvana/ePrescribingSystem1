@@ -43,25 +43,40 @@ namespace EPrescribingSystem.Controllers
         }
 
         [Route("register")]
+        [HttpGet]
         public IActionResult SignUpForm2()
         {
             UserCreateModel userCreateModel = new UserCreateModel();
 
+            //userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
+            //List<SelectListItem> Cities = _context.Cities
+            //    .OrderBy(n => n.Name)
+            //    .Select(n =>
+            //    new SelectListItem
+            //    {
+            //        Value = n.CityID.ToString(),
+            //        Text = n.Name
+            //    }).ToList();
+
+            //userCreateModel.Cities = Cities;
+            //userCreateModel.Suburbs = new List<SelectListItem>();
+
             userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
-            List<SelectListItem> Cities = _context.Cities
+            List<SelectListItem> Provinces = _context.Provinces
                 .OrderBy(n => n.Name)
                 .Select(n =>
                 new SelectListItem
                 {
-                    Value = n.CityID.ToString(),
+                    Value = n.ProvinceID.ToString(),
                     Text = n.Name
                 }).ToList();
 
-            userCreateModel.Cities = Cities;
-            userCreateModel.Suburbs = new List<SelectListItem>();
+            userCreateModel.Provinces = Provinces;
+            userCreateModel.Cities = new List<SelectListItem>();
 
             return View(userCreateModel);
         }
+
         [Route("register")]
         [HttpPost]
         public async Task<ActionResult> SignUpForm2(UserCreateModel userModel)
@@ -69,18 +84,31 @@ namespace EPrescribingSystem.Controllers
 
             UserCreateModel userCreateModel = new UserCreateModel();
 
+            //userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
+            //List<SelectListItem> Cities = _context.Cities
+            //    .OrderBy(n => n.Name)
+            //    .Select(n =>
+            //    new SelectListItem
+            //    {
+            //        Value = n.CityID.ToString(),
+            //        Text = n.Name
+            //    }).ToList();
+
+            //userCreateModel.Cities = Cities;
+            //userCreateModel.Suburbs = new List<SelectListItem>();
+
             userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
-            List<SelectListItem> Cities = _context.Cities
+            List<SelectListItem> Provinces = _context.Provinces
                 .OrderBy(n => n.Name)
                 .Select(n =>
                 new SelectListItem
                 {
-                    Value = n.CityID.ToString(),
+                    Value = n.ProvinceID.ToString(),
                     Text = n.Name
                 }).ToList();
 
-            userCreateModel.Cities = Cities;
-            userCreateModel.Suburbs = new List<SelectListItem>();
+            userCreateModel.Provinces = Provinces;
+            userCreateModel.Cities = new List<SelectListItem>();
 
 
 
@@ -103,7 +131,28 @@ namespace EPrescribingSystem.Controllers
             return View(userCreateModel);
         }
 
-            [HttpGet]
+
+        [HttpGet]
+        public ActionResult GetCities(int? ProvinceId)
+        {
+            if (ProvinceId != null)
+            {
+                List<SelectListItem> citySel = _context.Cities
+                .Where(s => s.ProvinceID == ProvinceId)
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.ProvinceID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+                return Json(citySel);
+            }
+            return null;
+        }
+
+        [HttpGet]
         public ActionResult GetSuburbs(int? CityId)
         {
             if(CityId != null)

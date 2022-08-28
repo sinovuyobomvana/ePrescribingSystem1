@@ -20,6 +20,13 @@ namespace EPrescribingSystem.Models
         public string Address1 { get; set; }
         
         public string Address2 { get; set; }
+
+        
+        public string PostalCode { get; set; }
+
+        [ForeignKey("SuburbID")]
+        public int SuburbID { get; set; }
+
         [Required, Phone]
         public string ContactNum { get; set; }
         [Required, EmailAddress]

@@ -90,6 +90,14 @@
                                     <label asp-for="@Model.RegisterUserModel.AddressLine2">Address Line 2</label>
                                     <input asp-for="@Model.RegisterUserModel.AddressLine2" type="text" class="form-control" placeholder="Apartment, studio, or floor">
                                     <span asp-validation-for="@Model.RegisterUserModel.AddressLine2" class="text-danger"></span>
+
+
+                                    <label asp-for="@Model.RegisterUserModel.Province">Province</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                    <select asp-for="@Model.RegisterUserModel.Province" id="lstProvince" required asp-items="@Model.Provinces" class="form-control">
+                                        <option value="" selected>Select province...</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.RegisterUserModel.Province" class="text-danger"></span>
+
                                     <label asp-for="@Model.RegisterUserModel.City">City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
                                     <select asp-for="@Model.RegisterUserModel.City" id="lstCity" required asp-items="@Model.Cities" class="form-control">
                                         <option value="" selected>Select city...</option>
@@ -173,8 +181,8 @@
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+<script type="text/javascript">
+        @*$(document).ready(function () {
             $('#lstCity').change(function () {
                 var selectedCity = $('#lstCity').val();
 
@@ -185,7 +193,7 @@
                     $.getJSON('@Url.Action("GetSuburbs")', { CityID: selectedCity }, function (suburbs) {
                         if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
                             suburbSelect.append($('<option/>', {
-                                value: "1",
+                                value: "",
                                 text: "Select suburb..."
                             }));
                           /*  debugger;*/
@@ -201,6 +209,36 @@
 
                 }
             })
-        })
-    </script>
+        })*@
+
+         $(document).ready(function () {
+            $('#lstCity').change(function () {
+                var selectedCity = $('#lstCity').val();
+
+                var suburbSelect = $('#lstSuburb');
+                suburbSelect.empty();
+
+                if (selectedCity != null && selectedCity != '') {
+                    $.getJSON('@Url.Action("GetSuburbs")', { CityID: selectedCity }, function (suburbs) {
+                        if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
+                            suburbSelect.append($('<option/>', {
+                                value: "",
+                                text: "Select suburb..."
+                            }));
+                          /*  debugger;*/
+                            $.each(suburbs, function (index, suburb) {
+                                suburbSelect.append($('<option/>', {
+                                    value: suburb.value,
+                                    text: suburb.text
+                                }));
+                            });
+                        }
+                    });
+
+
+                }
+            })
+         })
+
+</script>
 }
