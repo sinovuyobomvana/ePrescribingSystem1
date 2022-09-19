@@ -19,7 +19,8 @@
                 <p>Fill all form field to go to next step</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
-                        <form id="msform">
+                        <form id="msform" asp-action="SignUpForm2" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <!-- progressbar -->
                             <ul id="progressbar">
                                 <li class="active" id="personal"><strong>Personal</strong></li>
