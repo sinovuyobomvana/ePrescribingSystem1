@@ -9,6 +9,9 @@
 <script src="~/js/role.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- MultiStep Form -->
 <div class="container-fluid" id="grad1">
     <div class="row justify-content-center mt-0">
@@ -19,7 +22,7 @@
                 <p>Fill all form field to go to next step</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
-                        <form id="msform" asp-action="SignUpForm2" method="post">
+                        <form id="msform" asp-action="SignUpForm2" method="post" class="was-validated">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <!-- progressbar -->
                             <ul id="progressbar">
@@ -36,7 +39,7 @@
                                     <h2 class="fs-title">Personal Information</h2>
                                     <div class="form-group">
                                         <label asp-for="RegisterUserModel.Title">Title</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <select asp-for="RegisterUserModel.Title" class="form-control">
+                                        <select asp-for="RegisterUserModel.Title" class="form-control" required>
                                             <option value="" selected>Select title...</option>
                                             <option>Mr</option>
                                             <option>Mrs</option>
@@ -49,27 +52,27 @@
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.FirstName">First Name</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <input asp-for="@Model.RegisterUserModel.FirstName" type="text" class="form-control" placeholder="First Name">
+                                        <input asp-for="@Model.RegisterUserModel.FirstName" type="text" class="form-control" placeholder="First Name" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.FirstName" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.LastName">Last Name</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <input asp-for="@Model.RegisterUserModel.LastName" type="text" class="form-control" placeholder="Last Name">
+                                        <input asp-for="@Model.RegisterUserModel.LastName" type="text" class="form-control" placeholder="Last Name" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.LastName" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.IDNumber">ID Number</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <input asp-for="@Model.RegisterUserModel.IDNumber" type="text" class="form-control" placeholder="ID Number">
+                                        <input asp-for="@Model.RegisterUserModel.IDNumber" type="text" class="form-control" placeholder="ID Number" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.IDNumber" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.DateOfBirth">Date Of Birth</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <input value="" asp-for="@Model.RegisterUserModel.DateOfBirth" type="date" class="form-control">
+                                        <input value="" asp-for="@Model.RegisterUserModel.DateOfBirth" type="date" class="form-control" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.DateOfBirth" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.Gender">Gender</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <select asp-for="@Model.RegisterUserModel.Gender" class="form-control">
+                                        <select asp-for="@Model.RegisterUserModel.Gender" class="form-control" required>
                                             <option value="" selected>Select gender...</option>
                                             <option>Male</option>
                                             <option>Female</option>
@@ -85,18 +88,18 @@
                                     <h2 class="fs-title">Address Details</h2>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.Addressine1">Address Line 1</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <input asp-for="@Model.RegisterUserModel.Addressine1" type="text" class="form-control" placeholder="1234 Main St">
+                                        <input asp-for="@Model.RegisterUserModel.Addressine1" type="text" class="form-control" placeholder="1234 Main St" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.Addressine1" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.AddressLine2">Address Line 2</label>
-                                        <input asp-for="@Model.RegisterUserModel.AddressLine2" type="text" class="form-control" placeholder="Apartment, studio, or floor">
+                                        <input asp-for="@Model.RegisterUserModel.AddressLine2" type="text" class="form-control" placeholder="Apartment, studio, or floor" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.AddressLine2" class="text-danger"></span>
                                     </div>
 
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.Province">Province</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <select asp-for="@Model.RegisterUserModel.Province" id="lstProvince" asp-items="@Model.Provinces" class="form-control">
+                                        <select asp-for="@Model.RegisterUserModel.Province" id="lstProvince" asp-items="@Model.Provinces" class="form-control" required>
                                             <option value="" selected>Select province...</option>
                                         </select>
                                         <span asp-validation-for="@Model.RegisterUserModel.Province" class="text-danger"></span>
@@ -104,7 +107,7 @@
 
                                     <div class="form-group">
                                         <label @Model.RegisterUserModel.City>City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <select asp-for="@Model.RegisterUserModel.City" id="lstCity" asp-items="@Model.Cities" class="form-control">
+                                        <select asp-for="@Model.RegisterUserModel.City" id="lstCity" asp-items="@Model.Cities" class="form-control" required>
                                             <option value="" selected>Select city...</option>
                                         </select>
                                         <span asp-validation-for="@Model.RegisterUserModel.City" class="text-danger"></span>
@@ -112,7 +115,7 @@
 
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.Suburb.SuburbID">Suburb</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <select asp-for="@Model.RegisterUserModel.Suburb.SuburbID" id="lstSuburb" class="form-control" asp-items="@Model.Suburbs">
+                                        <select asp-for="@Model.RegisterUserModel.Suburb.SuburbID" id="lstSuburb" class="form-control" asp-items="@Model.Suburbs" required>
                                             <option value="" selected>Select suburb...</option>
                                         </select>
                                         <span asp-validation-for="@Model.RegisterUserModel.Suburb.SuburbID" class="text-danger"></span>
@@ -120,7 +123,7 @@
 
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.PostalCode">Postal Code</label>
-                                        <input asp-for="@Model.RegisterUserModel.PostalCode" type="text" class="form-control" placeholder="Postal Code">
+                                        <input asp-for="@Model.RegisterUserModel.PostalCode" type="text" class="form-control" placeholder="Postal Code" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.PostalCode" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -133,12 +136,12 @@
                                     <h2 class="fs-title">Contact</h2>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.ContactNumber">Contact Number</label>
-                                        <input asp-for="@Model.RegisterUserModel.ContactNumber" type="text" class="form-control" placeholder="Contact Number">
+                                        <input asp-for="@Model.RegisterUserModel.ContactNumber" type="text" class="form-control" placeholder="Contact Number" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.ContactNumber" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.Email">Email</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <input asp-for="@Model.RegisterUserModel.Email" type="email" class="form-control" placeholder="Email">
+                                        <input asp-for="@Model.RegisterUserModel.Email" type="email" class="form-control" placeholder="Email" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.Email" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -150,12 +153,12 @@
                                     <h2 class="fs-title">Password</h2>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.Password">Password</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <input asp-for="@Model.RegisterUserModel.Password" type="password" class="form-control" placeholder="Password">
+                                        <input asp-for="@Model.RegisterUserModel.Password" type="password" class="form-control" placeholder="Password" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.Password" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.ConfirmPassword">Confirm Password</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                        <input asp-for="@Model.RegisterUserModel.ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+                                        <input asp-for="@Model.RegisterUserModel.ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.ConfirmPassword" class="text-danger"></span>
                                     </div>
                                 </div>
