@@ -123,7 +123,7 @@
 
                                     <div class="form-group">
                                         <label asp-for="@Model.RegisterUserModel.PostalCode">Postal Code</label>
-                                        <input asp-for="@Model.RegisterUserModel.PostalCode" type="text" class="form-control" placeholder="Postal Code" required>
+                                        <input asp-for="@Model.RegisterUserModel.PostalCode" type="text" id="postalCode" class="form-control" placeholder="Postal Code" required>
                                         <span asp-validation-for="@Model.RegisterUserModel.PostalCode" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -203,34 +203,34 @@
 
 <script type="text/javascript">
 
-        $(document).ready(function () {
-            $('#lstProvince').change(function () {
-                var selectedProvince = $('#lstProvince').val();
+        //$(document).ready(function () {
+        //    $('#lstProvince').change(function () {
+        //        var selectedProvince = $('#lstProvince').val();
 
-                var citySelect = $('#lstCity');
-                citySelect.empty();
+        //        var citySelect = $('#lstCity');
+        //        citySelect.empty();
                
-                if (selectedProvince != null && selectedProvince != '') {
-                    $.getJSON('@Url.Action("GetCities")', { ProvinceID: selectedProvince }, function (cities) {
-                        if (cities != null && !jQuery.isEmptyObject(cities)) {
-                            citySelect.append($('<option/>', {
-                                value: "",
-                                text: "Select city..."
-                            }));
-                          /*  debugger;*/
-                            $.each(cities, function (index, city) {
-                                citySelect.append($('<option/>', {
-                                    value: city.value,
-                                    text: city.text
-                                }));
-                            });
-                        }
-                    });
+        //        if (selectedProvince != null && selectedProvince != '') {
+        //            $.getJSON('@Url.Action("GetCities")', { ProvinceID: selectedProvince }, function (cities) {
+        //                if (cities != null && !jQuery.isEmptyObject(cities)) {
+        //                    citySelect.append($('<option/>', {
+        //                        value: "",
+        //                        text: "Select city..."
+        //                    }));
+        //                  /*  debugger;*/
+        //                    $.each(cities, function (index, city) {
+        //                        citySelect.append($('<option/>', {
+        //                            value: city.value,
+        //                            text: city.text
+        //                        }));
+        //                    });
+        //                }
+        //            });
 
 
-                }
-            })
-        })
+        //        }
+        //    })
+        //})
 
         $(document).ready(function () {
             $('#lstCity').change(function () {
@@ -261,7 +261,6 @@
                 }
             })
         })
-
-      
+   
 </script>
 }

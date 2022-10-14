@@ -1,9 +1,9 @@
-﻿using EPrescribingSystem.Models;
+﻿using EPrescribingSystem.Data;
+using EPrescribingSystem.Models;
 using EPrescribingSystem.Service;
 using EPrescribingSystem.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,15 +14,20 @@ namespace EPrescribingSystem.Repository
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUserService _userService;
+        private readonly EprescribingDBContext _context = null;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser>signInManager, IUserService userService)
+        public AccountRepository(EprescribingDBContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser>signInManager, IUserService userService)
         {
              _userManager = userManager;
             _signInManager = signInManager;
             _userService = userService;
+            _context = context;
         }
+
         public async Task<IdentityResult> CreateUserAsync(UserCreateModel userModel)
         {
+            string postal = GetPostalCodes(userModel);
+
             var user = new ApplicationUser()
             {
                 Email = userModel.RegisterUserModel.Email,
@@ -36,7 +41,7 @@ namespace EPrescribingSystem.Repository
                 AddressLine2 = userModel.RegisterUserModel.AddressLine2,
                 ContactNumber = userModel.RegisterUserModel.ContactNumber,
                 RegistrationDate = DateTime.Now,
-                PostalCode = userModel.RegisterUserModel.PostalCode,
+                PostalCode = postal,
                 SuburbID = userModel.RegisterUserModel.Suburb.SuburbID,
                 HighestQualification = userModel.RegisterUserModel.HighestQualification,
                 HealthCouncilRegistrationNumber = userModel.RegisterUserModel.HealthCouncilRegistrationNumber,
@@ -51,6 +56,15 @@ namespace EPrescribingSystem.Repository
             }
 
             return result; 
+        }
+
+        public string GetPostalCodes(UserCreateModel userModel)
+        {
+            string result = _context.Suburbs
+            .Where(s => s.SuburbID == userModel.RegisterUserModel.Suburb.SuburbID).Select(s=>s.PostalCode)
+            .FirstOrDefault();
+   
+            return result;
         }
 
         public async Task<SignInResult> PasswordSignInAsync(SignInModel signInModel)
