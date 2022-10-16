@@ -92,22 +92,30 @@
                                     <span asp-validation-for="@Model.RegisterUserModel.AddressLine2" class="text-danger"></span>
 
 
-                                    <label asp-for="@Model.RegisterUserModel.Province">Province</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                    <select asp-for="@Model.RegisterUserModel.Province" id="lstProvince" required asp-items="@Model.Provinces" class="form-control">
-                                        <option value="" selected>Select province...</option>
-                                    </select>
-                                    <span asp-validation-for="@Model.RegisterUserModel.Province" class="text-danger"></span>
+                                    <div class="form-group">
+                                        <label asp-for="@Model.RegisterUserModel.Province">Province</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                        <select asp-for="@Model.RegisterUserModel.Province" id="lstProvince" asp-items="@Model.Provinces" class="form-control" required>
+                                            <option value="" selected>Select province...</option>
+                                        </select>
+                                        <span asp-validation-for="@Model.RegisterUserModel.Province" class="text-danger"></span>
+                                    </div>
 
-                                    <label asp-for="@Model.RegisterUserModel.City">City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                    <select asp-for="@Model.RegisterUserModel.City" id="lstCity" required asp-items="@Model.Cities" class="form-control">
-                                        <option value="" selected>Select city...</option>
-                                    </select>
-                                    <span asp-validation-for="@Model.RegisterUserModel.City" class="text-danger"></span>
-                                    <label asp-for="@Model.RegisterUserModel.Suburb.SuburbID">Suburb</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
-                                    <select id="lstSuburb" required asp-for="@Model.RegisterUserModel.Suburb.SuburbID" class="form-control" asp-items="@Model.Suburbs">
-                                        <option value="1" selected>Select suburb...</option>
-                                    </select>
-                                    <span asp-validation-for="@Model.RegisterUserModel.Suburb.SuburbID" class="text-danger"></span>
+                                    <div class="form-group">
+                                        <label @Model.RegisterUserModel.City>City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                        <select asp-for="@Model.RegisterUserModel.City" id="lstCity" asp-items="@Model.Cities" class="form-control" required>
+                                            <option value="" selected>Select city...</option>
+                                        </select>
+                                        <span asp-validation-for="@Model.RegisterUserModel.City" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="@Model.RegisterUserModel.Suburb.SuburbID">Suburb</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                                        <select asp-for="@Model.RegisterUserModel.Suburb.SuburbID" id="lstSuburb" class="form-control" asp-items="@Model.Suburbs" required>
+                                            <option value="" selected>Select suburb...</option>
+                                        </select>
+                                        <span asp-validation-for="@Model.RegisterUserModel.Suburb.SuburbID" class="text-danger"></span>
+                                    </div>
+
                                     <label asp-for="@Model.RegisterUserModel.PostalCode">Postal Code</label>
                                     <input asp-for="@Model.RegisterUserModel.PostalCode" type="text" class="form-control" placeholder="Postal Code">
                                     <span asp-validation-for="@Model.RegisterUserModel.PostalCode" class="text-danger"></span>
@@ -211,34 +219,35 @@
             })
         })*@
 
-         $(document).ready(function () {
-            $('#lstCity').change(function () {
-                var selectedCity = $('#lstCity').val();
+            $(document).ready(function () {
+                $('#lstCity').change(function () {
+                    var selectedCity = $('#lstCity').val();
 
-                var suburbSelect = $('#lstSuburb');
-                suburbSelect.empty();
+                    var suburbSelect = $('#lstSuburb');
+                    suburbSelect.empty();
 
-                if (selectedCity != null && selectedCity != '') {
-                    $.getJSON('@Url.Action("GetSuburbs")', { CityID: selectedCity }, function (suburbs) {
-                        if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
-                            suburbSelect.append($('<option/>', {
-                                value: "",
-                                text: "Select suburb..."
-                            }));
-                          /*  debugger;*/
-                            $.each(suburbs, function (index, suburb) {
+                    if (selectedCity != null && selectedCity != '') {
+                        $.getJSON('@Url.Action("GetSuburbs", "Account")', { CityID: selectedCity }, function (suburbs) {
+                            if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
                                 suburbSelect.append($('<option/>', {
-                                    value: suburb.value,
-                                    text: suburb.text
+                                    value: "",
+                                    text: "Select suburb..."
                                 }));
-                            });
-                        }
-                    });
+
+                                /*  debugger;*/
+                                $.each(suburbs, function (index, suburb) {
+                                    suburbSelect.append($('<option/>', {
+                                        value: suburb.value,
+                                        text: suburb.text
+                                    }));
+                                });
+                            }
+                        });
 
 
-                }
+                    }
+                })
             })
-         })
 
 </script>
 }

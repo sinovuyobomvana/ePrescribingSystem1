@@ -27,6 +27,19 @@ namespace EPrescribingSystem.Controllers
             UserCreateModel userCreateModel = new UserCreateModel();
 
             userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
+            List<SelectListItem> Provinces = _context.Provinces
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.ProvinceID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+            userCreateModel.Provinces = Provinces;
+            userCreateModel.Cities = new List<SelectListItem>();
+
+            userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
             List<SelectListItem> Cities = _context.Cities
                 .OrderBy(n => n.Name)
                 .Select(n =>
@@ -70,6 +83,19 @@ namespace EPrescribingSystem.Controllers
          {
 
             UserCreateModel userCreateModel = new UserCreateModel();
+
+            userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
+            List<SelectListItem> Provinces = _context.Provinces
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.ProvinceID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+            userCreateModel.Provinces = Provinces;
+            userCreateModel.Cities = new List<SelectListItem>();
 
             userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
             List<SelectListItem> Cities = _context.Cities
