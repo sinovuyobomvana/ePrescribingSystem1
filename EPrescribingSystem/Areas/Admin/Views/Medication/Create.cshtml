@@ -3,7 +3,12 @@
 @{
     ViewData["Title"] = "Add Medication";
 }
+<head> 
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
+</head>
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
@@ -21,10 +26,26 @@
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="DosageForm" class="control-label"></label>
-                        <input asp-for="DosageForm" class="form-control" />
+
+                        <br />
+                        <label class="text-dark">Dosage Form</label>
+                        <br />
+                        <select asp-for="DosageForm" required class="form-control">
+                            <option>Tablet</option>
+                            <option>Capsule</option>
+                            <option>Suspension</option>
+                            <option>Syrup</option>
+                            <option>Lotion</option>
+                            <option>Spray</option>
+                            <option>Gel</option>
+                            <option>Suppository</option>
+                            <option>Injection</option>
+                            <option>Drops</option>
+
+                        </select>
                         <span asp-validation-for="DosageForm" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="Schedule" class="control-label"></label>
                         <input asp-for="Schedule" class="form-control" />
