@@ -21,8 +21,8 @@ namespace EPrescribingSystem.Controllers
             _registerRepository = registerRepository;
         }
 
-        [Route("signup")]
-        public IActionResult Index()
+        [Route("admin-register")]
+        public IActionResult Register()
         {
             UserCreateModel userCreateModel = new UserCreateModel();
 
@@ -77,7 +77,7 @@ namespace EPrescribingSystem.Controllers
         //    return View(userModel);
         //}
 		
-		[Route("signup")]
+		[Route("admin-register")]
         [HttpPost]
         public async Task<ActionResult> Register(UserCreateModel userModel)
          {
@@ -124,8 +124,9 @@ namespace EPrescribingSystem.Controllers
                     }
                     return View(userCreateModel);
                 }
-                return RedirectToAction("SignIn", userModel);
-                //ModelState.Clear();
+                ModelState.Clear();
+                return View(userModel);
+                
             }
 
             return View(userCreateModel);
