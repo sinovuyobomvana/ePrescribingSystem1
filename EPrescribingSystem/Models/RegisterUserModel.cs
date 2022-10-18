@@ -67,7 +67,7 @@ namespace EPrescribingSystem.Models
         [Required(ErrorMessage = "Please select city.")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Please enter postal code.")]
+        //[Required(ErrorMessage = "Please enter postal code.")]
         public string PostalCode { get; set; }
 
         [Required(ErrorMessage = "Please enter contact no.")]
@@ -75,8 +75,8 @@ namespace EPrescribingSystem.Models
 
         public Suburb Suburb { get; set; }
 
-        [Required(ErrorMessage = "Please select Highest Qualification.")]
-        //[Display(Name = "Highest Qualification")]
+        //[Required(ErrorMessage = "Please select Highest Qualification.")]
+        [Display(Name = "Highest Qualification")]
         public string HighestQualification { get; set; }
 
       //  [Required(ErrorMessage = "Please select enter Registration Number.")]
