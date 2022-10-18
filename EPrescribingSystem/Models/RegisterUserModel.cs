@@ -75,8 +75,8 @@ namespace EPrescribingSystem.Models
 
         public Suburb Suburb { get; set; }
 
-      //  [Required(ErrorMessage = "Please select enter Highest Qualification.")]
-        [Display(Name = "Highest Qualification")]
+        [Required(ErrorMessage = "Please select Highest Qualification.")]
+        //[Display(Name = "Highest Qualification")]
         public string HighestQualification { get; set; }
 
       //  [Required(ErrorMessage = "Please select enter Registration Number.")]

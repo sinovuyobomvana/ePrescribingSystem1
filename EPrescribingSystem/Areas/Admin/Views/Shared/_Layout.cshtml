@@ -26,6 +26,29 @@
     <script src="~/assets/bootstrap/js/JavaScript.js"></script>
     <link href="~/assets/bootstrap/css/ProgressBarWindows.css" rel="stylesheet" />
 
+    <!--Table Zama Ghost-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+
     @*<script>
             $(document).ready(function () {
                  $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
@@ -46,9 +69,10 @@
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="PDashboard"><i></i><span class="fas fa-tachometer-alt">&nbsp;&nbsp;Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Profile" asp-action="Profile"><i ></i><span class="fas fa-user">&nbsp;&nbsp;Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="PCalendar"><i></i><span class="fa fa-calendar">&nbsp;&nbsp;Calendar</span></a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Pharmacy" asp-action="Index"><i></i><span class="fa fa-book-medical">&nbsp;&nbsp;Pharmacies</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="UserRoles" asp-action="Index"><i></i><span class="fa fa-users">&nbsp;&nbsp;Users</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="ChildProgress" asp-action="PChildProgress"><i></i><span class="fa fa-table">&nbsp;&nbsp;Records</span></a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Payment" asp-action="PPayment"><i></i><span class="fa fa-book-medical">&nbsp;&nbsp;Medication</span></a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Medication" asp-action="Index"><i></i><span class="fa fa-book-medical">&nbsp;&nbsp;Medication</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="SignIn"><i ></i><span class="fas fa-sign-out-alt">&nbsp;&nbsp;Log Out</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -109,7 +133,7 @@
             </div>
 
         </div>
-        <script src="~/assets2/bootstrap/js/bootstrap.min.js"></script>
+    @*    <script src="~/assets2/bootstrap/js/bootstrap.min.js"></script>
         <script src="~/assets2/js/chart.min.js"></script>
         <script src="~/assets2/js/bs-init.js"></script>
         <script src="~/assets2/js/Bootstrap-4---Payment-Form.js"></script>
@@ -117,11 +141,11 @@
 
         <script src="~/assets2/bootstrap/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-        <script src="assets2/js/creative.js"></script>
+        <script src="assets2/js/creative.js"></script>*@
         @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>*@
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+@*        <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
         @RenderSection("Scripts", required: false)
     </div>
 </body>
