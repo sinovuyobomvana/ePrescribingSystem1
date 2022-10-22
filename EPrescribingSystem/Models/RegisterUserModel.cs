@@ -71,6 +71,7 @@ namespace EPrescribingSystem.Models
         public string PostalCode { get; set; }
 
         [Required(ErrorMessage = "Please enter contact no.")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "A valid phone number must have 10 digits.")]
         public string ContactNumber { get; set; }
 
         public Suburb Suburb { get; set; }
