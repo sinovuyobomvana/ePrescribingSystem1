@@ -27,7 +27,7 @@ namespace EPrescribingSystem.Models
         public string PostalCode { get; set; }
 
         [ForeignKey("SuburbID")]
-        public int SuburbID { get; set; }
+        public virtual Suburb Suburb { get; set; }
 
         [Required, Phone]
         public string ContactNum { get; set; }

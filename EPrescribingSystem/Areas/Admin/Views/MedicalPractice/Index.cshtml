@@ -23,6 +23,7 @@
                     <th>@Html.DisplayNameFor(model => model.Name)</th>
                     <th>@Html.DisplayNameFor(model => model.Address1)</th>
                     <th>@Html.DisplayNameFor(model => model.Address2)</th>
+                    <th>@Html.DisplayNameFor(model => model.Suburb)</th>
                     <th>@Html.DisplayNameFor(model => model.ContactNum)</th>
                     <th>@Html.DisplayNameFor(model => model.EmailAddress)</th>
                     <th>Actions</th>
@@ -43,6 +44,9 @@
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.Address2)
+                        </td>
+                         <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Suburb.Name)
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.ContactNum)

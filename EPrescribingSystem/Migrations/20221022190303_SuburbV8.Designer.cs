@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221022190303_SuburbV8")]
+    partial class SuburbV8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -331,7 +333,7 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ActiveIngredientID")
+                    b.Property<int>("ContraIndicationID")
                         .HasColumnType("int");
 
                     b.Property<string>("DosageForm")
@@ -346,12 +348,9 @@ namespace EPrescribingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Strength")
-                        .HasColumnType("int");
-
                     b.HasKey("MedicationID");
 
-                    b.HasIndex("ActiveIngredientID");
+                    b.HasIndex("ContraIndicationID");
 
                     b.ToTable("Medication");
                 });
@@ -728,11 +727,13 @@ namespace EPrescribingSystem.Migrations
 
             modelBuilder.Entity("EPrescribingSystem.Models.Medication", b =>
                 {
-                    b.HasOne("EPrescribingSystem.Models.ActiveIngredient", "ActiveIngredient")
+                    b.HasOne("EPrescribingSystem.Models.ContraIndication", "ContraIndication")
                         .WithMany()
-                        .HasForeignKey("ActiveIngredientID");
+                        .HasForeignKey("ContraIndicationID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ActiveIngredient");
+                    b.Navigation("ContraIndication");
                 });
 
             modelBuilder.Entity("EPrescribingSystem.Models.MedicationActiveIngredient", b =>

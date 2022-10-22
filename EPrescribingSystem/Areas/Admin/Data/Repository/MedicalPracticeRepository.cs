@@ -22,7 +22,7 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
 
         public async Task<IEnumerable<MedicalPractice>> GetAllAsync()
         {
-            var result = await _context.MedicalPractices.ToListAsync();
+            var result = await _context.MedicalPractices.Include(x=>x.Suburb.City.Province).ToListAsync();
             return result;
         }
 
@@ -34,7 +34,7 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
 
         public async Task<MedicalPractice> GetByIdAsync(int id)
         {
-            var result = await _context.MedicalPractices.FirstOrDefaultAsync(n => n.MedicalPracticeID == id);
+            var result = await _context.MedicalPractices.Include(a=>a.Suburb.City.Province).FirstOrDefaultAsync(n => n.MedicalPracticeID == id);
             return result;
         }
 

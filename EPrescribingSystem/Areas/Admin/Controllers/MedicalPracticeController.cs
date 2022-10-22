@@ -110,6 +110,14 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Edit(int id)
         {
+            List<Suburb> suburbs = await _context.Suburbs.ToListAsync();
+            List<Province> provinces = await _context.Provinces.ToListAsync();
+            List<City> cities = await _context.Cities.ToListAsync();
+
+            ViewBag.Suburbs = suburbs;
+            ViewBag.Provinces = provinces;
+            ViewBag.Cities = cities;
+
             var medicalPracticeDetails = await _service.GetByIdAsync(id);
 
             if (medicalPracticeDetails == null)

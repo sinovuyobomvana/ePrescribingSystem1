@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using EPrescribingSystem.Models;
 using Microsoft.AspNetCore.Authorization;
+using EPrescribingSystem.Data;
 
 namespace EPrescribingSystem.Controllers
 {
@@ -16,11 +17,13 @@ namespace EPrescribingSystem.Controllers
         
             private readonly UserManager<ApplicationUser> _userManager;
             private readonly RoleManager<IdentityRole> _roleManager;
+            private readonly EprescribingDBContext _context = null;
 
-            public UserRolesController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public UserRolesController(EprescribingDBContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
             {
                 _roleManager = roleManager;
                 _userManager = userManager;
+                _context = context;
             }
         //[Route("[area]/UserRoles")]
         [Route("[area]/[controller]/[action]")]
@@ -36,13 +39,20 @@ namespace EPrescribingSystem.Controllers
                     thisViewModel.Email = user.Email;
                     thisViewModel.FirstName = user.FirstName;
                     thisViewModel.LastName = user.LastName;
+                    thisViewModel.SuburbName = GetSuburb(user.SuburbID);
                     thisViewModel.Roles = await GetUserRoles(user);
                     userRolesViewModel.Add(thisViewModel);
                 }
                 return View(userRolesViewModel);
         }
 
-      
+        public string GetSuburb (int Id)
+        {
+            string suburbName;
+
+            return suburbName = _context.Suburbs.Where(s => s.SuburbID == Id).Select(x => x.Name).FirstOrDefault();
+        }
+
         private async Task<List<string>> GetUserRoles(ApplicationUser user)
         {
             return new List<string>(await _userManager.GetRolesAsync(user));

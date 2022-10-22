@@ -2,6 +2,7 @@
 using EPrescribingSystem.Areas.Admin.ViewModel;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -24,11 +25,39 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             _context = context;
         }
 
+        //[Route("[area]/[controller]/[action]")]
+        //public async Task<IActionResult> Index()
+        //{
+        //    var data = await _service.GetAllAsync();
+        //    return View(data);
+        //}
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Index()
         {
-            var data = await _service.GetAllAsync();
-            return View(data);
+            var pharmacies = await _context.Pharmacies.ToListAsync();
+            var pharmacyViewModel = new List<PharmacyViewModel>();
+            foreach (Pharmacy pharm in pharmacies)
+            {
+                var thisViewModel = new PharmacyViewModel();
+                thisViewModel.PharmacyID = pharm.PharmacyID;
+                thisViewModel.Address1 = pharm.Address1;
+                thisViewModel.EmailAddress = pharm.EmailAddress;
+                thisViewModel.Province = pharm.Province;
+                thisViewModel.Name = pharm.Name;
+                thisViewModel.ContactNumber = pharm.ContactNumber;
+                thisViewModel.LicenseNumber = pharm.LicenseNumber;
+                thisViewModel.PostalCode = pharm.PostalCode;
+                thisViewModel.SuburbName = GetSuburb(pharm.SuburbID);
+                pharmacyViewModel.Add(thisViewModel);
+            }
+            return View(pharmacyViewModel);
+        }
+
+        public string GetSuburb(int Id)
+        {
+            string suburbName;
+
+            return suburbName = _context.Suburbs.Where(s => s.SuburbID == Id).Select(x => x.Name).FirstOrDefault();
         }
 
 
@@ -85,6 +114,8 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var pharmacyDetails = await _service.GetByIdAsync(id);
+
+
 
             if (pharmacyDetails == null) return View("Not Found!!!");
             return View(pharmacyDetails);
