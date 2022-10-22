@@ -14,7 +14,6 @@ namespace EPrescribingSystem.Models
         [Required(ErrorMessage = "Please select suburb.")]
         public int SuburbID { get; set; }
 
-        
         public string Name { get; set; }
    
         public string PostalCode { get; set; }

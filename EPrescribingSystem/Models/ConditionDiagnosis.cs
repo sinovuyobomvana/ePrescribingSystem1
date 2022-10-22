@@ -14,8 +14,8 @@ namespace EPrescribingSystem.Models
 
         public int ConditionID { get; set; }
 
-        public string ConditionName { get; set; }
+        public string ICD_10_CODE { get; set; }
 
-        public string symptoms { get; set; }
+        public string Diagnosis { get; set; }
     }
 }

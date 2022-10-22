@@ -22,7 +22,7 @@
                     <th>@Html.DisplayNameFor(model => model.LicenseNumber)</th>
                     <th>@Html.DisplayNameFor(model => model.Name)</th>
                     <th>@Html.DisplayNameFor(model => model.Address1)</th>
-                    <th>Suburb</th>
+                    <th>@Html.DisplayNameFor(model => model.Suburb)</th>
                     <th>@Html.DisplayNameFor(model => model.ContactNumber)</th>
                     <th>@Html.DisplayNameFor(model => model.EmailAddress)</th>
                     <th>Actions</th>
@@ -42,7 +42,7 @@
                             @Html.DisplayFor(modelItem => item.Address1)
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.SuburbModel)
+                           <label asp-for="@item.Suburb.Name"></label>
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.ContactNumber)

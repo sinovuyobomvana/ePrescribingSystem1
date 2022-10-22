@@ -237,11 +237,8 @@ namespace EPrescribingSystem.Controllers
                     var roleUser = await _userManager.FindByNameAsync(userName);
 
                     HttpContext.Session.SetString("Username", signInModel.Email);
-                    //HttpContext.Session.SetString("Role", signInModel.Email);
 
                     var userRoles = await _userManager.GetRolesAsync(roleUser);
-
-                    //_logger.LogInformation("User logged in.");
 
                     foreach (var role in userRoles)
                     {
@@ -252,8 +249,6 @@ namespace EPrescribingSystem.Controllers
 
                         if (role == "Admin")
                             return RedirectToAction("Index", "UserRoles", new { area = "Admin" });
-                        else if (role == "Basic")
-                            return RedirectToAction("AdmissionDashboard1", "AdmissionDashboard");
                         else if (role == "Patient")
                             return RedirectToAction("PDashboard", "Home", new { area = "Patient" });
                         else if (role == "Doctor")

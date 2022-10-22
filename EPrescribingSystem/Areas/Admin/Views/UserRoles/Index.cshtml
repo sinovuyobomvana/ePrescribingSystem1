@@ -18,6 +18,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
+                <td>Suburb</td>
                 <th>Roles</th>
                 <th>Action</th>
             </tr>
@@ -29,6 +30,7 @@
                     <td>@user.FirstName</td>
                     <td>@user.LastName</td>
                     <td>@user.Email</td>
+                    <td>@user.Suburb.Name</td>
                     <td>@string.Join(" , ", user.Roles.ToList())</td>
                     <td>
                         <a class="btn btn-primary" asp-area="Admin" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage Roles</a>

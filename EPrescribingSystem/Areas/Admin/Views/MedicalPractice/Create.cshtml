@@ -1,4 +1,5 @@
-﻿@model MedicalPractice
+﻿@using EPrescribingSystem.Areas.Admin.ViewModel
+@model MedicalPracticeViewModel
 
 @{
     ViewData["Title"] = "Add a new Medical Practice";
@@ -15,34 +16,59 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group">
-                        <label asp-for="PracticeNumber" class="control-label"></label>
-                        <input asp-for="PracticeNumber" class="form-control" />
-                        <span asp-validation-for="PracticeNumber" class="text-danger"></span>
+                        <label asp-for="MedicalPractice.PracticeNumber" class="control-label"></label>
+                        <input asp-for="MedicalPractice.PracticeNumber" class="form-control" />
+                        <span asp-validation-for="MedicalPractice.PracticeNumber" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <label asp-for="MedicalPractice.Name" class="control-label"></label>
+                        <input asp-for="MedicalPractice.Name" class="form-control" />
+                        <span asp-validation-for="MedicalPractice.Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Address1" class="control-label"></label>
-                        <input asp-for="Address1" class="form-control" />
-                        <span asp-validation-for="Address1" class="text-danger"></span>
+                        <label asp-for="MedicalPractice.Address1" class="control-label"></label>
+                        <input asp-for="MedicalPractice.Address1" class="form-control" />
+                        <span asp-validation-for="MedicalPractice.Address1" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Address2" class="control-label"></label>
-                        <input asp-for="Address2" class="form-control" />
-                        <span asp-validation-for="Address2" class="text-danger"></span>
+                        <label asp-for="MedicalPractice.Address2" class="control-label"></label>
+                        <input asp-for="MedicalPractice.Address2" class="form-control" />
+                        <span asp-validation-for="MedicalPractice.Address2" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.MedicalPractice.Province">Province</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                        <select asp-for="@Model.MedicalPractice.Province" id="lstProvince" asp-items="@Model.Provinces" class="form-control" required>
+                            <option value="" selected>Select province...</option>
+                        </select>
+                        <span asp-validation-for="@Model.MedicalPractice.Province" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>City</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                        <select id="lstCity" asp-items="@Model.Cities" class="form-control" required>
+                            <option value="" selected>Select city...</option>
+                        </select>
+                        <span @*asp-validation-for="MedicalPractice.City"*@ class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MedicalPractice.SuburbID">Suburb</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                        <select asp-for="MedicalPractice.SuburbID" id="lstSuburb" class="form-control" asp-items="@Model.Suburbs" required>
+                            <option value="" selected>Select suburb...</option>
+                        </select>
+                        <span asp-validation-for="MedicalPractice.SuburbID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MedicalPractice.ContactNum" class="control-label"></label>
+                        <input asp-for="MedicalPractice.ContactNum" class="form-control" />
+                        <span asp-validation-for="MedicalPractice.ContactNum" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ContactNum" class="control-label"></label>
-                        <input asp-for="ContactNum" class="form-control" />
-                        <span asp-validation-for="ContactNum" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="EmailAddress" class="control-label"></label>
-                        <input asp-for="EmailAddress" class="form-control" />
-                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        <label asp-for="MedicalPractice.EmailAddress" class="control-label"></label>
+                        <input asp-for="MedicalPractice.EmailAddress" class="form-control" />
+                        <span asp-validation-for="MedicalPractice.EmailAddress" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
@@ -55,3 +81,35 @@
         </div>
     </div>
 </div>
+
+   <script>
+    $(document).ready(function () {
+        $('#lstCity').change(function () {
+            var selectedCity = $('#lstCity').val();
+
+            var suburbSelect = $('#lstSuburb');
+            suburbSelect.empty();
+
+            if (selectedCity != null && selectedCity != '') {
+                $.getJSON('@Url.Action("GetSuburbs", "Account")', { CityID: selectedCity }, function (suburbs) {
+                    if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
+                        suburbSelect.append($('<option/>', {
+                            value: "",
+                            text: "Select suburb..."
+                        }));
+
+                        /*  debugger;*/
+                        $.each(suburbs, function (index, suburb) {
+                            suburbSelect.append($('<option/>', {
+                                value: suburb.value,
+                                text: suburb.text
+                            }));
+                        });
+                    }
+                });
+
+
+            }
+        })
+    })
+  </script>

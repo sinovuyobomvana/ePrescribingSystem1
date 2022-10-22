@@ -1,8 +1,12 @@
 ﻿using EPrescribingSystem.Areas.Admin.Data.Repository;
 using EPrescribingSystem.Areas.Admin.Data.Services;
+using EPrescribingSystem.Areas.Admin.ViewModel;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
+using EPrescribingSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +18,12 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
     public class MedicalPracticeController : Controller
     {
         private readonly IMedicalPracticeRepository _service;
+        private readonly EprescribingDBContext _context = null;
 
-
-        public MedicalPracticeController(IMedicalPracticeRepository service)
+        public MedicalPracticeController(EprescribingDBContext context, IMedicalPracticeRepository service)
         {
             _service = service;
+            _context = context;
         }
   
         [Route("[area]/[controller]/[action]")]
@@ -33,13 +38,55 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         [Route("[area]/[controller]/[action]")]
         public IActionResult Create()
         {
-            
-            return View();
+            MedicalPracticeViewModel medicalPracticeModel = new MedicalPracticeViewModel();
+
+            medicalPracticeModel.MedicalPractice = new Models.MedicalPractice();
+            List<SelectListItem> Provinces = _context.Provinces
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.ProvinceID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+            medicalPracticeModel.Provinces = Provinces;
+            medicalPracticeModel.Cities = new List<SelectListItem>();
+
+            medicalPracticeModel.MedicalPractice = new Models.MedicalPractice();
+            List<SelectListItem> Cities = _context.Cities
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.CityID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+            medicalPracticeModel.Cities = Cities;
+            medicalPracticeModel.Suburbs = new List<SelectListItem>();
+
+            return View(medicalPracticeModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("PracticeNumber,Name,Address1,Address2,ContactNum,EmailAddress")]MedicalPractice medicalPractice)
+        public async Task<IActionResult> Create([Bind("PracticeNumber,Name,Address1,Address2,ContactNum,EmailAddress, PostalCode, SuburbID, Province")]MedicalPractice medicalPractice)
         {
+            MedicalPracticeViewModel medicalPracticeModel = new MedicalPracticeViewModel();
+
+            medicalPracticeModel.MedicalPractice = new Models.MedicalPractice();
+            List<SelectListItem> Provinces = _context.Provinces
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.ProvinceID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+            medicalPracticeModel.Provinces = Provinces;
+            medicalPracticeModel.Cities = new List<SelectListItem>();
+
             if (!ModelState.IsValid)
             {
                 return View(medicalPractice);
@@ -120,6 +167,26 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
 
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult GetSuburbs(int? CityId)
+        {
+            if (CityId != null)
+            {
+                List<SelectListItem> suburbsSel = _context.Suburbs
+                .Where(s => s.CityID == CityId)
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.CityID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+                return Json(suburbsSel);
+            }
+            return null;
         }
         //[HttpGet]
         //[Route("[area]/[controller]/[action]")]

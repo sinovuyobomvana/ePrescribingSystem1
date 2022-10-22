@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221018192411_MedicalPractiseTableV6")]
+    partial class MedicalPractiseTableV6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -744,13 +746,13 @@ namespace EPrescribingSystem.Migrations
 
             modelBuilder.Entity("EPrescribingSystem.Models.Pharmacy", b =>
                 {
-                    b.HasOne("EPrescribingSystem.Models.Suburb", "Suburb")
+                    b.HasOne("EPrescribingSystem.Models.Suburb", "SuburbModel")
                         .WithMany()
                         .HasForeignKey("SuburbID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Suburb");
+                    b.Navigation("SuburbModel");
                 });
 
             modelBuilder.Entity("EPrescribingSystem.Models.Prescription", b =>

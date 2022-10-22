@@ -22,6 +22,8 @@ namespace EPrescribingSystem.Models
         public string Address2 { get; set; }
 
         
+        public string Province { get; set; }
+
         public string PostalCode { get; set; }
 
         [ForeignKey("SuburbID")]

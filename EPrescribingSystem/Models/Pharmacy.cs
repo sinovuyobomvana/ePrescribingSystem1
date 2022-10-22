@@ -23,11 +23,13 @@ namespace EPrescribingSystem.Models
        
         public string PostalCode { get; set; }
 
+        public string Province { get; set; }
+
         [Required]
         public string LicenseNumber { get; set; }
 
         [ForeignKey("SuburbID")]
         public int SuburbID { get; set; }
-        public Suburb SuburbModel { get; set; }
+        public Suburb Suburb { get; set; }
     }
 }
