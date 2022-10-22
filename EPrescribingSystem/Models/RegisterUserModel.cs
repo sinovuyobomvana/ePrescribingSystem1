@@ -56,7 +56,7 @@ namespace EPrescribingSystem.Models
         [Display(Name = "Address Line 1")]
         public string Addressine1 { get; set; }
 
-        [Required(ErrorMessage = "Please enter address line 2.")]
+        //[Required(ErrorMessage = "Please enter address line 2.")]
         [StringLength(50)]
         [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
@@ -79,15 +79,15 @@ namespace EPrescribingSystem.Models
         [Display(Name = "Highest Qualification")]
         public string HighestQualification { get; set; }
 
-      //  [Required(ErrorMessage = "Please select enter Registration Number.")]
+        //[Required(ErrorMessage = "Please select enter Registration Number.")]
         [Display(Name = "Registration Number")]
         public string RegistrationNumber { get; set; }
 
-       // [Required(ErrorMessage = "Please select enter Health Council Registration Number.")]
+        //[Required(ErrorMessage = "Please select enter Health Council Registration Number.")]
         [Display(Name = "Health Council Registration Number")]
         public string HealthCouncilRegistrationNumber { get; set; }
 
-       // [Required(ErrorMessage = "Please select enter Role.")]
+        [Required(ErrorMessage = "Please select Role.")]
         [Display(Name = "Role")]
         public string Role { get; set; }
     }

@@ -39,11 +39,12 @@
                                 <div class="form-card">
                                     <h2 class="fs-title">Role</h2>
 
-                                    <select id="roles" class="form-control" required>
+                                    <select asp-for="RegisterUserModel.Role" id="roles" class="form-control" required>
                                         <option value="" selected>Select Role...</option>
                                         <option value="doc">Doctor</option>
                                         <option value="pharm">Pharmacist</option>
                                     </select>
+                                    <span asp-validation-for="@Model.RegisterUserModel.Role" class="text-danger"></span>
                                 </div>
 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
