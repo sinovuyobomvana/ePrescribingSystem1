@@ -50,7 +50,16 @@ namespace EPrescribingSystem.Repository
 
             var result = await _userManager.CreateAsync(user, userModel.RegisterUserModel.Password);
 
-            if (result.Succeeded)
+
+            if (result.Succeeded && userModel.RegisterUserModel.Role == "pharm")
+            {
+                await _userManager.AddToRoleAsync(user, Enums.Roles.Pharmacist.ToString());
+            }
+            else if (result.Succeeded && userModel.RegisterUserModel.Role == "doc")
+            {
+                await _userManager.AddToRoleAsync(user, Enums.Roles.Doctor.ToString());
+            }
+            else
             {
                 await _userManager.AddToRoleAsync(user, Enums.Roles.Patient.ToString());
             }
