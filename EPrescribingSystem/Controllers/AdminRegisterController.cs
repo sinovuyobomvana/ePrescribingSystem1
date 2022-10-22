@@ -124,9 +124,10 @@ namespace EPrescribingSystem.Controllers
                     }
                     return View(userCreateModel);
                 }
-                ModelState.Clear();
-                return View(userModel);
-                
+                //ModelState.Clear();
+                //return View(userModel);
+                return RedirectToAction("Index", "UserRoles", new { area = "Admin" });
+
             }
 
             return View(userCreateModel);
