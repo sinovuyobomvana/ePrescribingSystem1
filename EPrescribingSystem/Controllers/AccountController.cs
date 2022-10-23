@@ -182,7 +182,7 @@ namespace EPrescribingSystem.Controllers
                 .Select(n =>
                 new SelectListItem
                 {
-                    Value = n.CityID.ToString(),
+                    Value = n.SuburbID.ToString(),
                     Text = n.Name
                 }).ToList();
 

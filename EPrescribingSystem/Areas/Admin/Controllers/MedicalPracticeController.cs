@@ -70,28 +70,28 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("PracticeNumber,Name,Address1,Address2,ContactNum,EmailAddress, PostalCode, SuburbID, Province")]MedicalPractice medicalPractice)
+        public async Task<IActionResult> Create(MedicalPracticeViewModel medicalPracticeModel)
         {
-            MedicalPracticeViewModel medicalPracticeModel = new MedicalPracticeViewModel();
-
-            medicalPracticeModel.MedicalPractice = new Models.MedicalPractice();
-            List<SelectListItem> Provinces = _context.Provinces
-                .OrderBy(n => n.Name)
-                .Select(n =>
-                new SelectListItem
-                {
-                    Value = n.ProvinceID.ToString(),
-                    Text = n.Name
-                }).ToList();
-
-            medicalPracticeModel.Provinces = Provinces;
-            medicalPracticeModel.Cities = new List<SelectListItem>();
+            //MedicalPracticeViewModel medicalPracticeModel = new MedicalPracticeViewModel();
 
             if (!ModelState.IsValid)
             {
-                return View(medicalPractice);
+                medicalPracticeModel.MedicalPractice = new Models.MedicalPractice();
+                List<SelectListItem> Provinces = _context.Provinces
+                    .OrderBy(n => n.Name)
+                    .Select(n =>
+                    new SelectListItem
+                    {
+                        Value = n.ProvinceID.ToString(),
+                        Text = n.Name
+                    }).ToList();
+
+                medicalPracticeModel.Provinces = Provinces;
+                medicalPracticeModel.Cities = new List<SelectListItem>();
+
+                return View(medicalPracticeModel);
             }
-            await _service.AddAsync(medicalPractice);
+            await _service.AddAsync(medicalPracticeModel);
             return RedirectToAction(nameof(Index));
         }
 

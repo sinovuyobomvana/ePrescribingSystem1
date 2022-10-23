@@ -1,4 +1,5 @@
-﻿using EPrescribingSystem.Models;
+﻿using EPrescribingSystem.Migrations;
+using EPrescribingSystem.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -30,7 +31,8 @@ namespace EPrescribingSystem.Data
                             Address1 = "59 Parliament Street",
                             Address2 = "Central",
                             ContactNum = "0826561544",
-                            EmailAddress = "medicross@gmail.com"
+                            EmailAddress = "medicross@gmail.com",
+                            SuburbID = 4
                         },
                         new MedicalPractice()
                         {
@@ -39,7 +41,8 @@ namespace EPrescribingSystem.Data
                             Address1 = "17 Nobbs Road",
                             Address2 = "Humewood",
                             ContactNum = "0826569999",
-                            EmailAddress = "healthmeds@gmail.com"
+                            EmailAddress = "healthmeds@gmail.com",
+                            SuburbID = 3
                         },
                     });
                     context.SaveChanges();

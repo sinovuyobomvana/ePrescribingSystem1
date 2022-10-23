@@ -1,5 +1,6 @@
 ﻿using EPrescribingSystem.Areas.Admin.Data.Repository;
 using EPrescribingSystem.Areas.Admin.Data.Services;
+using EPrescribingSystem.Areas.Admin.ViewModel;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
 using Microsoft.EntityFrameworkCore;
@@ -26,9 +27,9 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
             return result;
         }
 
-        public async Task AddAsync(MedicalPractice medicalPractice)
+        public async Task AddAsync(MedicalPracticeViewModel medicalPractice)
         {
-            await _context.MedicalPractices.AddAsync(medicalPractice);
+            await _context.MedicalPractices.AddAsync(medicalPractice.MedicalPractice);
             await _context.SaveChangesAsync();
         }
 
@@ -40,7 +41,7 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
 
         public MedicalPractice GetById(int id)
         {
-            MedicalPractice medicalPractice = _context.MedicalPractices.Where(c => c.MedicalPracticeID == id).FirstOrDefault();
+            MedicalPractice medicalPractice = _context.MedicalPractices.Include(x=>x.Suburb.City.Province).Where(c => c.MedicalPracticeID == id).FirstOrDefault();
             return medicalPractice;
         }
 
