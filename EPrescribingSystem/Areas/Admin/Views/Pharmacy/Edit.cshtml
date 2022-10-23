@@ -42,13 +42,13 @@
 
                     <div class="form-group">
                         <label class="control-label">City</label>
-                        <select asp-items="@(new SelectList(ViewBag.Cities, "CityID", "Name"))" class="form-control"></select>
+                        <select asp-items="@(new SelectList(ViewBag.Cities, "CityID", "Name"))" id="lstCity" class="form-control"></select>
                         <span asp-validation-for="Suburb.City.Name" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Suburb</label>
-                        <select asp-for="Suburb.SuburbID" asp-items="@(new SelectList(ViewBag.Suburbs, "SuburbID", "Name"))" class="form-control"></select>
+                        <select asp-for="Suburb.SuburbID" asp-items="@(new SelectList(ViewBag.Suburbs, "SuburbID", "Name"))" id="lstSuburb" class="form-control"></select>
                         <span asp-validation-for="Suburb.Name" class="text-danger"></span>
                     </div>
 
@@ -74,3 +74,35 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#lstCity').change(function () {
+            var selectedCity = $('#lstCity').val();
+
+            var suburbSelect = $('#lstSuburb');
+            suburbSelect.empty();
+
+            if (selectedCity != null && selectedCity != '') {
+                $.getJSON('@Url.Action("GetSuburbs", "Account")', { CityID: selectedCity }, function (suburbs) {
+                    if (suburbs != null && !jQuery.isEmptyObject(suburbs)) {
+                        suburbSelect.append($('<option/>', {
+                            value: "",
+                            text: "Select suburb..."
+                        }));
+
+                        /*  debugger;*/
+                        $.each(suburbs, function (index, suburb) {
+                            suburbSelect.append($('<option/>', {
+                                value: suburb.value,
+                                text: suburb.text
+                            }));
+                        });
+                    }
+                });
+
+
+            }
+        })
+    })
+</script>
