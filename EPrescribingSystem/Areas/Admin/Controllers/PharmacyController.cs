@@ -16,21 +16,17 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
     [Area("Admin")]
     public class PharmacyController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IPharmacyRepository _service;
         private readonly EprescribingDBContext _context = null;
 
-        public PharmacyController(EprescribingDBContext context, IPharmacyRepository service)
+        public PharmacyController(UserManager<ApplicationUser> userManager, EprescribingDBContext context, IPharmacyRepository service)
         {
             _service = service;
             _context = context;
+            _userManager = userManager;
         }
 
-        //[Route("[area]/[controller]/[action]")]
-        //public async Task<IActionResult> Index()
-        //{
-        //    var data = await _service.GetAllAsync();
-        //    return View(data);
-        //}
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Index()
         {
@@ -49,6 +45,8 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
                 thisViewModel.LicenseNumber = pharm.LicenseNumber;
                 thisViewModel.PostalCode = pharm.PostalCode;
                 thisViewModel.SuburbName = GetSuburb(pharm.SuburbID);
+                //thisViewModel.UserID = pharm.UserID;
+
                 pharmacyViewModel.Add(thisViewModel);
             }
             return View(pharmacyViewModel);
@@ -61,11 +59,9 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             return suburbName = _context.Suburbs.Where(s => s.SuburbID == Id).Select(x => x.Name).FirstOrDefault();
         }
 
-
-        //Get: Pharmacy/Create
         [HttpGet]
         [Route("[area]/[controller]/[action]")]
-        public IActionResult Create()
+        public async Task <IActionResult> Create()
         {
             MedicalPracticeViewModel medicalPracticeModel = new MedicalPracticeViewModel();
 
@@ -94,6 +90,35 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
 
             medicalPracticeModel.Cities = Cities;
             medicalPracticeModel.Suburbs = new List<SelectListItem>();
+
+            var users = await _userManager.Users.ToListAsync();
+            var userRolesViewModel = new List<UserRolesViewModel>();
+
+
+            var thisViewModel = new UserRolesViewModel();
+            foreach (ApplicationUser user in users)
+            {
+                var checkrol = await _userManager.IsInRoleAsync(user, "Pharmacist");
+                if (checkrol)
+                {
+                    //var thisViewModel = new UserRolesViewModel();
+                    thisViewModel.UserId = user.Id;
+                    thisViewModel.Email = user.Email;
+                    thisViewModel.FirstName = user.FirstName;
+                    thisViewModel.LastName = user.LastName;
+                    userRolesViewModel.Add(thisViewModel);
+                }
+            }
+
+            List<SelectListItem> Users = _context.Users.Where(u => u.Id == thisViewModel.UserId).Select( 
+                n=> new SelectListItem
+                {
+                    Value = n.Id,
+                    Text = n.FirstName +" " + n.LastName
+
+                }).ToList();
+
+            medicalPracticeModel.Users = Users; 
 
             return View(medicalPracticeModel);
         }

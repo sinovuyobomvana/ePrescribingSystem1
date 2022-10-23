@@ -16,5 +16,6 @@ namespace EPrescribingSystem.Areas.Admin.ViewModel
         public string Province { get; set; }
         public string LicenseNumber { get; set; }
         public string SuburbName { get; set; }
+        public int UserID { get; set; }
     }
 }

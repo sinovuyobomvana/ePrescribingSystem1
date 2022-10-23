@@ -28,6 +28,11 @@ namespace EPrescribingSystem.Models
 
         public string Province { get; set; }
 
+        [ForeignKey("UserID")]
+        public string UserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+
         [Required]
         public string LicenseNumber { get; set; }
 

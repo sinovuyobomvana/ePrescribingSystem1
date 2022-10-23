@@ -72,6 +72,14 @@
                     </div>
 
                     <div class="form-group">
+                        <label asp-for="Pharmacy.UserId">Pharmacist Responsible</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
+                        <select asp-for="Pharmacy.UserId" asp-items="@Model.Users" class="form-control" required>
+                            <option value="" selected>Select pharmacist...</option>
+                        </select>
+                        <span asp-validation-for="Pharmacy.UserId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-outline-success float-right" />
                         <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Pharmacy" asp-action="Index">Cancel</a>
                     </div>
