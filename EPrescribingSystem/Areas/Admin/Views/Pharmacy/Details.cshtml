@@ -22,14 +22,32 @@
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Address1" class="control-label"></label>
-                    <input asp-for="Address1" class="form-control" readonly />
-                    <span asp-validation-for="Address1" class="text-danger"></span>
+                    <label asp-for="AddressLine1" class="control-label"></label>
+                    <input asp-for="AddressLine1" class="form-control" readonly />
+                    <span asp-validation-for="AddressLine1" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
-                    <label asp-for="Suburb.Name" class="control-label"></label>
+                    <label asp-for="AddressLine2" class="control-label"></label>
+                    <input asp-for="AddressLine2" class="form-control" readonly />
+                    <span asp-validation-for="AddressLine2" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Suburb</label>
                     <input asp-for="Suburb.Name" class="form-control" readonly />
                     <span asp-validation-for="Suburb.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">City</label>
+                    <input asp-for="Suburb.City.Name" class="form-control" readonly />
+                    <span asp-validation-for="Suburb.City.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Province</label>
+                    <input asp-for="Suburb.City.Province.Name" class="form-control" readonly />
+                    <span asp-validation-for="Suburb.City.Province.Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="ContactNumber" class="control-label"></label>

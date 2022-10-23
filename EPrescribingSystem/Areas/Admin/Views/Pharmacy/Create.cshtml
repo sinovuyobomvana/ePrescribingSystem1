@@ -26,10 +26,17 @@
                         <span asp-validation-for="Pharmacy.Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Pharmacy.Address1" class="control-label"></label>
-                        <input asp-for="Pharmacy.Address1" class="form-control" />
-                        <span asp-validation-for="Pharmacy.Address1" class="text-danger"></span>
+                        <label asp-for="Pharmacy.AddressLine1" class="control-label"></label>
+                        <input asp-for="Pharmacy.AddressLine1" class="form-control" />
+                        <span asp-validation-for="Pharmacy.AddressLine1" class="text-danger"></span>
                     </div>
+
+                    <div class="form-group">
+                        <label asp-for="Pharmacy.AddressLine2" class="control-label"></label>
+                        <input asp-for="Pharmacy.AddressLine2" class="form-control" />
+                        <span asp-validation-for="Pharmacy.AddressLine2" class="text-danger"></span>
+                    </div>
+
                     <div class="form-group">
                         <label asp-for="@Model.Pharmacy.Province">Province</label><span class="validator" style="color:Red;color:Red;display:contents;">*</span>
                         <select asp-for="@Model.Pharmacy.Province" id="lstProvince" asp-items="@Model.Provinces" class="form-control" required>

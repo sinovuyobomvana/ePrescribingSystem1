@@ -8,7 +8,8 @@ namespace EPrescribingSystem.Areas.Admin.ViewModel
     {
         public int PharmacyID { get; set; }
         public string Name { get; set; }
-        public string Address1 { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
         public string ContactNumber { get; set; }
         public string EmailAddress { get; set; }
         public string PostalCode { get; set; }

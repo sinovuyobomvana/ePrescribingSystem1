@@ -40,7 +40,8 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
                 var thisViewModel = new PharmacyViewModel();
                 thisViewModel.PharmacyID = pharm.PharmacyID;
-                thisViewModel.Address1 = pharm.Address1;
+                thisViewModel.AddressLine1 = pharm.AddressLine1;
+                thisViewModel.AddressLine2 = pharm.AddressLine2;
                 thisViewModel.EmailAddress = pharm.EmailAddress;
                 thisViewModel.Province = pharm.Province;
                 thisViewModel.Name = pharm.Name;
@@ -98,13 +99,13 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Name,Address1,ContactNumber,EmailAddress,LicenseNumber,SuburbID, PostalCode, Province")] Pharmacy pharmacy)
+        public async Task<IActionResult> Create( MedicalPracticeViewModel pharmacies)
         {
             if (!ModelState.IsValid)
             {
-                return View(pharmacy);
+                return View(pharmacies);
             }
-            await _service.AddAsync(pharmacy);
+            await _service.AddAsync(pharmacies);
             return RedirectToAction(nameof(Index));
         }
 
@@ -115,8 +116,6 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         {
             var pharmacyDetails = await _service.GetByIdAsync(id);
 
-
-
             if (pharmacyDetails == null) return View("Not Found!!!");
             return View(pharmacyDetails);
         }
@@ -124,10 +123,18 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         //Get: Pharmacy/Update
         [HttpGet]
         [Route("[area]/[controller]/[action]")]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
+            List<Suburb> suburbs = await _context.Suburbs.ToListAsync();
+            List<Province> provinces = await _context.Provinces.ToListAsync();
+            List<City> cities = await _context.Cities.ToListAsync();
 
-            Pharmacy pharmacy = _service.GetById(id);
+            ViewBag.Suburbs = suburbs;
+            ViewBag.Provinces = provinces;
+            ViewBag.Cities = cities;
+
+            Pharmacy pharmacy = await _service.GetByIdAsync(id);
+
             return View(pharmacy);
         }
         //public async Task<IActionResult> Edit(int id)

@@ -1,4 +1,5 @@
-﻿using EPrescribingSystem.Models;
+﻿using EPrescribingSystem.Areas.Admin.ViewModel;
+using EPrescribingSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
 
         Task<Pharmacy> GetByIdAsync(int id);
         Pharmacy GetById(int id);
-        Task AddAsync(Pharmacy pharmacy);
+        Task AddAsync(MedicalPracticeViewModel pharmacy);
         Task<Pharmacy> UpdateAsync(Pharmacy pharmacy);
         //Task<pharmacy> UpdateAsync(int id, Pharmacy pharmacy);
         Pharmacy Update(Pharmacy pharmacy);

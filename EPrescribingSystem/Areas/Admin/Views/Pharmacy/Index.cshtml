@@ -25,7 +25,8 @@
                     <th>@Html.DisplayNameFor(model => model.EmailAddress)</th>*@
                     <th>Licence Number</th>
                     <th>Name</th>
-                    <th>Address </th>
+                    <th>Address Line 1</th>
+                    <th>Address Line 2</th>
                     <th>Suburb</th>
                     <th>Contact Number</th>
                     <th>Email Address</th>
@@ -43,7 +44,10 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.Address1)
+                            @Html.DisplayFor(modelItem => item.AddressLine1)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.AddressLine2)
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.SuburbName)
