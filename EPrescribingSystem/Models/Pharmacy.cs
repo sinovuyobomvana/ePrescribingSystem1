@@ -28,8 +28,8 @@ namespace EPrescribingSystem.Models
 
         public string Province { get; set; }
 
-        [ForeignKey("UserID")]
-        public string UserId { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        public string ApplicationUserId { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
 

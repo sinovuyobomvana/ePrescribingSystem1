@@ -32,13 +32,13 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
 
         public async Task<Pharmacy> GetByIdAsync(int id)
         {
-            var result = await _context.Pharmacies.Include(x=>x.Suburb.City.Province).FirstOrDefaultAsync(n => n.PharmacyID == id);
+            var result = await _context.Pharmacies.Include(u => u.ApplicationUser).Include(x=>x.Suburb.City.Province).FirstOrDefaultAsync(n => n.PharmacyID == id);
             return result;
         }
 
         public Pharmacy GetById(int id)
         {
-            Pharmacy pharmacy = _context.Pharmacies.Include(s=>s.Suburb.City.Province).Where(c => c.PharmacyID == id).FirstOrDefault();
+            Pharmacy pharmacy = _context.Pharmacies.Include(u=>u.ApplicationUser).Include(s=>s.Suburb.City.Province).Where(c => c.PharmacyID == id).FirstOrDefault();
             return pharmacy;
         }
 
