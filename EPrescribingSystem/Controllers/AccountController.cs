@@ -36,6 +36,11 @@ namespace EPrescribingSystem.Controllers
             return View();
         }
 
+        public IActionResult Success()
+        {
+            return View();
+        }
+
         public IActionResult SignUpForm()
         {
 
@@ -80,7 +85,7 @@ namespace EPrescribingSystem.Controllers
         [Route("register")]
         [HttpPost]
         public async Task<ActionResult> SignUpForm2(UserCreateModel userModel)
-         {
+        {
 
             UserCreateModel userCreateModel = new UserCreateModel();
 
@@ -110,25 +115,42 @@ namespace EPrescribingSystem.Controllers
             userCreateModel.Cities = Cities;
             userCreateModel.Suburbs = new List<SelectListItem>();
 
-      
+            var patientQuery = from c in _context.Users select c;
+            ViewBag.IsSuccess = true;
+            //ViewBag.IsDone = false;
 
-            if (ModelState.IsValid)
+            if (!string.IsNullOrEmpty(userModel.RegisterUserModel.IDNumber))
             {
-                var result = await _accountRepository.CreateUserAsync(userModel);
+                patientQuery = patientQuery.Where(c => c.IDNumber.Equals(userModel.RegisterUserModel.IDNumber));
 
-                if (!result.Succeeded)
+
+                if (patientQuery.FirstOrDefault() != null)
                 {
-                    foreach(var errorMessage in result.Errors)
-                    {
-                        ModelState.AddModelError("", errorMessage.Description); 
-                    }
+                    ViewBag.IsSuccess = false;
                     return View(userCreateModel);
                 }
-                return RedirectToAction("SignIn", userModel);
-                //ModelState.Clear();
+                else
+                {
+
+                    if (ModelState.IsValid)
+                    {
+                        var result = await _accountRepository.CreateUserAsync(userModel);
+
+                        if (!result.Succeeded)
+                        {
+                            foreach (var errorMessage in result.Errors)
+                            {
+                                ModelState.AddModelError("", errorMessage.Description);
+                            }
+                            return View(userCreateModel);
+                        }
+                        return RedirectToAction("Success", userModel);
+                        //ModelState.Clear();
+                    }
+                }
             }
 
-            return View(userCreateModel);
+                return View(userCreateModel);
         }
 
 

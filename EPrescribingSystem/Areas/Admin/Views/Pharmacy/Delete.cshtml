@@ -36,10 +36,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="SuburbID" class="control-label"></label>
-                    <input asp-for="SuburbID" class="form-control" readonly />
-                    <span asp-validation-for="SuburbID" class="text-danger"></span>
+                    <label class="control-label">Suburb</label>
+                    <input asp-for="Suburb.Name" class="form-control" readonly />
+                    <span asp-validation-for="Suburb.Name" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label class="control-label">City</label>
+                    <input asp-for="Suburb.City.Name" class="form-control" readonly />
+                    <span asp-validation-for="Suburb.City.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Province</label>
+                    <input asp-for="Suburb.City.Province.Name" class="form-control" readonly />
+                    <span asp-validation-for="Suburb.City.Province.Name" class="text-danger"></span>
+                </div>
+
                 <div class="form-group">
                     <label asp-for="ContactNumber" class="control-label"></label>
                     <input asp-for="ContactNumber" class="form-control" readonly />
@@ -51,18 +63,18 @@
                     <span asp-validation-for="EmailAddress" class="text-danger"></span>
                 </div>
 
-@*                <div class="form-group">
+                <div class="form-group">
                     <label class="control-label">Responsible Pharmacist</label>
                     <input value="@(Model.ApplicationUser.FirstName + " " + Model.ApplicationUser.LastName)" class="form-control" readonly />
                     <span asp-validation-for="ApplicationUser.FirstName" class="text-danger"></span>
-                </div>*@
+                </div>
 
                 <div class="form-group">
                     <form asp-action="Delete">
                         <input type="hidden" asp-for="PharmacyID" />
                         <input type="submit" value="Confirm" class="btn btn-danger float-right" />
                     </form>
-                    <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="MedicalPractice" asp-action="Index">Cancel</a>
+                    <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Pharmacy" asp-action="Index">Cancel</a>
                 </div>
 
             </div>

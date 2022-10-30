@@ -64,6 +64,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label">Responsible Pharmacist</label>
+                        <select asp-for="ApplicationUser.Id" asp-items="@(new SelectList(ViewBag.Users, "Value", "Text"))" class="form-control"></select>
+                        <span asp-validation-for="ApplicationUserId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
                         <input type="hidden" asp-for="PharmacyID" />
                         <input type="submit" value="Update" class="btn btn-outline-success float-right" />
                         <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
