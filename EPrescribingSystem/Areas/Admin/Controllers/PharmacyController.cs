@@ -1,10 +1,12 @@
 ﻿using EPrescribingSystem.Areas.Admin.Data.Repository;
 using EPrescribingSystem.Areas.Admin.ViewModel;
 using EPrescribingSystem.Data;
+using EPrescribingSystem.Migrations;
 using EPrescribingSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -95,13 +97,13 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             var userRolesViewModel = new List<UserRolesViewModel>();
 
 
-            var thisViewModel = new UserRolesViewModel();
+            //var thisViewModel2 = new UserRolesViewModel();
             foreach (ApplicationUser user in users)
             {
                 var checkrol = await _userManager.IsInRoleAsync(user, "Pharmacist");
                 if (checkrol)
                 {
-                    //var thisViewModel = new UserRolesViewModel();
+                    var thisViewModel = new UserRolesViewModel();
                     thisViewModel.UserId = user.Id;
                     thisViewModel.Email = user.Email;
                     thisViewModel.FirstName = user.FirstName;
@@ -110,15 +112,12 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
                 }
             }
 
-            List<SelectListItem> Users = _context.Users.Where(u => u.Id == thisViewModel.UserId).Select( 
-                n=> new SelectListItem
-                {
-                    Value = n.Id,
-                    Text = n.FirstName +" " + n.LastName
+            List<SelectListItem> Users = userRolesViewModel.Select(a=> new SelectListItem{
+                Value = a.UserId,
+                Text = a.FirstName + " "+ a.LastName
+            }).ToList();
 
-                }).ToList();
-
-            medicalPracticeModel.Users = Users; 
+            medicalPracticeModel.Users = Users;
 
             return View(medicalPracticeModel);
         }
@@ -153,10 +152,37 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             List<Suburb> suburbs = await _context.Suburbs.ToListAsync();
             List<Province> provinces = await _context.Provinces.ToListAsync();
             List<City> cities = await _context.Cities.ToListAsync();
+            //List<ApplicationUser> users = await _context.Users.ToListAsync();
+
+            var users = await _userManager.Users.ToListAsync();
+            var userRolesViewModel = new List<UserRolesViewModel>();
+
+
+            foreach (ApplicationUser user in users)
+            {
+                var checkrol = await _userManager.IsInRoleAsync(user, "Pharmacist");
+                if (checkrol)
+                {
+                    var thisViewModel = new UserRolesViewModel();
+                    thisViewModel.UserId = user.Id;
+                    thisViewModel.Email = user.Email;
+                    thisViewModel.FirstName = user.FirstName;
+                    thisViewModel.LastName = user.LastName;
+                    userRolesViewModel.Add(thisViewModel);
+                }
+            }
+
+            List<SelectListItem> Users = userRolesViewModel.Select(a => new SelectListItem
+            {
+                Value = a.UserId,
+                Text = a.FirstName + " " + a.LastName
+            }).ToList();
+
 
             ViewBag.Suburbs = suburbs;
             ViewBag.Provinces = provinces;
             ViewBag.Cities = cities;
+            ViewBag.Users = Users;
 
             Pharmacy pharmacy = await _service.GetByIdAsync(id);
 
