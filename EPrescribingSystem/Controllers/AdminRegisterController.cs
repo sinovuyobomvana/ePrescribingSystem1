@@ -1,17 +1,24 @@
 ﻿using EPrescribingSystem.Data;
+using EPrescribingSystem.Extensions;
 using EPrescribingSystem.Repository;
 using EPrescribingSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CodeStyle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Controllers
 {
-    public class AdminRegisterController : Controller
+    
+
+    public class AdminRegisterController : BaseController
     {
+
+        public bool isDone = false;
         private readonly EprescribingDBContext _context = null;
         private readonly IAccountRepository _registerRepository;
 
@@ -81,7 +88,7 @@ namespace EPrescribingSystem.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(UserCreateModel userModel)
          {
-
+            ViewBag.Isdone = false;
             UserCreateModel userCreateModel = new UserCreateModel();
 
             userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
@@ -110,10 +117,11 @@ namespace EPrescribingSystem.Controllers
             userCreateModel.Cities = Cities;
             userCreateModel.Suburbs = new List<SelectListItem>();
 
-
+            
 
             if (ModelState.IsValid)
             {
+                isDone = true;
                 var result = await _registerRepository.CreateUserAsync(userModel);
 
                 if (!result.Succeeded)
@@ -124,12 +132,14 @@ namespace EPrescribingSystem.Controllers
                     }
                     return View(userCreateModel);
                 }
-                //ModelState.Clear();
-                //return View(userModel);
+
+                ViewBag.Isdone = true;
                 return RedirectToAction("Index", "UserRoles", new { area = "Admin" });
-
+                
+              
             }
-
+            if (isDone)
+                BasicNotification();
             return View(userCreateModel);
         }
     }
