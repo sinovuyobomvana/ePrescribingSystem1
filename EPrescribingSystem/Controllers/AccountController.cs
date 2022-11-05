@@ -142,6 +142,7 @@ namespace EPrescribingSystem.Controllers
                             {
                                 ModelState.AddModelError("", errorMessage.Description);
                             }
+                         
                             return View(userCreateModel);
                         }
                         return RedirectToAction("Success", userModel);
