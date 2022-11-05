@@ -1,17 +1,24 @@
 ﻿using EPrescribingSystem.Data;
+using EPrescribingSystem.Extensions;
 using EPrescribingSystem.Repository;
 using EPrescribingSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CodeStyle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace EPrescribingSystem.Controllers
 {
-    public class AdminRegisterController : Controller
+    
+
+    public class AdminRegisterController : BaseController
     {
+
+        public bool isDone = false;
         private readonly EprescribingDBContext _context = null;
         private readonly IAccountRepository _registerRepository;
 
@@ -76,12 +83,12 @@ namespace EPrescribingSystem.Controllers
 
         //    return View(userModel);
         //}
-		
-		[Route("admin-register")]
+
+        [Route("admin-register")]
         [HttpPost]
         public async Task<ActionResult> Register(UserCreateModel userModel)
-         {
-
+        {
+            
             UserCreateModel userCreateModel = new UserCreateModel();
 
             userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
@@ -114,23 +121,29 @@ namespace EPrescribingSystem.Controllers
 
             if (ModelState.IsValid)
             {
+                isDone = true;
                 var result = await _registerRepository.CreateUserAsync(userModel);
 
                 if (!result.Succeeded)
                 {
-                    foreach(var errorMessage in result.Errors)
+                    foreach (var errorMessage in result.Errors)
                     {
-                        ModelState.AddModelError("", errorMessage.Description); 
+                        ModelState.AddModelError("", errorMessage.Description);
                     }
                     return View(userCreateModel);
                 }
-                //ModelState.Clear();
-                //return View(userModel);
-                return RedirectToAction("Index", "UserRoles", new { area = "Admin" });
+
+               
+                return RedirectToAction("AdminSuccess");
+
 
             }
-
             return View(userCreateModel);
+        }
+
+        public IActionResult AdminSuccess()
+        {
+           return View();
         }
     }
 }
