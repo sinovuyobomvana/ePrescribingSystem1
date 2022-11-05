@@ -21,6 +21,7 @@ namespace EPrescribingSystem.Models
 
         [Required(ErrorMessage = "Please enter ID no.")]
         [Display(Name = "ID Number")]
+        [RegularExpression("(((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\\d{4})( |-)(\\d{3})|(\\d{7}))", ErrorMessage = "Enter a valid South African ID Number")]
         [StringLength(13, MinimumLength = 13, ErrorMessage = "A valid ID number must have 13 digits.")]
         public string IDNumber { get; set; }
 
@@ -38,6 +39,7 @@ namespace EPrescribingSystem.Models
         [Required(ErrorMessage = "Please enter your email")]
         [Display(Name = "Email address")]
         [EmailAddress(ErrorMessage = "Please enter a valid email")]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$", ErrorMessage = "Invalid email address.")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter a strong password")]
@@ -71,6 +73,7 @@ namespace EPrescribingSystem.Models
         public string PostalCode { get; set; }
 
         [Required(ErrorMessage = "Please enter contact no.")]
+        [RegularExpression("^((?:\\+27|27)|0)(=72|82|73|83|74|84)(\\d{7})$", ErrorMessage = "Phone number is not vallid") ]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "A valid phone number must have 10 digits.")]
         public string ContactNumber { get; set; }
 
