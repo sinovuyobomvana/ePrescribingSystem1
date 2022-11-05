@@ -83,12 +83,12 @@ namespace EPrescribingSystem.Controllers
 
         //    return View(userModel);
         //}
-		
-		[Route("admin-register")]
+
+        [Route("admin-register")]
         [HttpPost]
         public async Task<ActionResult> Register(UserCreateModel userModel)
-         {
-            ViewBag.Isdone = false;
+        {
+            
             UserCreateModel userCreateModel = new UserCreateModel();
 
             userCreateModel.RegisterUserModel = new Models.RegisterUserModel();
@@ -117,7 +117,7 @@ namespace EPrescribingSystem.Controllers
             userCreateModel.Cities = Cities;
             userCreateModel.Suburbs = new List<SelectListItem>();
 
-            
+
 
             if (ModelState.IsValid)
             {
@@ -126,20 +126,24 @@ namespace EPrescribingSystem.Controllers
 
                 if (!result.Succeeded)
                 {
-                    foreach(var errorMessage in result.Errors)
+                    foreach (var errorMessage in result.Errors)
                     {
-                        ModelState.AddModelError("", errorMessage.Description); 
+                        ModelState.AddModelError("", errorMessage.Description);
                     }
                     return View(userCreateModel);
                 }
 
-                //ModelState.Clear();
-                //return View(userModel);
-                return RedirectToAction("AdminSuccess", "AdminRegister", new { area = "AdminRegister" });
                
+                return RedirectToAction("AdminSuccess");
 
 
-                
+            }
+            return View(userCreateModel);
+        }
 
+        public IActionResult AdminSuccess()
+        {
+           return View();
+        }
     }
 }

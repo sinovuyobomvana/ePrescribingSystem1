@@ -22,7 +22,7 @@ ViewData["Title"] = "Success";
                 <div class="row">
 
                     <div class="col-md-12 mx-0">
-                        <form id="msform" asp-action="SignUpForm2" method="post" class="was-validated">
+                        <form id="msform" asp-action="Register" method="post" class="was-validated">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <!-- progressbar -->
                             <ul id="progressbar">
@@ -48,15 +48,15 @@ ViewData["Title"] = "Success";
                                     <div class="row justify-content-center">
                                         <div class="col-7 text-center">
                                             <h5>You Have Successfully added a users</h5>
-                                            @*                                            <input  name="make_payment" class="action-button" value="Login" />*@
-                                            <button asp-controller="UserRolesController" asp-action="Index" class="action-button">View Users</button>
-                                            <button asp-controller="AdminRegisterController" asp-action="Register">Add another user</button>
+                                           
+                                            <button asp-controller="UserRoles" asp-action="Index" class="action-button">View Users</button>
+
+                                            <button asp-controller="AdminRegister" asp-action="Register">Add another user</button>
                                         </div>
                                     </div>
                                 </div>
                             </fieldset>
-                            @*                            <div class="text-center"><a class="small" asp-controller="Account" asp-action="SignIn">Already have an account? SignIn!</a></div>
-                            <br />*@
+                           
                         </form>
                     </div>
                 </div>
