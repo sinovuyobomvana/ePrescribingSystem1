@@ -32,7 +32,7 @@ namespace EPrescribingSystem.Data
                 LastName = "Bomvana",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                SuburbID = 8,
+                SuburbID = 4,
                 RegistrationDate = DateTime.Now
                 
             };

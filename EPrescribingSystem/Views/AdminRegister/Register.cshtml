@@ -319,5 +319,15 @@
 
             }).change();
         });
+
+        $(document).ready(function () {
+                                	$('#myBtn').click(function () {
+                                		$('.toast').toast({
+                                			animation: true,
+                                			delay: 8000
+                                		});
+                                		$('.toast').toast('show');
+                                	});
+                                });
 </script>
 }

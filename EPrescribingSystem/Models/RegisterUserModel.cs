@@ -80,6 +80,7 @@ namespace EPrescribingSystem.Models
         [Display(Name = "Highest Qualification")]
         public string HighestQualification { get; set; }
 
+        [RegularExpression("(^[a-zA-Z]{2}[0-9]{6})$)")]
         //[Required(ErrorMessage = "Please select enter Registration Number.")]
         [Display(Name = "Registration Number")]
         public string RegistrationNumber { get; set; }
