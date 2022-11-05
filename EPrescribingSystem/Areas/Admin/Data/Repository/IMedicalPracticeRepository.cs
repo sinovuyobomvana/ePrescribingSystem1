@@ -1,4 +1,5 @@
-﻿using EPrescribingSystem.Models;
+﻿using EPrescribingSystem.Areas.Admin.ViewModel;
+using EPrescribingSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace EPrescribingSystem.Areas.Admin.Data.Services
         Task<IEnumerable<MedicalPractice>> GetAllAsync();
         Task<MedicalPractice> GetByIdAsync(int id);
         MedicalPractice GetById(int id);
-        Task AddAsync(MedicalPractice medicalPractice);
+        Task AddAsync(MedicalPracticeViewModel medicalPractice);
         Task<MedicalPractice> UpdateAsync(MedicalPractice newMedicalPractice);
         //Task<MedicalPractice> UpdateAsync(int id, MedicalPractice newMedicalPractice);
         Task DeleteAsync(int id);

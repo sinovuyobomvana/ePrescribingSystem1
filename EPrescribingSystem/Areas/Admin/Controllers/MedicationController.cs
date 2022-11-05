@@ -37,7 +37,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Name,DosageForm,Schedule,ContraIndicationID")] Medication medication)
+        public async Task<IActionResult> Create([Bind("Name,DosageForm,Schedule,ActiveIngredientID,Strength")] Medication medication)
         {
             if (!ModelState.IsValid)
             {

@@ -57,10 +57,10 @@ namespace EPrescribingSystem.Models
 
         public Suburb Suburb { get; set; }
 
-        [ForeignKey("PharmacyID")]
-        public string PharmacyID { get; set; }
+        //[ForeignKey("PharmacyID")]
+        //public string PharmacyID { get; set; }
 
-        public Pharmacy PharmacyModel { get; set; }
+        //public Pharmacy PharmacyModel { get; set; }
 
     }
 }

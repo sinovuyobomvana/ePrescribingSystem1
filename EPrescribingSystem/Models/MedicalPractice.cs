@@ -13,6 +13,7 @@ namespace EPrescribingSystem.Models
         [Key]
         public int MedicalPracticeID { get; set; }
 
+        [Required]
         public string PracticeNumber { get; set; }
         [Required]
         public string Name { get; set; }
@@ -28,6 +29,7 @@ namespace EPrescribingSystem.Models
 
         [ForeignKey("SuburbID")]
         public int SuburbID { get; set; }
+        public virtual Suburb Suburb { get; set; }
 
         [Required, Phone]
         public string ContactNum { get; set; }

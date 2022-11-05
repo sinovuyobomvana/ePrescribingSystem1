@@ -19,8 +19,9 @@ namespace EPrescribingSystem.Models
         [Required]
         public string Schedule { get; set; }
 
-        [ForeignKey("ContraIndicationID")]
-        public int ContraIndicationID { get; set; }
-        public ContraIndication ContraIndication { get; set; }
+        public int Strength { get; set; }
+
+        [ForeignKey("ActiveIngredientID")]
+        public ActiveIngredient ActiveIngredient { get; set; }
     }
 }

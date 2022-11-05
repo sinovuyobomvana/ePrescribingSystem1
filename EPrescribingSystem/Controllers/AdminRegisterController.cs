@@ -133,14 +133,13 @@ namespace EPrescribingSystem.Controllers
                     return View(userCreateModel);
                 }
 
-                ViewBag.Isdone = true;
-                return RedirectToAction("Index", "UserRoles", new { area = "Admin" });
+                //ModelState.Clear();
+                //return View(userModel);
+                return RedirectToAction("AdminSuccess", "AdminRegister", new { area = "AdminRegister" });
+               
+
+
                 
-              
-            }
-            if (isDone)
-                BasicNotification();
-            return View(userCreateModel);
-        }
+
     }
 }

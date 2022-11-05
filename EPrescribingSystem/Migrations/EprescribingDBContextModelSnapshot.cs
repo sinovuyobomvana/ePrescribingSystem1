@@ -125,12 +125,6 @@ namespace EPrescribingSystem.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PharmacyID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PharmacyModelPharmacyID")
-                        .HasColumnType("int");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -177,8 +171,6 @@ namespace EPrescribingSystem.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("PharmacyModelPharmacyID");
 
                     b.HasIndex("SuburbID");
 
@@ -309,6 +301,7 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PracticeNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Province")
@@ -318,6 +311,8 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("MedicalPracticeID");
+
+                    b.HasIndex("SuburbID");
 
                     b.ToTable("MedicalPractice");
                 });
@@ -329,7 +324,7 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ContraIndicationID")
+                    b.Property<int?>("ActiveIngredientID")
                         .HasColumnType("int");
 
                     b.Property<string>("DosageForm")
@@ -344,9 +339,12 @@ namespace EPrescribingSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Strength")
+                        .HasColumnType("int");
+
                     b.HasKey("MedicationID");
 
-                    b.HasIndex("ContraIndicationID");
+                    b.HasIndex("ActiveIngredientID");
 
                     b.ToTable("Medication");
                 });
@@ -404,8 +402,15 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address1")
+                    b.Property<string>("AddressLine1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ContactNumber")
                         .IsRequired()
@@ -433,6 +438,8 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("PharmacyID");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("SuburbID");
 
@@ -671,17 +678,11 @@ namespace EPrescribingSystem.Migrations
 
             modelBuilder.Entity("EPrescribingSystem.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("EPrescribingSystem.Models.Pharmacy", "PharmacyModel")
-                        .WithMany()
-                        .HasForeignKey("PharmacyModelPharmacyID");
-
                     b.HasOne("EPrescribingSystem.Models.Suburb", "Suburb")
                         .WithMany()
                         .HasForeignKey("SuburbID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("PharmacyModel");
 
                     b.Navigation("Suburb");
                 });
@@ -712,15 +713,24 @@ namespace EPrescribingSystem.Migrations
                     b.Navigation("PrescriptionModel");
                 });
 
-            modelBuilder.Entity("EPrescribingSystem.Models.Medication", b =>
+            modelBuilder.Entity("EPrescribingSystem.Models.MedicalPractice", b =>
                 {
-                    b.HasOne("EPrescribingSystem.Models.ContraIndication", "ContraIndication")
+                    b.HasOne("EPrescribingSystem.Models.Suburb", "Suburb")
                         .WithMany()
-                        .HasForeignKey("ContraIndicationID")
+                        .HasForeignKey("SuburbID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ContraIndication");
+                    b.Navigation("Suburb");
+                });
+
+            modelBuilder.Entity("EPrescribingSystem.Models.Medication", b =>
+                {
+                    b.HasOne("EPrescribingSystem.Models.ActiveIngredient", "ActiveIngredient")
+                        .WithMany()
+                        .HasForeignKey("ActiveIngredientID");
+
+                    b.Navigation("ActiveIngredient");
                 });
 
             modelBuilder.Entity("EPrescribingSystem.Models.MedicationActiveIngredient", b =>
@@ -744,11 +754,17 @@ namespace EPrescribingSystem.Migrations
 
             modelBuilder.Entity("EPrescribingSystem.Models.Pharmacy", b =>
                 {
+                    b.HasOne("EPrescribingSystem.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("EPrescribingSystem.Models.Suburb", "Suburb")
                         .WithMany()
                         .HasForeignKey("SuburbID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Suburb");
                 });

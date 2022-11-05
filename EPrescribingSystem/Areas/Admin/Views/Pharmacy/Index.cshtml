@@ -1,6 +1,4 @@
-﻿@using EPrescribingSystem.Models
-@*Define Models*@
-@model IEnumerable<Pharmacy>
+﻿@model List<EPrescribingSystem.Areas.Admin.ViewModel.PharmacyViewModel>
 @{
     ViewData["Title"] = "List of Pharmacy";
     Layout = "_Layout";
@@ -19,12 +17,19 @@
         <table id="example" class="display nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.LicenseNumber)</th>
+@*                    <th>@Html.DisplayNameFor(model => model.LicenseNumber)</th>
                     <th>@Html.DisplayNameFor(model => model.Name)</th>
                     <th>@Html.DisplayNameFor(model => model.Address1)</th>
                     <th>@Html.DisplayNameFor(model => model.Suburb)</th>
                     <th>@Html.DisplayNameFor(model => model.ContactNumber)</th>
-                    <th>@Html.DisplayNameFor(model => model.EmailAddress)</th>
+                    <th>@Html.DisplayNameFor(model => model.EmailAddress)</th>*@
+                    <th>Licence Number</th>
+                    <th>Name</th>
+                    <th>Address Line 1</th>
+              @*      <th>Address Line 2</th>*@
+                    <th>Suburb</th>
+                    <th>Contact Number</th>
+                    <th>Email Address</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -39,10 +44,13 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.Address1)
+                            @Html.DisplayFor(modelItem => item.AddressLine1)
                         </td>
+                   @*     <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.AddressLine2)
+                        </td>*@
                         <td class="align-middle">
-                           <label asp-for="@item.Suburb.Name"></label>
+                            @Html.DisplayFor(modelItem => item.SuburbName)
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.ContactNumber)
@@ -67,3 +75,9 @@
 <div style="position: fixed; right: 25px;" class="text-white">
     <a asp-controller="Pharmacy" asp-action="Create" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Add New Pharmacy </a>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+    });
+</script>

@@ -1,5 +1,6 @@
 ﻿using EPrescribingSystem.Areas.Admin.Data.Repository;
 using EPrescribingSystem.Areas.Admin.Data.Services;
+using EPrescribingSystem.Areas.Admin.ViewModel;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
 using Microsoft.EntityFrameworkCore;
@@ -22,25 +23,25 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
 
         public async Task<IEnumerable<MedicalPractice>> GetAllAsync()
         {
-            var result = await _context.MedicalPractices.ToListAsync();
+            var result = await _context.MedicalPractices.Include(x=>x.Suburb.City.Province).ToListAsync();
             return result;
         }
 
-        public async Task AddAsync(MedicalPractice medicalPractice)
+        public async Task AddAsync(MedicalPracticeViewModel medicalPractice)
         {
-            await _context.MedicalPractices.AddAsync(medicalPractice);
+            await _context.MedicalPractices.AddAsync(medicalPractice.MedicalPractice);
             await _context.SaveChangesAsync();
         }
 
         public async Task<MedicalPractice> GetByIdAsync(int id)
         {
-            var result = await _context.MedicalPractices.FirstOrDefaultAsync(n => n.MedicalPracticeID == id);
+            var result = await _context.MedicalPractices.Include(a=>a.Suburb.City.Province).FirstOrDefaultAsync(n => n.MedicalPracticeID == id);
             return result;
         }
 
         public MedicalPractice GetById(int id)
         {
-            MedicalPractice medicalPractice = _context.MedicalPractices.Where(c => c.MedicalPracticeID == id).FirstOrDefault();
+            MedicalPractice medicalPractice = _context.MedicalPractices.Include(x=>x.Suburb.City.Province).Where(c => c.MedicalPracticeID == id).FirstOrDefault();
             return medicalPractice;
         }
 

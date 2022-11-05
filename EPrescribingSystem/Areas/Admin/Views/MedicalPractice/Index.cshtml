@@ -23,6 +23,7 @@
                     <th>@Html.DisplayNameFor(model => model.Name)</th>
                     <th>@Html.DisplayNameFor(model => model.Address1)</th>
                     <th>@Html.DisplayNameFor(model => model.Address2)</th>
+                    <th>@Html.DisplayNameFor(model => model.Suburb)</th>
                     <th>@Html.DisplayNameFor(model => model.ContactNum)</th>
                     <th>@Html.DisplayNameFor(model => model.EmailAddress)</th>
                     <th>Actions</th>
@@ -44,6 +45,9 @@
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.Address2)
                         </td>
+                         <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Suburb.Name)
+                        </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.ContactNum)
                         </td>
@@ -64,6 +68,11 @@
     </div>
 </div>
 
-<div style="position: fixed; right: 25px;" class="text-white">
+<div style="right: 25px;" class="text-white">
     <a asp-controller="MedicalPractice" asp-action="Create" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Add New Practice </a>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+    });
+</script>
