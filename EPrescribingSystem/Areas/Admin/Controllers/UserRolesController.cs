@@ -116,6 +116,8 @@ namespace EPrescribingSystem.Controllers
                 ModelState.AddModelError("", "Cannot add selected roles to user");
                 return View(model);
             }
+
+            TempData["SuccessMessage"] = user.FirstName + " "+ user.LastName+    " User  Role Updated Successfully!";
             return RedirectToAction("Index");
         }
 

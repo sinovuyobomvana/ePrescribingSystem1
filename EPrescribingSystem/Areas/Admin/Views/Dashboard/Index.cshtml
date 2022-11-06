@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+
+<div class="text-center">
+    <h1>Welcome, To the Dashboard.</h1>
+</div>
+<br />
+<div class="card-columns">
+    
+    <div class="card" style="background: #5D3FD3;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Number of Pharmacists <strong>@ViewBag.PharmacistsCount</strong><p>
+                <img src="~/img/pharmacisticon.png" />
+                
+        </div>
+    </div>
+    <div class="card card-dark" style="background: #5D3FD3;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Number of Doctors <strong>@ViewBag.DocCount</strong></p>
+            <img src="~/img/doctoricon.png" />
+        </div>
+    </div>
+    <div class="card card-dark" style="background: #5D3FD3;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Number of Patients <strong>@ViewBag.PatCount</strong></p>
+            <img src="~/img/patienticon.png" />
+        </div>
+    </div>
+    
+</div>
+<div class="card" style="background: #5D3FD3;color: #ffffff;">
+    <div class="card-body text-center">
+        <p class="card-text">Total Number of Users @ViewBag.UserCount</p>
+    </div>
+</div>
+
+<br/>
+<div class="card-columns">
+    <div class="card" style="background: #5D3FD3;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Total Number of Pharmacies @ViewBag.Pharmacies</p>
+            <img src="~/img/pharmacyicon.png" />
+        </div>
+    </div>
+
+    <div class="card" style="background: #5D3FD3;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Total Number of Medical Practices @ViewBag.MedicalPracs</p>
+            <img src="~/img/medicalpractice.png" />
+        </div>
+       </div>
+
+    <div class="card" style="background: #5D3FD3;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Total Number of Medication @ViewBag.Medication</p>
+            <img src="~/img/medicationicon.png" />
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+    });
+</script>

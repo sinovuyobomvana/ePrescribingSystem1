@@ -44,6 +44,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
                 return View(medication);
             }
             await _service.AddAsync(medication);
+            TempData["SuccessMessage"] = medication.Name + " Medication Created Successfully!";
             return RedirectToAction(nameof(Index));
         }
 
@@ -85,7 +86,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
 
             }
-
+            TempData["SuccessMessage"] = medication.Name + " Medication Updated Successfully!";
             return RedirectToAction("Index");
         }
 
@@ -110,6 +111,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
 
             }
+            TempData["SuccessMessage"] = medication.Name + " Medication Deleted Successfully!";
             return RedirectToAction("Index");
         }
     }

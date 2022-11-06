@@ -29,7 +29,8 @@
     <!--Table Zama Ghost-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  @*  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -66,13 +67,13 @@
                 <br>
                 <hr class="sidebar-divider my-0" />
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="PDashboard"><i></i><span class="fas fa-tachometer-alt">&nbsp;&nbsp;Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i></i><span class="fas fa-tachometer-alt">&nbsp;&nbsp;Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Profile" asp-action="Profile"><i ></i><span class="fas fa-user">&nbsp;&nbsp;Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="PCalendar"><i></i><span class="fa fa-calendar">&nbsp;&nbsp;Calendar</span></a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Pharmacy" asp-action="Index"><i></i><span class="fa fa-book-medical">&nbsp;&nbsp;Pharmacies</span></a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Pharmacy" asp-action="Index"><i></i><span class="fas fa-book-medical">&nbsp;&nbsp;Pharmacies</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="UserRoles" asp-action="Index"><i></i><span class="fa fa-users">&nbsp;&nbsp;Users</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="MedicalPractice" asp-action="Index"><i></i><span class="fa fa-table">&nbsp;&nbsp;Records</span></a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Medication" asp-action="Index"><i></i><span class="fa fa-book-medical">&nbsp;&nbsp;Medication</span></a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Medication" asp-action="Index"><i></i><span class="fas fa-briefcase-medical">&nbsp;&nbsp;Medication</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="SignIn"><i ></i><span class="fas fa-sign-out-alt">&nbsp;&nbsp;Log Out</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -82,7 +83,7 @@
             <div id="content">
                 <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <img width="180" height="70" src="~/assets/img/logo.png" />
+                     @*   <img width="180" height="70" src="~/assets/img/logo.png" />*@
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><b>Home</b></a></li>
                             <li class="nav-item"><a class="nav-link" asp-area="Parent" asp-controller="Home" asp-action="Help"><b>Help</b></a></li>
@@ -110,6 +111,31 @@
                 </nav>
                 <div class="container-fluid">
                     <div>
+
+                        <!--Success Dialog Start-->
+
+                        <div id="myModalSuccess" class="modal fade fa-text-width:30%;" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2>Success Message</h2>
+                                        <button class="close" data-dismiss="modal">&times;</button>
+
+                                    </div>
+
+                                    <div id="MyModalSuccessAlertBody" class="modal-body alert alert-success">
+                        
+                                    </div>
+                                @*    <div class="modal-footer">
+                                        &nbsp;
+                                        <button class="btn btn-info" data-dismiss="modal">Close</button>
+                                    </div>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Success Dialog End-->
+
                         @RenderBody()
                     </div>
                 </div>

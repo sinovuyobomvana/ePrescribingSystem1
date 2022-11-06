@@ -91,6 +91,8 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
 
                 return View(medicalPracticeModel);
             }
+            TempData["SuccessMessage"] = medicalPracticeModel.MedicalPractice.Name + " Medical Practise Created Successfully!";
+
             await _service.AddAsync(medicalPracticeModel);
             return RedirectToAction(nameof(Index));
         }
@@ -141,6 +143,8 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
 
             }
 
+            TempData["SuccessMessage"] = medicalPractice.Name + " Medical Practise Updated Successfully!";
+
             return RedirectToAction("Index");
         }
         //[HttpPost]
@@ -174,6 +178,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
 
             }
+            TempData["SuccessMessage"] = medicalPractice.Name+ " Medical Practise Deleted Successfully!";
             return RedirectToAction("Index");
         }
 

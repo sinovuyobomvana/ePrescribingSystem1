@@ -42,7 +42,7 @@ namespace EPrescribingSystem.Data
                             Address2 = "Humewood",
                             ContactNum = "0826569999",
                             EmailAddress = "healthmeds@gmail.com",
-                            SuburbID = 3
+                            SuburbID = 7
                         },
                     });
                     context.SaveChanges();
