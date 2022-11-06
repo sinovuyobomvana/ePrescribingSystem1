@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+
+<div class="text-center">
+    <h1>Welcome, To the Dashboard.</h1>
+</div>
+<br />
+<div class="card-columns">
+    <div class="card" style="background: #7978E9;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Total Number of Users</p>
+        </div>
+    </div>
+    <div class="card" style="background: #7DA0FA;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Some text inside the third card</p>
+        </div>
+    </div>
+    <div class="card card-dark" style="background: #4747A1;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Some text inside the fourth card</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+    });
+</script>

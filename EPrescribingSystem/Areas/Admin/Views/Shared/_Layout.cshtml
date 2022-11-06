@@ -67,7 +67,7 @@
                 <br>
                 <hr class="sidebar-divider my-0" />
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="PDashboard"><i></i><span class="fas fa-tachometer-alt">&nbsp;&nbsp;Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i></i><span class="fas fa-tachometer-alt">&nbsp;&nbsp;Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Profile" asp-action="Profile"><i ></i><span class="fas fa-user">&nbsp;&nbsp;Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="PCalendar"><i></i><span class="fa fa-calendar">&nbsp;&nbsp;Calendar</span></a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Pharmacy" asp-action="Index"><i></i><span class="fas fa-book-medical">&nbsp;&nbsp;Pharmacies</span></a></li>
@@ -83,7 +83,7 @@
             <div id="content">
                 <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <img width="180" height="70" src="~/assets/img/logo.png" />
+                     @*   <img width="180" height="70" src="~/assets/img/logo.png" />*@
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><b>Home</b></a></li>
                             <li class="nav-item"><a class="nav-link" asp-area="Parent" asp-controller="Home" asp-action="Help"><b>Help</b></a></li>
