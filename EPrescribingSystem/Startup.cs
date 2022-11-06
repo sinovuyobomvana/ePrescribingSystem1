@@ -56,8 +56,11 @@ namespace EPrescribingSystem
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
             services.AddScoped<IRegisterRepository, RegisterRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
+
+            services.Configure<SMTPConfigModel>(Configuration.GetSection("SMTPConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

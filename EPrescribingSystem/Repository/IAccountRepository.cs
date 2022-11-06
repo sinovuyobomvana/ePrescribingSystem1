@@ -11,5 +11,10 @@ namespace EPrescribingSystem.Repository
         Task<SignInResult> PasswordSignInAsync(SignInModel signInModel);
         Task SignOutAsync();
         Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel changePassword);
+        Task<IdentityResult> ConfirmEmailAsync(string uid, string token);
+        Task GenerateEmailConfirmationTokenAsync(ApplicationUser user);
+        Task<ApplicationUser> GetUserByEmailAsync(string email);
+        Task GenerateForgotPasswordAsync(ApplicationUser user);
+        Task<IdentityResult> ResetPassworsAsync(ResetPasswordModel model);
     }
 }
