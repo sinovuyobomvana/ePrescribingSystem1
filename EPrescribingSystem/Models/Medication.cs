@@ -12,16 +12,16 @@ namespace EPrescribingSystem.Models
     {
         [Key]
         public int MedicationID { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
-        public string DosageForm { get; set; }
-        [Required]
+
+        public string DosageForm { get; set; }  
+
         public string Schedule { get; set; }
 
         public int Strength { get; set; }
 
         [ForeignKey("ActiveIngredientID")]
+        public int ActiveIngredientID { get; set; }
         public ActiveIngredient ActiveIngredient { get; set; }
     }
 }

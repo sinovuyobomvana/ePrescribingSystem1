@@ -1,6 +1,6 @@
 ﻿@using EPrescribingSystem.Models
 @*Define Models*@
-@model IEnumerable<Medication>
+@model List<EPrescribingSystem.Areas.Admin.ViewModel.MedicationViewModel>
 @{
     ViewData["Title"] = "List of Medication";
     Layout = "_Layout";
@@ -23,12 +23,17 @@
             <thead>
                 <tr>
 
-                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+@*                    <th>@Html.DisplayNameFor(model => model.Name)</th>
                     <th>@Html.DisplayNameFor(model => model.DosageForm)</th>
                     <th>@Html.DisplayNameFor(model => model.Schedule)</th>
                     <th>@Html.DisplayNameFor(model => model.ActiveIngredient)</th>
-                    <th>@Html.DisplayNameFor(model => model.Strength)</th>
-                    <th>Actions</th>
+                    <th>@Html.DisplayNameFor(model => model.Strength)</th>*@
+                        <th>Name</th>
+                        <th>Dosage Form</th>
+                        <th>Shedule</th>
+                        <th>Active Ingredient</th>
+                        <th>Strenth</th>
+                        <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +50,7 @@
                             @Html.DisplayFor(modelItem => item.Schedule)
                             </td>
                             <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.ActiveIngredient.Name)
+                            @Html.DisplayFor(modelItem => item.ActiveIngredientName)
                             </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.Strength)

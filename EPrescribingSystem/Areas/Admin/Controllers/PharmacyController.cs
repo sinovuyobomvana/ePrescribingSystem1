@@ -1,7 +1,6 @@
 ﻿using EPrescribingSystem.Areas.Admin.Data.Repository;
 using EPrescribingSystem.Areas.Admin.ViewModel;
 using EPrescribingSystem.Data;
-using EPrescribingSystem.Migrations;
 using EPrescribingSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

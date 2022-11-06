@@ -1,5 +1,4 @@
-﻿using EPrescribingSystem.Migrations;
-using EPrescribingSystem.Models;
+﻿using EPrescribingSystem.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;

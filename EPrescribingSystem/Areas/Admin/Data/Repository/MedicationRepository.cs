@@ -44,13 +44,13 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
 
         public Medication GetById(int id)
         {
-            Medication medication = _context.Medications.Where(c => c.MedicationID == id).FirstOrDefault();
+            Medication medication = _context.Medications.Include(m => m.ActiveIngredient).Where(c => c.MedicationID == id).FirstOrDefault();
             return medication;
         }
 
         public async Task<Medication> GetByIdAsync(int id)
         {
-            var result = await _context.Medications.FirstOrDefaultAsync(n => n.MedicationID == id);
+            var result = await _context.Medications.Include(m=> m.ActiveIngredient).FirstOrDefaultAsync(n => n.MedicationID == id);
             return result;
         }
 
