@@ -1,4 +1,5 @@
-﻿using EPrescribingSystem.Data;
+﻿using EPrescribingSystem.Areas.Admin.ViewModel;
+using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -59,6 +60,12 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
             _context.Entry(newMedication).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return newMedication;
+        }
+
+        public async Task AddAsync(MedicalPracticeViewModel medication)
+        {
+            await _context.Medications.AddAsync(medication.Medication);
+            await _context.SaveChangesAsync();
         }
     }
 }

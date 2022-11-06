@@ -1,4 +1,5 @@
-﻿using EPrescribingSystem.Models;
+﻿using EPrescribingSystem.Areas.Admin.ViewModel;
+using EPrescribingSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,6 @@ namespace EPrescribingSystem.Areas.Admin.Data.Repository
         Task DeleteAsync(int id);
 
         Medication Delete(Medication medication);
+        Task AddAsync(MedicalPracticeViewModel medication);
     }
 }

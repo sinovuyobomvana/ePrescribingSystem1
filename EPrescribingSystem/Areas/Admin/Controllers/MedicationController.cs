@@ -1,10 +1,14 @@
 ﻿using EPrescribingSystem.Areas.Admin.Data.Repository;
 using EPrescribingSystem.Models;
+using EPrescribingSystem.Areas.Admin.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using EPrescribingSystem.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace EPrescribingSystem.Areas.Admin.Controllers
 {
@@ -12,19 +16,46 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
     public class MedicationController : Controller
     {
         private readonly IMedicationRepository _service;
+        private readonly EprescribingDBContext _context = null;
 
 
-        public MedicationController(IMedicationRepository service)
+        public MedicationController(EprescribingDBContext context, IMedicationRepository service)
         {
             _service = service;
+            _context = context;
         }
 
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Index()
         {
-            var data = await _service.GetAllAsync();
-            return View(data);
+            var medications = await _context.Medications.ToListAsync();
+            var medicationViewModel = new List<MedicationViewModel>();
+            foreach (Medication meds in medications)
+            {
+                var thisViewModel = new MedicationViewModel();
+                
+                thisViewModel.Name = meds.Name;
+                thisViewModel.Schedule = meds.Schedule;
+                thisViewModel.DosageForm = meds.DosageForm;
+                thisViewModel.ActiveIngredientName = GetActiveIngredient(meds.ActiveIngredient.ActiveIngredientID);
+                thisViewModel.Strength = meds.Strength;
+
+                medicationViewModel.Add(thisViewModel);
+            }
+            return View(medicationViewModel);
         }
+
+        public string GetActiveIngredient(int Id)
+        {
+            string activeIngredientName;
+
+            return activeIngredientName = _context.ActiveIngredients.Where(s => s.ActiveIngredientID == Id).Select(s => s.Name).FirstOrDefault();
+        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    var data = await _service.GetAllAsync();
+        //    return View(data);
+        //}
 
 
         //Get: Pharmacy/Create
@@ -32,21 +63,70 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         [Route("[area]/[controller]/[action]")]
         public IActionResult Create()
         {
+            MedicalPracticeViewModel medicalPracticeModel = new MedicalPracticeViewModel();
 
-            return View();
+            medicalPracticeModel.MedicalPractice = new Models.MedicalPractice();
+            List<SelectListItem> ActiveIngredients = _context.ActiveIngredients
+                .OrderBy(n => n.Name)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.ActiveIngredientID.ToString(),
+                    Text = n.Name
+                }).ToList();
+
+            medicalPracticeModel.ActiveIngredients = ActiveIngredients;
+            
+
+            return View(medicalPracticeModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Name,DosageForm,Schedule,ActiveIngredientID,Strength")] Medication medication)
+        public async Task<IActionResult> Create(MedicalPracticeViewModel medicalPracticeModel)
         {
+            //MedicalPracticeViewModel medicalPracticeModel = new MedicalPracticeViewModel();
+
             if (!ModelState.IsValid)
             {
-                return View(medication);
+                medicalPracticeModel.MedicalPractice = new Models.MedicalPractice();
+                List<SelectListItem> ActiveIngredients = _context.ActiveIngredients
+                    .OrderBy(n => n.Name)
+                    .Select(n =>
+                    new SelectListItem
+                    {
+                        Value = n.ActiveIngredientID.ToString(),
+                        Text = n.Name
+                    }).ToList();
+
+                medicalPracticeModel.ActiveIngredients = ActiveIngredients;
+                
+
+                return View(medicalPracticeModel);
             }
-            await _service.AddAsync(medication);
-            TempData["SuccessMessage"] = medication.Name + " Medication Created Successfully!";
+            await _service.AddAsync(medicalPracticeModel);
             return RedirectToAction(nameof(Index));
         }
+
+        //////////////////////////////////
+
+        //[HttpGet]
+        //[Route("[area]/[controller]/[action]")]
+        //public IActionResult Create()
+        //{
+
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> Create([Bind("Name,DosageForm,Schedule,ActiveIngredientID,Strength")] Medication medication)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(medication);
+        //    }
+        //    await _service.AddAsync(medication);
+        //    return RedirectToAction(nameof(Index));
+        //}
 
 
         //Get: Pharmacy/Details
@@ -86,7 +166,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
 
             }
-            TempData["SuccessMessage"] = medication.Name + " Medication Updated Successfully!";
+
             return RedirectToAction("Index");
         }
 
@@ -111,7 +191,6 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
 
             }
-            TempData["SuccessMessage"] = medication.Name + " Medication Deleted Successfully!";
             return RedirectToAction("Index");
         }
     }

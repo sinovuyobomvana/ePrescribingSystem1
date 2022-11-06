@@ -8,10 +8,13 @@ namespace EPrescribingSystem.Areas.Admin.ViewModel
     {
         public MedicalPractice MedicalPractice { get; set; }
         public Pharmacy Pharmacy { get; set; }
-        public UserRolesViewModel userRolesViewModel { get; set; }
+
+        public Medication Medication { get; set; }
         public IEnumerable<SelectListItem> Provinces { get; set; }
         public IEnumerable<SelectListItem> Cities { get; set; }
         public IEnumerable<SelectListItem> Suburbs { get; set; }
-        public IEnumerable<SelectListItem> Users { get; set; }
+
+        public IEnumerable<SelectListItem> ActiveIngredients { get; set; }
+        public List<SelectListItem> Users { get; internal set; }
     }
 }
