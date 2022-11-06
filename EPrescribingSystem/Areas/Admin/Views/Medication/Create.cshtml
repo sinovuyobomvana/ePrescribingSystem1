@@ -1,4 +1,4 @@
-﻿@model Medication
+﻿@model EPrescribingSystem.Areas.Admin.ViewModel.MedicalPracticeViewModel
 
 @{
     ViewData["Title"] = "Add Medication";
@@ -21,16 +21,16 @@
 
                     
                     <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <label asp-for="Medication.Name" class="control-label"></label>
+                        <input asp-for="Medication.Name" class="form-control" />
+                        <span asp-validation-for="Medication.Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
 
                         <br />
                         <label class="text-dark">Dosage Form</label>
                         <br />
-                        <select asp-for="DosageForm" required class="form-control">
+                        <select asp-for="Medication.DosageForm" required class="form-control">
                             <option>Tablet</option>
                             <option>Capsule</option>
                             <option>Suspension</option>
@@ -43,24 +43,26 @@
                             <option>Drops</option>
 
                         </select>
-                        <span asp-validation-for="DosageForm" class="text-danger"></span>
+                        <span asp-validation-for="Medication.DosageForm" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="Schedule" class="control-label"></label>
-                        <input asp-for="Schedule" class="form-control" />
-                        <span asp-validation-for="Schedule" class="text-danger"></span>
+                        <label asp-for="Medication.Schedule" class="control-label"></label>
+                        <input asp-for="Medication.Schedule" class="form-control" />
+                        <span asp-validation-for="Medication.Schedule" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ActiveIngredient.ActiveIngredientID" class="control-label"></label>
-                        <select asp-for="ActiveIngredient.ActiveIngredientID" class="form-control"></select>
-                        <span asp-validation-for="ActiveIngredient.ActiveIngredientID" class="text-danger"></span>
+                        <label asp-for="Medication.ActiveIngredientID" class="control-label"></label>
+                        <select asp-for="Medication.ActiveIngredientID" asp-items="@Model.ActiveIngredients" class="form-control">
+                            <option value="" selected>Select Active ingrediant...</option>
+                        </select>
+                        <span asp-validation-for="Medication.ActiveIngredientID" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="Strength" class="control-label"></label>
-                        <input asp-for="Strength" class="form-control" />
-                        <span asp-validation-for="Strength" class="text-danger"></span>
+                        <label asp-for="Medication.Strength" class="control-label"></label>
+                        <input asp-for="Medication.Strength" class="form-control" />
+                        <span asp-validation-for="Medication.Strength" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">

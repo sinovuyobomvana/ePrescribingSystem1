@@ -33,11 +33,11 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             foreach (Medication meds in medications)
             {
                 var thisViewModel = new MedicationViewModel();
-                
+                thisViewModel.MedicationID = meds.MedicationID;
                 thisViewModel.Name = meds.Name;
                 thisViewModel.Schedule = meds.Schedule;
                 thisViewModel.DosageForm = meds.DosageForm;
-                thisViewModel.ActiveIngredientName = GetActiveIngredient(meds.ActiveIngredient.ActiveIngredientID);
+                thisViewModel.ActiveIngredientName = GetActiveIngredient(meds.ActiveIngredientID);
                 thisViewModel.Strength = meds.Strength;
 
                 medicationViewModel.Add(thisViewModel);
@@ -76,7 +76,6 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
                 }).ToList();
 
             medicalPracticeModel.ActiveIngredients = ActiveIngredients;
-            
 
             return View(medicalPracticeModel);
         }
@@ -101,9 +100,11 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
                 medicalPracticeModel.ActiveIngredients = ActiveIngredients;
                 
 
-                return View(medicalPracticeModel);
+                return View(medicalPracticeModel.Medication);
             }
-            await _service.AddAsync(medicalPracticeModel);
+            TempData["SuccessMessage"] = medicalPracticeModel.Medication.Name + " Medication Created Successfully!";
+
+            await _service.AddAsync(medicalPracticeModel.Medication);
             return RedirectToAction(nameof(Index));
         }
 
@@ -166,7 +167,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
 
             }
-
+            TempData["SuccessMessage"] = medication.Name + " Medication updated Successfully!";
             return RedirectToAction("Index");
         }
 
@@ -191,6 +192,8 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
 
             }
+
+            TempData["SuccessMessage"] = medication.Name + " Medication Deleted Successfully!";
             return RedirectToAction("Index");
         }
     }
