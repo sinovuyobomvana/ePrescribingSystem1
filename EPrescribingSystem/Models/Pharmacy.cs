@@ -19,9 +19,17 @@ namespace EPrescribingSystem.Models
         public string AddressLine1 { get; set; }
 
         public string AddressLine2 { get; set; }
-        [Required, Phone]
+
+        [Required(ErrorMessage = "Please enter contact no.")]
+        [RegularExpression("^((?:\\+27|27)|0)(=72|82|73|83|74|84)(\\d{7})$", ErrorMessage = "Phone number is not vallid")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "A valid phone number must have 10 digits.")]
         public string ContactNumber { get; set; }
-        [Required, EmailAddress]
+
+        
+        [Required(ErrorMessage = "Please enter your email")]
+        [Display(Name = "Email address")]
+        [EmailAddress(ErrorMessage = "Please enter a valid email")]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$", ErrorMessage = "Invalid email address.")]
         public string EmailAddress { get; set; }
        
         public string PostalCode { get; set; }
