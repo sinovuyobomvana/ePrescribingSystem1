@@ -3,7 +3,9 @@ using EPrescribingSystem.Models;
 using EPrescribingSystem.Service;
 using EPrescribingSystem.ViewModel;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,13 +17,17 @@ namespace EPrescribingSystem.Repository
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUserService _userService;
         private readonly EprescribingDBContext _context = null;
+        private readonly IConfiguration _configuration;
+        private readonly IEmailService _emailService;
 
-        public AccountRepository(EprescribingDBContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser>signInManager, IUserService userService)
+        public AccountRepository(IEmailService emailService, IConfiguration configuration, EprescribingDBContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser>signInManager, IUserService userService)
         {
              _userManager = userManager;
             _signInManager = signInManager;
             _userService = userService;
             _context = context;
+            _configuration = configuration;
+            _emailService = emailService;
         }
 
         public async Task<IdentityResult> CreateUserAsync(UserCreateModel userModel)
@@ -50,6 +56,23 @@ namespace EPrescribingSystem.Repository
 
             var result = await _userManager.CreateAsync(user, userModel.RegisterUserModel.Password);
 
+            if (result.Succeeded)
+            {
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                if (!string.IsNullOrEmpty(token))
+                {
+                    try
+                    {
+                        await SendEmailConfirmationEmail(user, token);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+
+
+                }
+            }
 
             if (result.Succeeded && userModel.RegisterUserModel.Role == "pharm")
             {
@@ -94,6 +117,76 @@ namespace EPrescribingSystem.Repository
             var user = await _userManager.FindByIdAsync(userId);
 
             return await _userManager.ChangePasswordAsync(user, changePassword.CurrentPassword, changePassword.NewPassword);
+        }
+
+        private async Task SendEmailConfirmationEmail(ApplicationUser user, string token)
+        {
+            string appDomain = _configuration.GetSection("Application:AppDomain").Value;
+            string confirmationLink = _configuration.GetSection("Application:EmailConfirmation").Value;
+
+            UserEmailOptions options = new UserEmailOptions
+            {
+                ToEmails = new List<string>() { user.Email },
+                Placeholders = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("{{UserName}}", user.FirstName),
+                    new KeyValuePair<string, string>("{{Link}}", string.Format(appDomain + confirmationLink, user.Id, token))
+                }
+            };
+
+            await _emailService.SendEmailForEmailConfirmation(options);
+
+        }
+        public async Task GenerateEmailConfirmationTokenAsync(ApplicationUser user)
+        {
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            if (!string.IsNullOrEmpty(token))
+            {
+                await SendEmailConfirmationEmail(user, token);
+            }
+        }
+
+        public async Task GenerateForgotPasswordAsync(ApplicationUser user)
+        {
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            if (!string.IsNullOrEmpty(token))
+            {
+                await SendForgotPasswordEmail(user, token);
+            }
+        }
+
+        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
+
+        private async Task SendForgotPasswordEmail(ApplicationUser user, string token)
+        {
+            string appDomain = _configuration.GetSection("Application:AppDomain").Value;
+            string confirmationLink = _configuration.GetSection("Application:ForgotPassword").Value;
+
+            UserEmailOptions options = new UserEmailOptions
+            {
+                ToEmails = new List<string>() { user.Email },
+                Placeholders = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("{{UserName}}", user.FirstName),
+                    new KeyValuePair<string, string>("{{Link}}", string.Format(appDomain + confirmationLink, user.Id, token))
+                }
+            };
+
+            await _emailService.SendEmailForForgotPassword(options);
+
+        }
+
+        public async Task<IdentityResult> ConfirmEmailAsync(string uid, string token)
+        {
+            return await _userManager.ConfirmEmailAsync(await _userManager.FindByIdAsync(uid), token);
+        }
+
+        public async Task<IdentityResult> ResetPassworsAsync(ResetPasswordModel model)
+        {
+            return await _userManager.ResetPasswordAsync(await _userManager.FindByIdAsync(model.UserId), model.Token, model.NewPassword);
         }
 
     }

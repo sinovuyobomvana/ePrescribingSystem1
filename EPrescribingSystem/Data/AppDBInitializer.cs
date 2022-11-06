@@ -32,7 +32,7 @@ namespace EPrescribingSystem.Data
                             Address2 = "Central",
                             ContactNum = "0826561544",
                             EmailAddress = "medicross@gmail.com",
-                            SuburbID = 4
+                            SuburbID = 2
                         },
                         new MedicalPractice()
                         {
@@ -42,7 +42,7 @@ namespace EPrescribingSystem.Data
                             Address2 = "Humewood",
                             ContactNum = "0826569999",
                             EmailAddress = "healthmeds@gmail.com",
-                            SuburbID = 7
+                            SuburbID = 1
                         },
                     });
                     context.SaveChanges();
