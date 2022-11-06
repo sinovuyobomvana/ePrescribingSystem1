@@ -31,8 +31,9 @@ namespace EPrescribingSystem.Data
                 FirstName = "Sinovuyo",
                 LastName = "Bomvana",
                 EmailConfirmed = true,
+                PhoneNumber = "0731953257",
                 PhoneNumberConfirmed = true,
-                SuburbID = 4,
+                SuburbID = 1,
                 RegistrationDate = DateTime.Now
                 
             };
