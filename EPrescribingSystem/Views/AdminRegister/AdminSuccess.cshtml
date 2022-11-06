@@ -49,9 +49,9 @@ ViewData["Title"] = "Success";
                                         <div class="col-7 text-center">
                                             <h5>You Have Successfully added a users</h5>
                                            
-                                            <button asp-controller="UserRoles" asp-action="Index" class="action-button">View Users</button>
+                                            <a asp-controller="UserRoles" asp-action="Index" asp-area="Admin" class="action-button">View Users</a>
 
-                                            <button asp-controller="AdminRegister" asp-action="Register">Add another user</button>
+                                            <a asp-controller="AdminRegister" asp-action="Register" class="action-button">Add another user</a>
                                         </div>
                                     </div>
                                 </div>
