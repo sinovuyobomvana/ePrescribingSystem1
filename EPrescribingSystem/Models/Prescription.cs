@@ -13,12 +13,16 @@ namespace EPrescribingSystem.Models
         [Key]
         public int PrescriptionID { get; set; }
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime PrescriptionDate { get; set; }
+        public DateTime DispensingDate { get; set; }
         [Required]
-        public string Descritpion { get; set; }
+        public string Instruction { get; set; }
+
+        public string Quantity { get; set; }
 
         [Required]
         public int NumberOfRepeats { get; set; }
+        public int NumberOfRepeatsLeft { get; set; }
 
         [ForeignKey("MedicationID")]
         public int MedicationID { get; set; }

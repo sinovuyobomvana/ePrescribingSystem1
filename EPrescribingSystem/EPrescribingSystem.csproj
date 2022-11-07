@@ -16,10 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Doctor\Controllers\" />
-    <Folder Include="Areas\Doctor\Data\" />
     <Folder Include="Areas\Doctor\Models\" />
-    <Folder Include="Areas\Doctor\Views\" />
+    <Folder Include="Areas\Doctor\Views\Condition\" />
     <Folder Include="Areas\Patient\Controllers\" />
     <Folder Include="Areas\Patient\Data\" />
     <Folder Include="Areas\Patient\Models\" />

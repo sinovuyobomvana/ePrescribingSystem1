@@ -17,5 +17,13 @@ namespace EPrescribingSystem.Models
         public string ICD_10_CODE { get; set; }
 
         public string Diagnosis { get; set; }
+
+        public DateTime DiagnosisDate { get; set; }
+
+
+        [ForeignKey("ApplicationUserId")]
+        public string ApplicationUserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }
