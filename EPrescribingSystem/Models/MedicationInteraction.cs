@@ -14,10 +14,12 @@ namespace EPrescribingSystem.Models
 
         public int InteractionID { get; set; }
 
-        public string Name { get; set; }
+        [ForeignKey("ActiveIngredientID")]
+        [Display(Name = "Active Ingredient 1")]
+        public int ActiveIngredientID { get; set; }
+        public ActiveIngredient ActiveIngredient { get; set; }
 
-        public string Type { get; set; }
-
-        public string Effect { get; set; }
+        [Display(Name = "Active Ingredient 2")]
+        public int ActiveIngredientID2 { get; set; }
     }
 }

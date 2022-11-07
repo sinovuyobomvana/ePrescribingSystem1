@@ -1,0 +1,41 @@
+﻿@model IEnumerable<EPrescribingSystem.Models.Disease>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ICD_10_CODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diagnosis)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ICD_10_CODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diagnosis)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DiseaseID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DiseaseID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DiseaseID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

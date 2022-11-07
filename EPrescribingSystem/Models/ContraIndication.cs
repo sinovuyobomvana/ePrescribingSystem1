@@ -11,15 +11,16 @@ namespace EPrescribingSystem.Models
     public class ContraIndication
     {
         [Key]
-
+     
         public int ContraIndicationID { get; set; }
+        [Display(Name = "Active Ingredient")]
 
         [ForeignKey("ActiveIngredientID")]
         public int ActiveIngredientID { get; set; }
         public ActiveIngredient ActiveIngredient { get; set; }
-
-        [ForeignKey("ConditionID")]
-        public int ConditionID { get; set; }
-        public ConditionDiagnosis Condition{ get; set; }
+        [Display(Name = "Diagnosis")]
+        [ForeignKey("DiseaseID")]
+        public int DiseaseID { get; set; }
+        public Disease Disease { get; set; }
     }
 }

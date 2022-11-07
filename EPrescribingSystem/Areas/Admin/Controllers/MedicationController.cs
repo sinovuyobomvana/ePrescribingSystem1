@@ -38,7 +38,11 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
                 thisViewModel.Schedule = meds.Schedule;
                 thisViewModel.DosageForm = meds.DosageForm;
                 thisViewModel.ActiveIngredientName = GetActiveIngredient(meds.ActiveIngredientID);
+                thisViewModel.ActiveIngredientName2 = GetActiveIngredient(meds.ActiveIngredientID2);
+                thisViewModel.ActiveIngredientName3 = GetActiveIngredient(meds.ActiveIngredientID3);
                 thisViewModel.Strength = meds.Strength;
+                thisViewModel.Strength2 = meds.Strength2;
+                thisViewModel.Strength3 = meds.Strength3;
 
                 medicationViewModel.Add(thisViewModel);
             }
@@ -100,11 +104,11 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
                 medicalPracticeModel.ActiveIngredients = ActiveIngredients;
                 
 
-                return View(medicalPracticeModel.Medication);
+                return View(medicalPracticeModel);
             }
             TempData["SuccessMessage"] = medicalPracticeModel.Medication.Name + " Medication Created Successfully!";
 
-            await _service.AddAsync(medicalPracticeModel.Medication);
+            await _service.AddAsync(medicalPracticeModel);
             return RedirectToAction(nameof(Index));
         }
 

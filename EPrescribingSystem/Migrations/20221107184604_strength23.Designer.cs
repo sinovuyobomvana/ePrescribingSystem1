@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221107184604_strength23")]
+    partial class strength23
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,34 +239,16 @@ namespace EPrescribingSystem.Migrations
                     b.Property<int>("ActiveIngredientID")
                         .HasColumnType("int");
 
-                    b.Property<int>("DiseaseID")
+                    b.Property<int>("ConditionID")
                         .HasColumnType("int");
 
                     b.HasKey("ContraIndicationID");
 
                     b.HasIndex("ActiveIngredientID");
 
-                    b.HasIndex("DiseaseID");
+                    b.HasIndex("ConditionID");
 
                     b.ToTable("ContraIndication");
-                });
-
-            modelBuilder.Entity("EPrescribingSystem.Models.Disease", b =>
-                {
-                    b.Property<int>("DiseaseID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Diagnosis")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ICD_10_CODE")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DiseaseID");
-
-                    b.ToTable("Disease");
                 });
 
             modelBuilder.Entity("EPrescribingSystem.Models.MedicalHistory", b =>
@@ -417,15 +401,16 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActiveIngredientID")
-                        .HasColumnType("int");
+                    b.Property<string>("Effect")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ActiveIngredientID2")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("InteractionID");
-
-                    b.HasIndex("ActiveIngredientID");
 
                     b.ToTable("MedicationInteraction");
                 });
@@ -755,15 +740,15 @@ namespace EPrescribingSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EPrescribingSystem.Models.Disease", "Disease")
+                    b.HasOne("EPrescribingSystem.Models.ConditionDiagnosis", "Condition")
                         .WithMany()
-                        .HasForeignKey("DiseaseID")
+                        .HasForeignKey("ConditionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ActiveIngredient");
 
-                    b.Navigation("Disease");
+                    b.Navigation("Condition");
                 });
 
             modelBuilder.Entity("EPrescribingSystem.Models.MedicalHistory", b =>
@@ -822,17 +807,6 @@ namespace EPrescribingSystem.Migrations
                     b.Navigation("ActiveIngredient");
 
                     b.Navigation("MedicationModel");
-                });
-
-            modelBuilder.Entity("EPrescribingSystem.Models.MedicationInteraction", b =>
-                {
-                    b.HasOne("EPrescribingSystem.Models.ActiveIngredient", "ActiveIngredient")
-                        .WithMany()
-                        .HasForeignKey("ActiveIngredientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ActiveIngredient");
                 });
 
             modelBuilder.Entity("EPrescribingSystem.Models.Pharmacy", b =>

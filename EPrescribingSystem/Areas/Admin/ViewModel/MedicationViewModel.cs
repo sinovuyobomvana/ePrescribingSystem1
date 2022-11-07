@@ -11,7 +11,11 @@ namespace EPrescribingSystem.Areas.Admin.ViewModel
         public string Schedule { get; set; }
         public string DosageForm { get; set; }
         public string ActiveIngredientName { get; set; }
-        public int Strength { get; set; }
-        
+        public string ActiveIngredientName2 { get; set; }
+        public string ActiveIngredientName3 { get; set; }
+        public string Strength { get; set; }
+        public string Strength2 { get; set; }
+        public string Strength3 { get; set; }
+
     }
 }

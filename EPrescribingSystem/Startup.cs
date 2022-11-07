@@ -1,6 +1,6 @@
 using EPrescribingSystem.Areas.Admin.Data.Repository;
 using EPrescribingSystem.Areas.Admin.Data.Services;
-using EPrescribingSystem.Areas.Doctor.Data.Repository;
+//using EPrescribingSystem.Areas.Doctor.Data.Repository;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Helpers;
 using EPrescribingSystem.Models;
@@ -58,7 +58,7 @@ namespace EPrescribingSystem
             services.AddScoped<IRegisterRepository, RegisterRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEmailService, EmailService>();
-            services.AddScoped<IConditionRepository, ConditionRepository>();
+            //services.AddScoped<IConditionRepository, ConditionRepository>();
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
 

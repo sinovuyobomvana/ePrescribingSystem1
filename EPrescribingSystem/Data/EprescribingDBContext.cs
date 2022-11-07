@@ -29,6 +29,7 @@ namespace EPrescribingSystem.Data
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Suburb> Suburbs { get; set; }
         public DbSet<Province> Provinces { get; set; }
+        public DbSet<EPrescribingSystem.Models.Disease> Disease { get; set; }
 
 
 
