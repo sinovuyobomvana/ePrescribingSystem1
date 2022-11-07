@@ -64,14 +64,57 @@
                         <input asp-for="Medication.Strength" class="form-control" />
                         <span asp-validation-for="Medication.Strength" class="text-danger"></span>
                     </div>
+                    <div id="siya" style="display:none">
+                    <div class="form-group">
+                        <label asp-for="Medication.ActiveIngredientID2" class="control-label"></label>
+                        <select asp-for="Medication.ActiveIngredientID2" asp-items="@Model.ActiveIngredients" class="form-control">
+                            <option value="" selected>Select Active ingrediant...</option>
+                        </select>
+                        <span asp-validation-for="Medication.ActiveIngredientID2" class="text-danger"></span>
+                    </div>
+                 
+                    <div class="form-group">
+                        <label asp-for="Medication.Strength2" class="control-label"></label>
+                        <input asp-for="Medication.Strength2" class="form-control" />
+                        <span asp-validation-for="Medication.Strength2" class="text-danger"></span>
+                    </div>
 
                     <div class="form-group">
+                        <label asp-for="Medication.ActiveIngredientID3" class="control-label"></label>
+                        <select asp-for="Medication.ActiveIngredientID3" asp-items="@Model.ActiveIngredients" class="form-control">
+                            <option value="" selected>Select Active ingrediant...</option>
+                        </select>
+                        <span asp-validation-for="Medication.ActiveIngredientID3" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Medication.Strength3" class="control-label"></label>
+                        <input asp-for="Medication.Strength3" class="form-control" />
+                        <span asp-validation-for="Medication.Strength3" class="text-danger"></span>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        </div>
+
+                    <div class="form-group">
+                      
                         <input type="submit" value="Create" class="btn btn-outline-success float-right" />
                         <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Medication" asp-action="Index">Cancel</a>
+                        <a class="btn btn-outline-info" id="show">Add active ingredient</a>
                     </div>
                 </form>
-
+               
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#hide").click(function () {
+            $("#siya").hide();
+        });
+        $("#show").click(function () {
+            $("#siya").show();
+        });
+    });
+</script>

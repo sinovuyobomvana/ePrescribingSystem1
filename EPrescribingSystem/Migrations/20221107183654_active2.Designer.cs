@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221107183654_active2")]
+    partial class active2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -351,14 +353,8 @@ namespace EPrescribingSystem.Migrations
                     b.Property<string>("Schedule")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Strength")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Strength2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Strength3")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Strength")
+                        .HasColumnType("int");
 
                     b.HasKey("MedicationID");
 

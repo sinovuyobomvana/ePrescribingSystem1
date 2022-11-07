@@ -39,6 +39,8 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
                 thisViewModel.DosageForm = meds.DosageForm;
                 thisViewModel.ActiveIngredientName = GetActiveIngredient(meds.ActiveIngredientID);
                 thisViewModel.Strength = meds.Strength;
+                thisViewModel.Strength2 = meds.Strength2;
+                thisViewModel.Strength3 = meds.Strength3;
 
                 medicationViewModel.Add(thisViewModel);
             }
