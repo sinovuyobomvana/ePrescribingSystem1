@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+
+<div class="text-center">
+    <h1>Welcome, To the Dashboard.</h1>
+</div>
+<br />
+<br />
+<div class="card-columns">
+
+    <div class="card" style="background: #5D3FD3;color: #ffffff;">
+        <div class="card-body text-center">
+            <p class="card-text">Total Number of Medication @ViewBag.Medication</p>
+            <img src="~/img/medicationicon.png" />
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+    });
+</script>

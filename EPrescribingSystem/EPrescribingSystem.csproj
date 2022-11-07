@@ -22,10 +22,8 @@
     <Folder Include="Areas\Patient\Data\" />
     <Folder Include="Areas\Patient\Models\" />
     <Folder Include="Areas\Patient\Views\" />
-    <Folder Include="Areas\Pharmacist\Controllers\" />
     <Folder Include="Areas\Pharmacist\Data\" />
     <Folder Include="Areas\Pharmacist\Models\" />
-    <Folder Include="Areas\Pharmacist\Views\" />
   </ItemGroup>
 
   <ItemGroup>
