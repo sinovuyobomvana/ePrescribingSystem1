@@ -18,8 +18,8 @@ namespace EPrescribingSystem.Models
         public int ActiveIngredientID { get; set; }
         public ActiveIngredient ActiveIngredient { get; set; }
 
-        [ForeignKey("ConditionID")]
-        public int ConditionID { get; set; }
-        public ConditionDiagnosis Condition{ get; set; }
+        [ForeignKey("DiseaseID")]
+        public int DiseaseID { get; set; }
+        public Disease Disease { get; set; }
     }
 }
