@@ -10,6 +10,7 @@ namespace EPrescribingSystem.Models
         public int DiseaseID { get; set; }
         [Display(Name = "ICD-10 CODE")]
         public string ICD_10_CODE { get; set; }
+        [Display(Name = "Diagnosis")]
         public string Diagnosis { get; set; }
     }
 }
