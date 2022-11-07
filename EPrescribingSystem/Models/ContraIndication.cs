@@ -14,10 +14,12 @@ namespace EPrescribingSystem.Models
 
         public int ContraIndicationID { get; set; }
 
-        public string Name { get; set; }
+        [ForeignKey("ActiveIngredientID")]
+        public int ActiveIngredientID { get; set; }
+        public ActiveIngredient ActiveIngredient { get; set; }
 
-        public string Type { get; set; }
-
-        public string Effect { get; set; }
+        [ForeignKey("ConditionID")]
+        public int ConditionID { get; set; }
+        public ConditionDiagnosis Condition{ get; set; }
     }
 }
