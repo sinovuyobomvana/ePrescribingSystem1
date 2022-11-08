@@ -7,36 +7,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EPrescribingSystem.Data;
 using EPrescribingSystem.Models;
-using Microsoft.AspNetCore.Identity;
 
-namespace EPrescribingSystem.Areas.Doctor.Controllers
+namespace EPrescribingSystem.Areas.Pharmacist.Controllers
 {
-    [Area("Doctor")]
+    [Area("Pharmacist")]
     public class PrescriptionController : Controller
     {
         private readonly EprescribingDBContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PrescriptionController(EprescribingDBContext context, UserManager<ApplicationUser> userManager)
+        public PrescriptionController(EprescribingDBContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-        // GET: Doctor/Prescription
-
-        [Route("[area]/[controller]/[action]")]
-        public async Task<IActionResult> Index()
+        // GET: Pharmacist/Prescription
+        [HttpGet]
+        [Route("[area]/[controller]/[action]/{id?}")]
+        public async Task<IActionResult> Index(string id)
         {
-            var eprescribingDBContext = _context.Prescriptions.Include(d=>d.Doctor).Include(p => p.ApplicationUser).Include(p => p.Medication).Include(p => p.Pharmacy);
-
-            //var Userid = 
-            //ViewBag.Doctor = _context.Users.Where(u=>u.Id == eprescribingDBContext.ToList())
+            var eprescribingDBContext = _context.Prescriptions.Where(u=>u.ApplicationUserID == id).Include(p => p.ApplicationUser).Include(p => p.Doctor).Include(p => p.Med2).Include(p => p.Medication).Include(p => p.Medicine3).Include(p => p.Pharmacy);
             return View(await eprescribingDBContext.ToListAsync());
         }
 
-
-        // GET: Doctor/Prescription/Details/5
+        // GET: Pharmacist/Prescription/Details/5
         [HttpGet]
         [Route("[area]/[controller]/[action]/{id?}")]
         public async Task<IActionResult> Details(int? id)
@@ -48,7 +41,10 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
 
             var prescription = await _context.Prescriptions
                 .Include(p => p.ApplicationUser)
+                .Include(p => p.Doctor)
+                .Include(p => p.Med2)
                 .Include(p => p.Medication)
+                .Include(p => p.Medicine3)
                 .Include(p => p.Pharmacy)
                 .FirstOrDefaultAsync(m => m.PrescriptionID == id);
             if (prescription == null)
@@ -59,64 +55,43 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
             return View(prescription);
         }
 
-        // GET: Doctor/Prescription/Create
+        // GET: Pharmacist/Prescription/Create
         [HttpGet]
         [Route("[area]/[controller]/[action]")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            var users = await _userManager.Users.ToListAsync();
-            var userRolesViewModel = new List<UserRolesViewModel>();
-
-
-            foreach (ApplicationUser user in users)
-            {
-                var checkrol = await _userManager.IsInRoleAsync(user, "Patient");
-                if (checkrol)
-                {
-                    var thisViewModel = new UserRolesViewModel();
-                    thisViewModel.UserId = user.Id;
-                    thisViewModel.Email = user.Email;
-                    thisViewModel.FirstName = user.FirstName;
-                    thisViewModel.LastName = user.LastName;
-                    userRolesViewModel.Add(thisViewModel);
-                }
-            }
-
-            List<SelectListItem> Users = userRolesViewModel.Select(a => new SelectListItem
-            {
-                Value = a.UserId,
-                Text = a.FirstName + " " + a.LastName
-            }).ToList();
-
-            ViewBag.Users = Users;
-
-            //ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "FirstName");
-            //ViewData["ApplicationUserIDL"] = new SelectList(_context.Users, "Id", "LastName");
+            ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["DoctorID"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["Med2ID"] = new SelectList(_context.Medications, "MedicationID", "Name");
             ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "Name");
+            ViewData["Medicine3ID"] = new SelectList(_context.Medications, "MedicationID", "Name");
             ViewData["PharmacyID"] = new SelectList(_context.Pharmacies, "PharmacyID", "AddressLine1");
             return View();
         }
 
-        // POST: Doctor/Prescription/Create
+        // POST: Pharmacist/Prescription/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrescriptionID,PrescriptionDate,DispensingDate,Instruction,Quantity,NumberOfRepeats,NumberOfRepeatsLeft,MedicationID,PharmacyID,ApplicationUserID,DoctorID,Med2ID,Instruction2,Quantity2,NumberOfRepeats2,NumberOfRepeatsLeft2,Medicine3ID,Instruction3,Quantity3,NumberOfRepeats3,NumberOfRepeatsLeft3")] Prescription prescription)
+        public async Task<IActionResult> Create([Bind("PrescriptionID,PrescriptionDate,DispensingDate,Instruction,Quantity,NumberOfRepeats,NumberOfRepeatsLeft,MedicationID,Instruction2,Quantity2,NumberOfRepeats2,NumberOfRepeatsLeft2,Med2ID,Instruction3,Quantity3,NumberOfRepeats3,NumberOfRepeatsLeft3,Medicine3ID,PharmacyID,ApplicationUserID,DoctorID")] Prescription prescription)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 _context.Add(prescription);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-           // }
-            //ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id", prescription.ApplicationUserID);
-            //ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "MedicationID", prescription.MedicationID);
-            //ViewData["PharmacyID"] = new SelectList(_context.Pharmacies, "PharmacyID", "AddressLine1", prescription.PharmacyID);
-            //return View(prescription);
+            }
+            ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id", prescription.ApplicationUserID);
+            ViewData["DoctorID"] = new SelectList(_context.Users, "Id", "Id", prescription.DoctorID);
+            ViewData["Med2ID"] = new SelectList(_context.Medications, "MedicationID", "Name", prescription.Med2ID);
+            ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "Name", prescription.MedicationID);
+            ViewData["Medicine3ID"] = new SelectList(_context.Medications, "MedicationID", "Name", prescription.Medicine3ID);
+            ViewData["PharmacyID"] = new SelectList(_context.Pharmacies, "PharmacyID", "AddressLine1", prescription.PharmacyID);
+            return View(prescription);
         }
 
-        // GET: Doctor/Prescription/Edit/5
+        // GET: Pharmacist/Prescription/Edit/5
         [HttpGet]
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Edit(int? id)
@@ -132,17 +107,20 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
                 return NotFound();
             }
             ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id", prescription.ApplicationUserID);
-            ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "MedicationID", prescription.MedicationID);
+            ViewData["DoctorID"] = new SelectList(_context.Users, "Id", "Id", prescription.DoctorID);
+            ViewData["Med2ID"] = new SelectList(_context.Medications, "MedicationID", "Name", prescription.Med2ID);
+            ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "Name", prescription.MedicationID);
+            ViewData["Medicine3ID"] = new SelectList(_context.Medications, "MedicationID", "Name", prescription.Medicine3ID);
             ViewData["PharmacyID"] = new SelectList(_context.Pharmacies, "PharmacyID", "AddressLine1", prescription.PharmacyID);
             return View(prescription);
         }
 
-        // POST: Doctor/Prescription/Edit/5
+        // POST: Pharmacist/Prescription/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrescriptionID,PrescriptionDate,DispensingDate,Instruction,Quantity,NumberOfRepeats,NumberOfRepeatsLeft,MedicationID,PharmacyID,ApplicationUserID,Doctor")] Prescription prescription)
+        public async Task<IActionResult> Edit(int id, [Bind("PrescriptionID,PrescriptionDate,DispensingDate,Instruction,Quantity,NumberOfRepeats,NumberOfRepeatsLeft,MedicationID,Instruction2,Quantity2,NumberOfRepeats2,NumberOfRepeatsLeft2,Med2ID,Instruction3,Quantity3,NumberOfRepeats3,NumberOfRepeatsLeft3,Medicine3ID,PharmacyID,ApplicationUserID,DoctorID")] Prescription prescription)
         {
             if (id != prescription.PrescriptionID)
             {
@@ -170,12 +148,15 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id", prescription.ApplicationUserID);
+            ViewData["DoctorID"] = new SelectList(_context.Users, "Id", "Id", prescription.DoctorID);
+            ViewData["Med2ID"] = new SelectList(_context.Medications, "MedicationID", "MedicationID", prescription.Med2ID);
             ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "MedicationID", prescription.MedicationID);
+            ViewData["Medicine3ID"] = new SelectList(_context.Medications, "MedicationID", "MedicationID", prescription.Medicine3ID);
             ViewData["PharmacyID"] = new SelectList(_context.Pharmacies, "PharmacyID", "AddressLine1", prescription.PharmacyID);
             return View(prescription);
         }
 
-        // GET: Doctor/Prescription/Delete/5
+        // GET: Pharmacist/Prescription/Delete/5
         [HttpGet]
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Delete(int? id)
@@ -187,7 +168,10 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
 
             var prescription = await _context.Prescriptions
                 .Include(p => p.ApplicationUser)
+                .Include(p => p.Doctor)
+                .Include(p => p.Med2)
                 .Include(p => p.Medication)
+                .Include(p => p.Medicine3)
                 .Include(p => p.Pharmacy)
                 .FirstOrDefaultAsync(m => m.PrescriptionID == id);
             if (prescription == null)
@@ -198,7 +182,7 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
             return View(prescription);
         }
 
-        // POST: Doctor/Prescription/Delete/5
+        // POST: Pharmacist/Prescription/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

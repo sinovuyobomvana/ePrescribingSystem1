@@ -63,8 +63,8 @@
                                 <td>@user.IDNumber</td>
                             </tr>
                             <tr>
-                                <td>ID Number</td>
-                                <td>@user.IDNumber</td>
+                                <td>Action</td>
+                                <td><a asp-controller="Prescription" asp-action="Index" asp-route-id="@user.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt">View Prescription</i></a></td>
                             </tr>
                             
                             @*<tr>
