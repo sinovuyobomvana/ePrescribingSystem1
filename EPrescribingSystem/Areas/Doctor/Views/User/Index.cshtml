@@ -40,7 +40,7 @@
                     <label class="form-label"><strong>ID Number:</strong></label>
                     <input type="text" maxlength="13" min="13" placeholder="" required value="@ViewData["GetIDNumber"]" name="idNumber" />
                 </div>
-                <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Check Status</button></div>
+                <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Search users</button></div>
             </form>
             <br />
             <br />
@@ -63,8 +63,11 @@
                                 <td>@user.IDNumber</td>
                             </tr>
                             <tr>
-                                <td>Medical History</td>
-                                <td><a asp-controller="ConditionDiagnosis" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt"></i> Medical History </a> </td>
+                                <td>
+                                <a asp-controller="ConditionDiagnosis" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt">Medical History</i>  </a>
+                                <br />
+                                <a asp-controller="Prescription" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt">Prescription</i></a>
+                                </td>
                             </tr>
 
                             
