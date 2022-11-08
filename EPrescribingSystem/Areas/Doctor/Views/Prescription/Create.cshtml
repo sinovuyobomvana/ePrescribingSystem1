@@ -11,10 +11,11 @@
 <h4>Prescription</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <div class="row">
+                <div class="col">
             <div class="form-group">
                 <label class="control-label">Patient</label>
                 <select asp-for="ApplicationUserID" asp-items="@(new SelectList(ViewBag.Users, "Value", "Text"))" class="form-control"></select>
@@ -23,53 +24,133 @@
 
             <div class="form-group">
                 <label asp-for="PrescriptionDate" class="control-label"></label>
-                <input asp-for="PrescriptionDate" class="form-control" />
+                <input asp-for="PrescriptionDate" type="date" class="form-control" />
                 <span asp-validation-for="PrescriptionDate" class="text-danger"></span>
             </div>
-          @*  <div class="form-group">
-                <label asp-for="DispensingDate" class="control-label"></label>
-                <input asp-for="DispensingDate" class="form-control" />
-                <span asp-validation-for="DispensingDate" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="Instruction" class="control-label"></label>
-                <textarea asp-for="Instruction" class="form-control"></textarea>
-                <span asp-validation-for="Instruction" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
+                    <br />
+                    <h5>Medication 1</h5>
+                    <div class="form-group">
+                        <label asp-for="MedicationID" class="control-label"></label>
+                        <select asp-for="MedicationID" class="form-control" asp-items="ViewBag.MedicationID">
+                            <option>Select medication...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Instruction" class="control-label"></label>
+                        <textarea asp-for="Instruction" class="form-control"></textarea>
+                        <span asp-validation-for="Instruction" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Quantity" class="control-label"></label>
+                        <input asp-for="Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" hidden>
+                        <label asp-for="DoctorID" class="control-label">ID</label>
+                        <input asp-for="DoctorID" value="@UserManager.GetUserAsync(User).Result.Id" class="form-control" />
+                        <span asp-validation-for="DoctorID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NumberOfRepeats" class="control-label"></label>
+                        <input asp-for="NumberOfRepeats" class="form-control" />
+                        <span asp-validation-for="NumberOfRepeats" class="text-danger"></span>
+                    </div>
+@*                    <div class="form-group">
+                        <label asp-for="NumberOfRepeatsLeft" class="control-label"></label>
+                        <input asp-for="NumberOfRepeatsLeft" class="form-control" />
+                        <span asp-validation-for="NumberOfRepeatsLeft" class="text-danger"></span>
+                    </div>*@
+
             </div>
 
-            <div class="form-group" hidden>
-                <label asp-for="DoctorID" class="control-label">ID</label>
-                <input asp-for="DoctorID" value="@UserManager.GetUserAsync(User).Result.Id" class="form-control" />
-                <span asp-validation-for="DoctorID" class="text-danger"></span>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="NumberOfRepeats" class="control-label"></label>
-                <input asp-for="NumberOfRepeats" class="form-control" />
-                <span asp-validation-for="NumberOfRepeats" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumberOfRepeatsLeft" class="control-label"></label>
-                <input asp-for="NumberOfRepeatsLeft" class="form-control" />
-                <span asp-validation-for="NumberOfRepeatsLeft" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MedicationID" class="control-label"></label>
-                <select asp-for="MedicationID" class ="form-control" asp-items="ViewBag.MedicationID"></select>
-            </div>
-@*            <div class="form-group">
-                <label asp-for="PharmacyID" class="control-label"></label>
-                <select asp-for="PharmacyID" class ="form-control" asp-items="ViewBag.PharmacyID"></select>
-            </div>*@
-        
+                <div id="siya1" style="display:none" class="col">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h5>Medication 2</h5>
+                    <div class="form-group">
+                        <label asp-for="Med2ID" class="control-label"></label>
+                        <select asp-for="Med2ID" class="form-control" asp-items="ViewBag.MedicationID">
+                            <option>Select medication...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Instruction2" class="control-label"></label>
+                        <textarea asp-for="Instruction2" class="form-control"></textarea>
+                        <span asp-validation-for="Instruction2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Quantity2" class="control-label"></label>
+                        <input asp-for="Quantity2" class="form-control" />
+                        <span asp-validation-for="Quantity2" class="text-danger"></span>
+                    </div>
 
+                    <div class="form-group">
+                        <label asp-for="NumberOfRepeats2" class="control-label"></label>
+                        <input asp-for="NumberOfRepeats2" class="form-control" />
+                        <span asp-validation-for="NumberOfRepeats2" class="text-danger"></span>
+                    </div>
+@*                    <div class="form-group">
+                        <label asp-for="NumberOfRepeatsLeft" class="control-label"></label>
+                        <input asp-for="NumberOfRepeatsLeft" class="form-control" />
+                        <span asp-validation-for="NumberOfRepeatsLeft" class="text-danger"></span>
+                    </div>*@
+            
+                </div>
+              
+                    <div id="siya" style="display:none" class="col">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h5>Medication 3</h5>
+                    <div class="form-group">
+                        <label asp-for="Medicine3ID" class="control-label"></label>
+                        <select asp-for="Medicine3ID" class="form-control" asp-items="ViewBag.MedicationID">
+                            <option>Select medication...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Instruction3" class="control-label"></label>
+                        <textarea asp-for="Instruction3" class="form-control"></textarea>
+                        <span asp-validation-for="Instruction3" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Quantity3" class="control-label"></label>
+                        <input asp-for="Quantity3" class="form-control" />
+                        <span asp-validation-for="Quantity3" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NumberOfRepeats3" class="control-label"></label>
+                        <input asp-for="NumberOfRepeats3" class="form-control" />
+                        <span asp-validation-for="NumberOfRepeats3" class="text-danger"></span>
+                    </div>
+   @*                 <div class="form-group">
+                        <label asp-for="NumberOfRepeatsLeft" class="control-label"></label>
+                        <input asp-for="NumberOfRepeatsLeft" class="form-control" />
+                        <span asp-validation-for="NumberOfRepeatsLeft" class="text-danger"></span>
+                    </div>*@
+               
+         
+                </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-outline-info " style="display:none" id="show">Add active ingredient</a>
+                <a class="btn btn-outline-info" id="show1">Add active ingredient</a>
             </div>
         </form>
     </div>
@@ -78,4 +159,24 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#hide").click(function () {
+            $("#siya").hide();
+        });
+        $("#show1").click(function () {
+            $("#siya1").show();
+            $("#show1").hide();
+            $("#show").show();
+
+        });
+        $("#show").click(function () {
+            $("#siya").show();
+            //$("#show").hide();
+        
+
+        });
+    });
+</script>
 

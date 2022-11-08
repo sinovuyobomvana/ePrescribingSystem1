@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221108162639_required2")]
+    partial class required2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -529,10 +531,10 @@ namespace EPrescribingSystem.Migrations
                     b.Property<int>("NumberOfRepeats")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NumberOfRepeats2")
+                    b.Property<int>("NumberOfRepeats2")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NumberOfRepeats3")
+                    b.Property<int>("NumberOfRepeats3")
                         .HasColumnType("int");
 
                     b.Property<int>("NumberOfRepeatsLeft")
@@ -541,7 +543,7 @@ namespace EPrescribingSystem.Migrations
                     b.Property<int?>("NumberOfRepeatsLeft2")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NumberOfRepeatsLeft3")
+                    b.Property<int>("NumberOfRepeatsLeft3")
                         .HasColumnType("int");
 
                     b.Property<int?>("PharmacyID")

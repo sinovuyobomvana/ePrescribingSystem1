@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221108154602_presMed")]
+    partial class presMed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -509,6 +511,7 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Instruction")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Instruction2")
@@ -529,19 +532,19 @@ namespace EPrescribingSystem.Migrations
                     b.Property<int>("NumberOfRepeats")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NumberOfRepeats2")
+                    b.Property<int>("NumberOfRepeats2")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NumberOfRepeats3")
+                    b.Property<int>("NumberOfRepeats3")
                         .HasColumnType("int");
 
                     b.Property<int>("NumberOfRepeatsLeft")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NumberOfRepeatsLeft2")
+                    b.Property<int>("NumberOfRepeatsLeft2")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NumberOfRepeatsLeft3")
+                    b.Property<int>("NumberOfRepeatsLeft3")
                         .HasColumnType("int");
 
                     b.Property<int?>("PharmacyID")

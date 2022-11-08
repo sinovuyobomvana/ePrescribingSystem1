@@ -102,18 +102,18 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrescriptionID,PrescriptionDate,DispensingDate,Instruction,Quantity,NumberOfRepeats,NumberOfRepeatsLeft,MedicationID,PharmacyID,ApplicationUserID,DoctorID")] Prescription prescription)
+        public async Task<IActionResult> Create([Bind("PrescriptionID,PrescriptionDate,DispensingDate,Instruction,Quantity,NumberOfRepeats,NumberOfRepeatsLeft,MedicationID,PharmacyID,ApplicationUserID,DoctorID,Med2ID,Instruction2,Quantity2,NumberOfRepeats2,NumberOfRepeatsLeft2,Medicine3ID,Instruction3,Quantity3,NumberOfRepeats3,NumberOfRepeatsLeft3")] Prescription prescription)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(prescription);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id", prescription.ApplicationUserID);
-            ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "MedicationID", prescription.MedicationID);
-            ViewData["PharmacyID"] = new SelectList(_context.Pharmacies, "PharmacyID", "AddressLine1", prescription.PharmacyID);
-            return View(prescription);
+           // }
+            //ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id", prescription.ApplicationUserID);
+            //ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "MedicationID", prescription.MedicationID);
+            //ViewData["PharmacyID"] = new SelectList(_context.Pharmacies, "PharmacyID", "AddressLine1", prescription.PharmacyID);
+            //return View(prescription);
         }
 
         // GET: Doctor/Prescription/Edit/5

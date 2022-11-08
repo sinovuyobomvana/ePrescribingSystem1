@@ -55,7 +55,7 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
         // GET: Doctor/ConditionDiagnosis/Create
         [HttpGet]
         [Route("[area]/[controller]/[action]/{id?}")]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(string? id)
         {
             var users = await _userManager.Users.ToListAsync();
             var userRolesViewModel = new List<UserRolesViewModel>();
@@ -75,7 +75,7 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
                 }
             }
 
-            List<SelectListItem> Users = userRolesViewModel.Select(a => new SelectListItem
+            List<SelectListItem> Users = userRolesViewModel.Where(u=>u.UserId == id).Select(a => new SelectListItem
             {
                 Value = a.UserId,
                 Text = a.FirstName + " " + a.LastName
