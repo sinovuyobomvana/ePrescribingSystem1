@@ -15,9 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.ActiveIngredient)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActiveIngredientID2)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -25,10 +22,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ActiveIngredient.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActiveIngredientID2)
+                    <strong> @Html.DisplayFor(modelItem => item.ActiveIngredient.Name)</strong> interacts with <strong>@Html.DisplayFor(modelItem => item.Act.Name)</strong> and should not be taken at the same time.
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.InteractionID">Edit</a> |

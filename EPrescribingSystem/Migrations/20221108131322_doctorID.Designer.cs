@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221108131322_doctorID")]
+    partial class doctorID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -428,15 +430,13 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ActID")
-                        .HasColumnType("int");
-
                     b.Property<int>("ActiveIngredientID")
                         .HasColumnType("int");
 
-                    b.HasKey("InteractionID");
+                    b.Property<int>("ActiveIngredientID2")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ActID");
+                    b.HasKey("InteractionID");
 
                     b.HasIndex("ActiveIngredientID");
 
@@ -849,17 +849,11 @@ namespace EPrescribingSystem.Migrations
 
             modelBuilder.Entity("EPrescribingSystem.Models.MedicationInteraction", b =>
                 {
-                    b.HasOne("EPrescribingSystem.Models.ActiveIngredient", "Act")
-                        .WithMany()
-                        .HasForeignKey("ActID");
-
                     b.HasOne("EPrescribingSystem.Models.ActiveIngredient", "ActiveIngredient")
                         .WithMany()
                         .HasForeignKey("ActiveIngredientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Act");
 
                     b.Navigation("ActiveIngredient");
                 });

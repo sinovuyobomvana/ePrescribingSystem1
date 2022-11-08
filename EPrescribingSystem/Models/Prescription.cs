@@ -29,13 +29,18 @@ namespace EPrescribingSystem.Models
         public Medication Medication { get; set; }
 
         [ForeignKey("PharmacyID")]
-        public int PharmacyID { get; set; }
+        public int? PharmacyID { get; set; }
         public Pharmacy Pharmacy { get; set; }
 
-        [ForeignKey("UserID")]
-        public int UserID { get; set; }
+       
+        [ForeignKey("ApplicationUserID")]
+        [Display(Name = "Patient")]
+        public string ApplicationUserID { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-
+        [ForeignKey("DoctorID")]
+        [Display(Name = "Doctor")]
+        public string DoctorID { get; set; }
+        public ApplicationUser Doctor { get; set; }
     }
 }

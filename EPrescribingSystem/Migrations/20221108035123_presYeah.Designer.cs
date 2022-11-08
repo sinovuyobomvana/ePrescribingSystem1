@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221108035123_presYeah")]
+    partial class presYeah
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -428,15 +430,13 @@ namespace EPrescribingSystem.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ActID")
-                        .HasColumnType("int");
-
                     b.Property<int>("ActiveIngredientID")
                         .HasColumnType("int");
 
-                    b.HasKey("InteractionID");
+                    b.Property<int>("ActiveIngredientID2")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ActID");
+                    b.HasKey("InteractionID");
 
                     b.HasIndex("ActiveIngredientID");
 
@@ -505,8 +505,8 @@ namespace EPrescribingSystem.Migrations
                     b.Property<DateTime>("DispensingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Doctor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Instruction")
                         .IsRequired()
@@ -521,7 +521,7 @@ namespace EPrescribingSystem.Migrations
                     b.Property<int>("NumberOfRepeatsLeft")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PharmacyID")
+                    b.Property<int>("PharmacyID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PrescriptionDate")
@@ -533,8 +533,6 @@ namespace EPrescribingSystem.Migrations
                     b.HasKey("PrescriptionID");
 
                     b.HasIndex("ApplicationUserID");
-
-                    b.HasIndex("DoctorID");
 
                     b.HasIndex("MedicationID");
 
@@ -849,17 +847,11 @@ namespace EPrescribingSystem.Migrations
 
             modelBuilder.Entity("EPrescribingSystem.Models.MedicationInteraction", b =>
                 {
-                    b.HasOne("EPrescribingSystem.Models.ActiveIngredient", "Act")
-                        .WithMany()
-                        .HasForeignKey("ActID");
-
                     b.HasOne("EPrescribingSystem.Models.ActiveIngredient", "ActiveIngredient")
                         .WithMany()
                         .HasForeignKey("ActiveIngredientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Act");
 
                     b.Navigation("ActiveIngredient");
                 });
@@ -887,10 +879,6 @@ namespace EPrescribingSystem.Migrations
                         .WithMany()
                         .HasForeignKey("ApplicationUserID");
 
-                    b.HasOne("EPrescribingSystem.Models.ApplicationUser", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorID");
-
                     b.HasOne("EPrescribingSystem.Models.Medication", "Medication")
                         .WithMany()
                         .HasForeignKey("MedicationID")
@@ -899,11 +887,11 @@ namespace EPrescribingSystem.Migrations
 
                     b.HasOne("EPrescribingSystem.Models.Pharmacy", "Pharmacy")
                         .WithMany()
-                        .HasForeignKey("PharmacyID");
+                        .HasForeignKey("PharmacyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("Doctor");
 
                     b.Navigation("Medication");
 

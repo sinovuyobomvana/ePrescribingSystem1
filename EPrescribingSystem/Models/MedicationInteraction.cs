@@ -19,7 +19,10 @@ namespace EPrescribingSystem.Models
         public int ActiveIngredientID { get; set; }
         public ActiveIngredient ActiveIngredient { get; set; }
 
+        [ForeignKey("ActID")]
+
         [Display(Name = "Active Ingredient 2")]
-        public int ActiveIngredientID2 { get; set; }
+        public int? ActID { get; set; }
+        public ActiveIngredient Act { get; set; }
     }
 }

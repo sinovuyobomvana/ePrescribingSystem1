@@ -25,7 +25,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Index()
         {
-            var eprescribingDBContext = _context.MedicationInteractions.Include(m => m.ActiveIngredient);
+            var eprescribingDBContext = _context.MedicationInteractions.Include(a=>a.Act).Include(m => m.ActiveIngredient);
             return View(await eprescribingDBContext.ToListAsync());
         }
 
@@ -62,7 +62,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("InteractionID,ActiveIngredientID,ActiveIngredientID2")] MedicationInteraction medicationInteraction)
+        public async Task<IActionResult> Create([Bind("InteractionID,ActiveIngredientID,ActID")] MedicationInteraction medicationInteraction)
         {
             if (ModelState.IsValid)
             {
