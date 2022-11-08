@@ -93,9 +93,10 @@ namespace EPrescribingSystem.Areas.Pharmacist.Controllers
 
         // GET: Pharmacist/Prescription/Edit/5
         [HttpGet]
-        [Route("[area]/[controller]/[action]")]
+        [Route("[area]/[controller]/[action]/{id?}")]
         public async Task<IActionResult> Edit(int? id)
         {
+            
             if (id == null)
             {
                 return NotFound();
@@ -112,6 +113,9 @@ namespace EPrescribingSystem.Areas.Pharmacist.Controllers
             ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "Name", prescription.MedicationID);
             ViewData["Medicine3ID"] = new SelectList(_context.Medications, "MedicationID", "Name", prescription.Medicine3ID);
             ViewData["PharmacyID"] = new SelectList(_context.Pharmacies, "PharmacyID", "AddressLine1", prescription.PharmacyID);
+
+            ViewBag.MdID = id;
+
             return View(prescription);
         }
 
@@ -131,6 +135,7 @@ namespace EPrescribingSystem.Areas.Pharmacist.Controllers
             {
                 try
                 {
+                    prescription.DispensingDate= DateTime.Now;
                     _context.Update(prescription);
                     await _context.SaveChangesAsync();
                 }

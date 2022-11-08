@@ -4,137 +4,16 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h2>Prescription Details</h2>
 
 <div>
-    <h4>Prescription</h4>
+    <h4>@Model.ApplicationUser.FirstName @Model.ApplicationUser.LastName Prescription</h4>
     <hr />
-   @* <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrescriptionDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrescriptionDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DispensingDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DispensingDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Instruction)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Instruction)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfRepeats)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfRepeats)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfRepeatsLeft)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfRepeatsLeft)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medication)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Medication.MedicationID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Instruction2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Instruction2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantity2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfRepeats2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfRepeats2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfRepeatsLeft2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfRepeatsLeft2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Med2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Med2.MedicationID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Instruction3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Instruction3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantity3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfRepeats3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfRepeats3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfRepeatsLeft3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfRepeatsLeft3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medicine3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Medicine3.MedicationID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pharmacy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pharmacy.AddressLine1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplicationUser)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ApplicationUser.FirstName)   @Html.DisplayFor(model => model.ApplicationUser.LastName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Doctor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Doctor.FirstName)     @Html.DisplayFor(model => model.Doctor.LastName)
-        </dd>
-    </dl>*@
     <table id="example" class="display nowrap" style="width:100%">
         <thead>
             <tr>
                 <th>Medication Name</th>
+                <th>Instruction</th>
                 <th>Number of repeats</th>
                 <th>Number of repeats left</th>
                 <th>Doctor</th>
@@ -147,6 +26,9 @@
                     @Html.DisplayFor(model => model.Medication.Name)
                 </td>
                 <td>
+                    @Html.DisplayFor(model => model.Instruction)
+                </td>
+                <td>
                     @Html.DisplayFor(model => model.NumberOfRepeats)
                 </td>
                 <td>
@@ -155,15 +37,28 @@
                 <td>
                     @Html.DisplayFor(model => model.Doctor.FirstName)  @Html.DisplayFor(model => model.Doctor.LastName)
                 </td>
-
-                   @* <a asp-controller="Medication" asp-action="Edit" asp-route-id="@item.MedicationID" class="btn btn-outline-primary"><i class="fas fa-pencil-alt"></i>Edit </a>*@
-            </tr>
+                <td>
+                    @if (Model.NumberOfRepeatsLeft == 0)
+                    {
+                        <a asp-controller="Prescription" asp-action="Edit" asp-route-id="@Model.MedicationID" class="btn btn-outline-success disabled"><i class="fas fa-pencil-alt"></i>Dispense</a>
+                        <a asp-controller="Prescription" asp-action="Delete" asp-route-id="@Model.MedicationID" class="btn btn-outline-danger disabled"><i class="fas fa-pencil-alt"></i>Reject</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Prescription" asp-action="Edit" asp-route-id="@Model.MedicationID" class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i>Dispense</a>
+                        <a asp-controller="Prescription" asp-action="Delete" asp-route-id="@Model.MedicationID" class="btn btn-outline-danger"><i class="fas fa-pencil-alt"></i>Reject</a>
+                    }
+                </td>
+               </tr>
            
-                @if (Html.DisplayFor(model => model.Med2.MedicationID) != null)
+                @if (Model.Instruction2 != null)
                 {
                 <tr>
                     <td>
                         @Html.DisplayFor(model => model.Med2.Name)
+                    </td>
+                               <td>
+                        @Html.DisplayFor(model => model.Instruction2)
                     </td>
                     <td>
                         @Html.DisplayFor(model => model.NumberOfRepeats2)
@@ -174,14 +69,26 @@
                     <td>
                         @Html.DisplayFor(model => model.Doctor.FirstName)  @Html.DisplayFor(model => model.Doctor.LastName)
                     </td>
+                    <td>
+                        @if(Model.NumberOfRepeatsLeft2 == 0){
+                            <a asp-controller="Prescription" asp-action="Edit" asp-route-id="@Model.Med2ID" class="btn btn-outline-success disabled"><i class="fas fa-pencil-alt"></i>Dispense</a>
+                            <a asp-controller="Prescription" asp-action="Delete" asp-route-id="@Model.Med2ID" class="btn btn-outline-danger disabled"><i class="fas fa-pencil-alt"></i>Reject</a>
+                        }else {
+                        <a asp-controller="Prescription" asp-action="Edit" asp-route-id="@Model.Med2ID" class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i>Dispense</a>
+                        <a asp-controller="Prescription" asp-action="Delete" asp-route-id="@Model.Med2ID" class="btn btn-outline-danger"><i class="fas fa-pencil-alt"></i>Reject</a>
+                        }
+                    </td>
                 </tr>
                 }
             
-                @if (Html.DisplayFor(model => model.Medicine3.MedicationID) != null)
+                @if(Model.Instruction3!= null)
                 {
                 <tr>
                     <td>
                         @Html.DisplayFor(model => model.Medicine3.Name)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(model => model.Instruction3)
                     </td>
                     <td>
                         @Html.DisplayFor(model => model.NumberOfRepeats3)
@@ -191,6 +98,18 @@
                     </td>
                     <td>
                         @Html.DisplayFor(model => model.Doctor.FirstName)  @Html.DisplayFor(model => model.Doctor.LastName)
+                    </td>
+                    <td>
+                        @if (Model.NumberOfRepeatsLeft3 == 0)
+                        {
+                            <a asp-controller="Prescription" asp-action="Edit" asp-route-id="@Model.Medicine3ID" class="btn btn-outline-success disabled"><i class="fas fa-pencil-alt"></i>Dispense</a>
+                            <a asp-controller="Prescription" asp-action="Delete" asp-route-id="@Model.Medicine3ID" class="btn btn-outline-danger disabled"><i class="fas fa-pencil-alt"></i>Reject</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Prescription" asp-action="Edit" asp-route-id="@Model.Medicine3ID" class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i>Dispense</a>
+                            <a asp-controller="Prescription" asp-action="Delete" asp-route-id="@Model.Medicine3ID" class="btn btn-outline-danger"><i class="fas fa-pencil-alt"></i>Reject</a>
+                        }
                     </td>
                 </tr>
                 }

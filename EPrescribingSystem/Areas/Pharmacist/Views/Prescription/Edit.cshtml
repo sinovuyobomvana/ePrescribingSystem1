@@ -33,21 +33,8 @@
                 <input asp-for="Quantity" class="form-control" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NumberOfRepeats" class="control-label"></label>
-                <input asp-for="NumberOfRepeats" class="form-control" />
-                <span asp-validation-for="NumberOfRepeats" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumberOfRepeatsLeft" class="control-label"></label>
-                <input asp-for="NumberOfRepeatsLeft" class="form-control" />
-                <span asp-validation-for="NumberOfRepeatsLeft" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MedicationID" class="control-label"></label>
-                <select asp-for="MedicationID" class="form-control" asp-items="ViewBag.MedicationID"></select>
-                <span asp-validation-for="MedicationID" class="text-danger"></span>
-            </div>
+         
+          
             <div class="form-group" style="display:none">
                 <label asp-for="Instruction2" class="control-label"></label>
                 <input asp-for="Instruction2" class="form-control" />
@@ -58,21 +45,8 @@
                 <input asp-for="Quantity2" class="form-control" />
                 <span asp-validation-for="Quantity2" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NumberOfRepeats2" class="control-label"></label>
-                <input asp-for="NumberOfRepeats2" class="form-control" />
-                <span asp-validation-for="NumberOfRepeats2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumberOfRepeatsLeft2" class="control-label"></label>
-                <input asp-for="NumberOfRepeatsLeft2" class="form-control" />
-                <span asp-validation-for="NumberOfRepeatsLeft2" class="text-danger"></span>
-            </div>
-            <div class="form-group" >
-                <label asp-for="Med2ID" class="control-label"></label>
-                <select asp-for="Med2ID" class="form-control" asp-items="ViewBag.Med2ID"></select>
-                <span asp-validation-for="Med2ID" class="text-danger"></span>
-            </div>
+         
+         
             <div class="form-group" style="display:none">
                 <label asp-for="Instruction3" class="control-label"></label>
                 <input asp-for="Instruction3" class="form-control" />
@@ -83,21 +57,7 @@
                 <input asp-for="Quantity3" class="form-control" />
                 <span asp-validation-for="Quantity3" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NumberOfRepeats3" class="control-label"></label>
-                <input asp-for="NumberOfRepeats3" class="form-control" />
-                <span asp-validation-for="NumberOfRepeats3" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumberOfRepeatsLeft3" class="control-label"></label>
-                <input asp-for="NumberOfRepeatsLeft3" class="form-control" />
-                <span asp-validation-for="NumberOfRepeatsLeft3" class="text-danger"></span>
-            </div>
-            <div class="form-group" >
-                <label asp-for="Medicine3ID" class="control-label"></label>
-                <select asp-for="Medicine3ID" class="form-control" asp-items="ViewBag.Medicine3ID"></select>
-                <span asp-validation-for="Medicine3ID" class="text-danger"></span>
-            </div>
+       
             <div class="form-group" style="display:none">
                 <label asp-for="PharmacyID" class="control-label"></label>
                 <select asp-for="PharmacyID" class="form-control" asp-items="ViewBag.PharmacyID"></select>
@@ -113,6 +73,64 @@
                 <select asp-for="DoctorID" class="form-control" asp-items="ViewBag.DoctorID"></select>
                 <span asp-validation-for="DoctorID" class="text-danger"></span>
             </div>
+
+            @if (Model.MedicationID == ViewBag.MdID)
+            {
+                <div class="form-group">
+                    <label asp-for="MedicationID" class="control-label"></label>
+                    <select asp-for="MedicationID" class="form-control" asp-items="ViewBag.MedicationID"></select>
+                    <span asp-validation-for="MedicationID" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NumberOfRepeats" class="control-label"></label>
+                    <input asp-for="NumberOfRepeats" class="form-control" />
+                    <span asp-validation-for="NumberOfRepeats" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumberOfRepeatsLeft" class="control-label"></label>
+                    <input asp-for="NumberOfRepeatsLeft" class="form-control" />
+                    <span asp-validation-for="NumberOfRepeatsLeft" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Med2ID == ViewBag.MdID)
+            {
+                <div class="form-group">
+                    <label asp-for="Med2ID" class="control-label"></label>
+                    <select asp-for="Med2ID" class="form-control" asp-items="ViewBag.Med2ID"></select>
+                    <span asp-validation-for="Med2ID" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NumberOfRepeats2" class="control-label"></label>
+                    <input asp-for="NumberOfRepeats2" class="form-control" />
+                    <span asp-validation-for="NumberOfRepeats2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumberOfRepeatsLeft2" class="control-label"></label>
+                    <input asp-for="NumberOfRepeatsLeft2" class="form-control" />
+                    <span asp-validation-for="NumberOfRepeatsLeft2" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Medicine3ID == ViewBag.MdID)
+            {
+                <div class="form-group">
+                    <label asp-for="Medicine3ID" class="control-label"></label>
+                    <select asp-for="Medicine3ID" class="form-control" asp-items="ViewBag.Medicine3ID"></select>
+                    <span asp-validation-for="Medicine3ID" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NumberOfRepeats3" class="control-label"></label>
+                    <input asp-for="NumberOfRepeats3" class="form-control" />
+                    <span asp-validation-for="NumberOfRepeats3" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumberOfRepeatsLeft3" class="control-label"></label>
+                    <input asp-for="NumberOfRepeatsLeft3" class="form-control" />
+                    <span asp-validation-for="NumberOfRepeatsLeft3" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
