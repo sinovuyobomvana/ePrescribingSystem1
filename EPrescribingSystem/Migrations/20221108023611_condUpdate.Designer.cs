@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221108023611_condUpdate")]
+    partial class condUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,9 +221,6 @@ namespace EPrescribingSystem.Migrations
 
                     b.Property<DateTime>("DiagnosisDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Doctor")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ICD_10_CODE")
                         .HasColumnType("nvarchar(max)");

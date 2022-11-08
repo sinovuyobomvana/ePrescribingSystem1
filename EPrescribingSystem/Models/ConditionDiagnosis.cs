@@ -26,6 +26,12 @@ namespace EPrescribingSystem.Models
 
         public ApplicationUser ApplicationUser { get; set; }
 
+        public string Doctor { get; set; }
+
         public string Allergy { get; set; }
+        [Display(Name = "Medication")]
+        [ForeignKey("MedicationID")]
+        public int MedicationID { get; set; }
+        public Medication Medication { get; set; }
     }
 }

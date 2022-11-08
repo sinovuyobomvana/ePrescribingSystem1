@@ -27,7 +27,7 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
         [Route("[area]/[controller]/[action]")]
         public async Task<IActionResult> Index()
         {
-            var eprescribingDBContext = _context.ConditionDiagnoses.Include(c => c.ApplicationUser);
+            var eprescribingDBContext = _context.ConditionDiagnoses.Include(m=>m.Medication).Include(c => c.ApplicationUser);
             return View(await eprescribingDBContext.ToListAsync());
         }
 
@@ -83,6 +83,8 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
 
             ViewBag.Users = Users;
 
+            ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "Name");
+
             //ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "FirstName");
             //ViewData["ApplicationUserIdL"] = new SelectList(_context.Users, "Id", "LastName");
 
@@ -94,7 +96,7 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConditionID,ICD_10_CODE,Diagnosis,DiagnosisDate,ApplicationUserId,Allergy")] ConditionDiagnosis conditionDiagnosis)
+        public async Task<IActionResult> Create([Bind("ConditionID,ICD_10_CODE,Diagnosis,DiagnosisDate,ApplicationUserId,Allergy,MedicationID,Doctor")] ConditionDiagnosis conditionDiagnosis)
         {
             if (ModelState.IsValid)
             {

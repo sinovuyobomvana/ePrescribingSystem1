@@ -24,6 +24,9 @@
             <th>
                Patient
             </th>
+              <th>
+                @Html.DisplayNameFor(model => model.Medication)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Allergy)
             </th>
@@ -40,11 +43,14 @@
                 @Html.DisplayFor(modelItem => item.Diagnosis)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DiagnosisDate)
+                @Html.DisplayFor(modelItem => item.DiagnosisDate.Date)
             </td>
             <td>
                     @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)   @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medication.Name)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Allergy)
             </td>
