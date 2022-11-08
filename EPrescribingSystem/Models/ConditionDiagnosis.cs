@@ -25,5 +25,7 @@ namespace EPrescribingSystem.Models
         public string ApplicationUserId { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
+
+        public string Allergy { get; set; }
     }
 }

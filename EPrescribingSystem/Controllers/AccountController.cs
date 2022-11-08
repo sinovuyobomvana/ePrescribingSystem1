@@ -275,7 +275,7 @@ namespace EPrescribingSystem.Controllers
                         else if (role == "Patient")
                             return RedirectToAction("PDashboard", "Home", new { area = "Patient" });
                         else if (role == "Doctor")
-                            return RedirectToAction("Dashboard", "Home", new { area = "Doctor" });
+                            return RedirectToAction("Index", "Dashboard", new { area = "Doctor" });
                         else if (role == "Pharmacist")
                             return RedirectToAction("Index", "Pharmacist", new { area = "Pharmacist" });
                       

@@ -3,7 +3,7 @@
 namespace EPrescribingSystem.Areas.Doctor.Controllers
 {
     [Area("Doctor")]
-    public class PrescriptionController : Controller
+    public class DashboardController : Controller
     {
         [Route("[area]/[controller]/[action]")]
         public IActionResult Index()
