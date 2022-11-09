@@ -9,9 +9,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EPrescribingSystem.Areas.Parent.Controllers
+namespace Chungwa.Areas.Parent.Controllers
 {
-    [Area("Admin")]
+    [Area("Patient")]
     public class ProfileController : Controller
     {
         private readonly IAccountRepository _accountRepository;
