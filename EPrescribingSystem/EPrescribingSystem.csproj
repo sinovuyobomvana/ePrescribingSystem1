@@ -19,10 +19,8 @@
     <Folder Include="Areas\Doctor\Data\" />
     <Folder Include="Areas\Doctor\Models\" />
     <Folder Include="Areas\Doctor\ViewModel\" />
-    <Folder Include="Areas\Patient\Controllers\" />
     <Folder Include="Areas\Patient\Data\" />
     <Folder Include="Areas\Patient\Models\" />
-    <Folder Include="Areas\Patient\Views\" />
     <Folder Include="Areas\Pharmacist\Data\" />
     <Folder Include="Areas\Pharmacist\Models\" />
   </ItemGroup>
