@@ -65,6 +65,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
                 _context.Add(disease);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Disease added Successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(disease);

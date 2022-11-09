@@ -64,6 +64,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
                 _context.Add(activeIngredient);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = " Active Ingredient added Successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(activeIngredient);

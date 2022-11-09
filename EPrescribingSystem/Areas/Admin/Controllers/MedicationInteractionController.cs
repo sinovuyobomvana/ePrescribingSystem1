@@ -68,6 +68,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
                 _context.Add(medicationInteraction);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Medication Interaction added Successfully!";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ActiveIngredientID"] = new SelectList(_context.ActiveIngredients, "ActiveIngredientID", "ActiveIngredientID", medicationInteraction.ActiveIngredientID);

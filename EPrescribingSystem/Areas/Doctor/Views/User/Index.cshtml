@@ -77,9 +77,9 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                <a asp-controller="ConditionDiagnosis" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-info float-right"><i class="fas fa-pencil-alt">Medical History</i></a>
+                                <a asp-controller="ConditionDiagnosis" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-info"><i class="fas fa-pencil-alt"> Add Medical History</i></a> |
 
-                                 <a asp-controller="Prescription" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-info float-right "><i class="fas fa-pencil-alt">Prescription</i></a> |
+                                 <a asp-controller="Prescription" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-info"><i class="fas fa-pencil-alt"> Add Prescription</i></a> 
                                 </td>
                             </tr>
 
@@ -102,3 +102,30 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function openSuccessModal(strMessage) {
+        var myDiv = document.getElementById("MyModalSuccessAlertBody");
+        myDiv.innerHTML = strMessage;
+        $('#myModalSuccess').modal('show');
+
+        window.setTimeout(function () {
+            $('#myModalSuccess').modal('hide');
+        }, 3000);
+    }
+
+    $(document).ready(function () {
+        var msg = "@TempData["SuccessMessage"]";
+
+        if (msg) {
+            openSuccessModal(msg);
+        }
+
+        //debugger;
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+    });
+</script>

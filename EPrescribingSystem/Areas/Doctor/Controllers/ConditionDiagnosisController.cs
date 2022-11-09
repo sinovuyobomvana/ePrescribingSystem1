@@ -102,9 +102,11 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
             {
                 _context.Add(conditionDiagnosis);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = " Medical history added Successfully!";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", conditionDiagnosis.ApplicationUserId);
+           
             return View(conditionDiagnosis);
         }
 

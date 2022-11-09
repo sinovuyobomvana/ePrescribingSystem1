@@ -71,6 +71,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             {
                 _context.Add(contraIndication);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = " Contra-Indication added Successfully!";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ActiveIngredientID"] = new SelectList(_context.ActiveIngredients, "ActiveIngredientID", "ActiveIngredientID", contraIndication.ActiveIngredientID);

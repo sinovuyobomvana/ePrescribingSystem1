@@ -47,3 +47,30 @@
 <div style="right: 25px;" class="text-white">
     <a asp-controller="MedicationInteraction" asp-action="Create" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Add Medication Interactions</a>
 </div>
+<script type="text/javascript">
+    function openSuccessModal(strMessage) {
+        var myDiv = document.getElementById("MyModalSuccessAlertBody");
+        myDiv.innerHTML = strMessage;
+        $('#myModalSuccess').modal('show');
+
+        window.setTimeout(function () {
+            $('#myModalSuccess').modal('hide');
+        }, 3000);
+    }
+
+    $(document).ready(function () {
+        var msg = "@TempData["SuccessMessage"]";
+
+        if (msg) {
+            openSuccessModal(msg);
+        }
+
+        //debugger;
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+    });
+</script>

@@ -137,7 +137,7 @@
                     @Html.DisplayFor(modelItem => item.Doctor.FirstName)  @Html.DisplayFor(modelItem => item.Doctor.LastName)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.PrescriptionID">Prescription Details</a>
+                    <a asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.PrescriptionID">View Prescription Details</a>
                 </td>
             </tr>
         }

@@ -108,7 +108,8 @@ namespace EPrescribingSystem.Areas.Doctor.Controllers
             //{
                 _context.Add(prescription);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            TempData["SuccessMessage"] = " Prescription added Successfully!";
+            return RedirectToAction(nameof(Index));
            // }
             //ViewData["ApplicationUserID"] = new SelectList(_context.Users, "Id", "Id", prescription.ApplicationUserID);
             //ViewData["MedicationID"] = new SelectList(_context.Medications, "MedicationID", "MedicationID", prescription.MedicationID);
