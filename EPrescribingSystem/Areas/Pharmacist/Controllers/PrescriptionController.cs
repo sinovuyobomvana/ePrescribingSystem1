@@ -52,6 +52,35 @@ namespace EPrescribingSystem.Areas.Pharmacist.Controllers
                 return NotFound();
             }
 
+
+            return View(prescription);
+        }
+
+        // GET: Pharmacist/Prescription/Details/5
+        [HttpGet]
+        [Route("[area]/[controller]/[action]/{id?}")]
+        public async Task<IActionResult> Details1(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var prescription = await _context.Prescriptions
+                .Include(p => p.ApplicationUser)
+                .Include(p => p.Doctor)
+                .Include(p => p.Med2)
+                .Include(p => p.Medication)
+                .Include(p => p.Medicine3)
+                .Include(p => p.Pharmacy)
+                .FirstOrDefaultAsync(m => m.PrescriptionID == id);
+            if (prescription == null)
+            {
+                return NotFound();
+            }
+
+            TempData["SuccessMessage"] = "Medication Dispensed Successfully!";
+
             return View(prescription);
         }
 
@@ -94,7 +123,7 @@ namespace EPrescribingSystem.Areas.Pharmacist.Controllers
         // GET: Pharmacist/Prescription/Edit/5
         [HttpGet]
         [Route("[area]/[controller]/[action]/{id?}")]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit1(int? id)
         {
             
             if (id == null)
@@ -124,6 +153,7 @@ namespace EPrescribingSystem.Areas.Pharmacist.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("[area]/[controller]/[action]/{id?}")]
         public async Task<IActionResult> Edit(int id, [Bind("PrescriptionID,PrescriptionDate,DispensingDate,Instruction,Quantity,NumberOfRepeats,NumberOfRepeatsLeft,MedicationID,Instruction2,Quantity2,NumberOfRepeats2,NumberOfRepeatsLeft2,Med2ID,Instruction3,Quantity3,NumberOfRepeats3,NumberOfRepeatsLeft3,Medicine3ID,PharmacyID,ApplicationUserID,DoctorID")] Prescription prescription)
         {
             if (id != prescription.PrescriptionID)
@@ -135,6 +165,19 @@ namespace EPrescribingSystem.Areas.Pharmacist.Controllers
             {
                 try
                 {
+                    if (prescription.MedicationID == id)
+                    {
+                        prescription.NumberOfRepeatsLeft--;
+                    }else if(prescription.Med2ID == id)
+                    {
+                        prescription.NumberOfRepeatsLeft2--;
+                    }
+                    else if(prescription.Medicine3ID == id)
+                    {
+                        prescription.NumberOfRepeatsLeft3--;
+                    }
+
+
                     prescription.DispensingDate= DateTime.Now;
                     _context.Update(prescription);
                     await _context.SaveChangesAsync();
