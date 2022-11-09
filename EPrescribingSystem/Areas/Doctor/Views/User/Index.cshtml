@@ -22,12 +22,12 @@
             <strong>Success!</strong> This alert box could indicate a successful or positive action.
         </div>
     }
-    <h1 class="text-center">User Roles</h1>
+  
 
     <div class="container-fluid">
         <div class="align-items-center mb-4">
             <div class="align-items-center mb-4">
-                <h2 class="text-dark text-center">Search for patient</h2>
+                <h1 class="text-dark text-center">Search for patient</h1>
             </div>
         </div>
         <div class="card-body">
@@ -40,7 +40,7 @@
                     <label class="form-label"><strong>ID Number:</strong></label>
                     <input type="text" maxlength="13" min="13" placeholder="" required value="@ViewData["GetIDNumber"]" name="idNumber" />
                 </div>
-                <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Search users</button></div>
+                <div class="mb-3"><button class="btn btn-outline-info btn-sm" type="submit">Search users</button></div>
             </form>
             <br />
             <br />
@@ -63,10 +63,23 @@
                                 <td>@user.IDNumber</td>
                             </tr>
                             <tr>
+                                <td>Date Of Birth</td>
+                                <td>@user.DateOfBirth</td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td>@user.Gender</td>
+                            </tr>
+                            <tr>
+                                <td>Contact Details</td>
+                                <td>@user.PhoneNumber @user.Email</td>
+                            </tr>
+                            <tr>
+                                <td></td>
                                 <td>
-                                <a asp-controller="ConditionDiagnosis" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt">Medical History</i>  </a>
-                                <br />
-                                <a asp-controller="Prescription" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-primary"><i class="fas fa-pencil-alt">Prescription</i></a>
+                                <a asp-controller="ConditionDiagnosis" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-info float-right"><i class="fas fa-pencil-alt">Medical History</i></a>
+
+                                 <a asp-controller="Prescription" asp-action="Create" asp-route-id="@user.Id" class="btn btn-outline-info float-right "><i class="fas fa-pencil-alt">Prescription</i></a> |
                                 </td>
                             </tr>
 

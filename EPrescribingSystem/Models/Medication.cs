@@ -24,11 +24,11 @@ namespace EPrescribingSystem.Models
         [Display(Name = "Strength 1")]
         public string Strength { get; set; }
         [Display(Name = "Active Ingredient 2")]
-        public int ActiveIngredientID2 { get; set; }
+        public int? ActiveIngredientID2 { get; set; }
         [Display(Name = "Strength 2")]
         public string Strength2 { get; set; }
         [Display(Name = "Active Ingredient 3")]
-        public int ActiveIngredientID3 { get; set; }
+        public int? ActiveIngredientID3 { get; set; }
         [Display(Name = "Strength 3")]
         public string Strength3 { get; set; }
 
