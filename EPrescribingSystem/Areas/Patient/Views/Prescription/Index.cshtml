@@ -5,7 +5,7 @@
     Layout = "_Layout";
 }
 
-<h3>My Prescription</h3>
+<h2>My Prescription</h2>
 
 <table id="example" class="table">
     <thead>
@@ -143,3 +143,8 @@
         }
     </tbody>
 </table>
+    <script>
+        $(document).ready(function () {
+            $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+        });
+    </script>

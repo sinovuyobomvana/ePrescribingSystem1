@@ -1,0 +1,68 @@
+﻿@model IEnumerable<EPrescribingSystem.Models.ConditionDiagnosis>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<h2>My Medical History</h2>
+
+<table id="example" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ICD_10_CODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diagnosis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiagnosisDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Allergy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medication)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ICD_10_CODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiagnosisDate)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName) @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.FirstName)  @Html.DisplayFor(modelItem => item.Doctor.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Allergy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medication.Name)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    <script>
+        $(document).ready(function () {
+            $('.navbar-dark').find('[href="' + window.location.pathname + '"]').parent().addClass('active')
+        });
+    </script>
