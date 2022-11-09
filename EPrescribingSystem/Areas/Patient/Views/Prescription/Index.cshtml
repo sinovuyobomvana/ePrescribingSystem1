@@ -2,20 +2,18 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_Layout";
 }
 
-<h1>Index</h1>
+<h3>My Prescription</h3>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table id="example" class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.PrescriptionDate)
             </th>
-            <th style ="display:none">
+            <th style="display:none">
                 @Html.DisplayNameFor(model => model.DispensingDate)
             </th>
             <th style="display:none">
@@ -63,87 +61,85 @@
             <th style="display:none">
                 @Html.DisplayNameFor(model => model.Medicine3)
             </th>
-            <th>
+            <td style="display:none">
                 @Html.DisplayNameFor(model => model.Pharmacy)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ApplicationUserID)
             </th>
-            <th >
+            <th>
                 @Html.DisplayNameFor(model => model.Doctor)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrescriptionDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DispensingDate)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrescriptionDate)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Instruction)
-            </td>
+                    @Html.DisplayFor(modelItem => item.DispensingDate)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
+                    @Html.DisplayFor(modelItem => item.Instruction)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.NumberOfRepeats)
-            </td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.NumberOfRepeatsLeft)
-            </td>
+                    @Html.DisplayFor(modelItem => item.NumberOfRepeats)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Medication.MedicationID)
-            </td>
+                    @Html.DisplayFor(modelItem => item.NumberOfRepeatsLeft)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Instruction2)
-            </td>
+                    @Html.DisplayFor(modelItem => item.Medication.MedicationID)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Quantity2)
-            </td>
+                    @Html.DisplayFor(modelItem => item.Instruction2)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.NumberOfRepeats2)
-            </td>
+                    @Html.DisplayFor(modelItem => item.Quantity2)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.NumberOfRepeatsLeft2)
-            </td>
+                    @Html.DisplayFor(modelItem => item.NumberOfRepeats2)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Med2.MedicationID)
-            </td>
+                    @Html.DisplayFor(modelItem => item.NumberOfRepeatsLeft2)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Instruction3)
-            </td>
+                    @Html.DisplayFor(modelItem => item.Med2.MedicationID)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Quantity3)
-            </td>
+                    @Html.DisplayFor(modelItem => item.Instruction3)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.NumberOfRepeats3)
-            </td>
+                    @Html.DisplayFor(modelItem => item.Quantity3)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.NumberOfRepeatsLeft3)
-            </td>
+                    @Html.DisplayFor(modelItem => item.NumberOfRepeats3)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Medicine3.MedicationID)
-            </td>
+                    @Html.DisplayFor(modelItem => item.NumberOfRepeatsLeft3)
+                </td>
                 <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Pharmacy.AddressLine1)
-            </td>
-            <td >
+                    @Html.DisplayFor(modelItem => item.Medicine3.MedicationID)
+                </td>
+                <td style="display:none">
+                    @Html.DisplayFor(modelItem => item.Pharmacy.Name)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)  @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)
-            </td>
-            <td>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Doctor.FirstName)  @Html.DisplayFor(modelItem => item.Doctor.LastName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PrescriptionID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PrescriptionID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PrescriptionID">Delete</a>
-            </td>
-        </tr>
-}
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.PrescriptionID">Prescription Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
