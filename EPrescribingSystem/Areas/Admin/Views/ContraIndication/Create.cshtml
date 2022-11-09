@@ -3,13 +3,13 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<h4>ContraIndication</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Add a new Contra-Indication</h1>
+        </p>
+        <div style="margin: auto;" class="row">
+            <div class="col-md-8 offset-2">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -21,13 +21,12 @@
                 <select asp-for="DiseaseID" class ="form-control" asp-items="ViewBag.DiseaseID"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="ContraIndication" asp-action="Index">Cancel</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    </div>
 </div>
 

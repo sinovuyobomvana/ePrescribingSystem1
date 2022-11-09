@@ -4,14 +4,16 @@ using EPrescribingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EPrescribingSystem.Migrations
 {
     [DbContext(typeof(EprescribingDBContext))]
-    partial class EprescribingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221109003212_mednulls")]
+    partial class mednulls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,8 +222,8 @@ namespace EPrescribingSystem.Migrations
                     b.Property<DateTime>("DiagnosisDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Doctor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ICD_10_CODE")
                         .HasColumnType("nvarchar(max)");
@@ -232,8 +234,6 @@ namespace EPrescribingSystem.Migrations
                     b.HasKey("ConditionID");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("DoctorID");
 
                     b.HasIndex("MedicationID");
 
@@ -794,10 +794,6 @@ namespace EPrescribingSystem.Migrations
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("EPrescribingSystem.Models.ApplicationUser", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorID");
-
                     b.HasOne("EPrescribingSystem.Models.Medication", "Medication")
                         .WithMany()
                         .HasForeignKey("MedicationID")
@@ -805,8 +801,6 @@ namespace EPrescribingSystem.Migrations
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("Doctor");
 
                     b.Navigation("Medication");
                 });

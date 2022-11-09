@@ -2,14 +2,25 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_Layout";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+@*Write Code*@
+<div class="text-center">
+    <h1>Contra-Indication Records</h1>
+</div>
+
+<br />
+<br />
+<div class="row">
+    <div class="align-items-center mb-4">
+        <div class="table-responsive-sm">
+            <table id="example" class="display nowrap" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -19,7 +30,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Disease.Diagnosis)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -36,11 +47,18 @@
                 @Html.DisplayFor(modelItem => item.Disease.Diagnosis)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ContraIndicationID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ContraIndicationID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ContraIndicationID">Delete</a>
+                    <a asp-controller="ContraIndication" asp-action="Edit" asp-route-id="@item.ContraIndicationID" class="btn btn-outline-primary"><i class="fas fa-pencil-alt"></i>Edit</a> |
+                    <a asp-controller="ContraIndication" asp-action="Details" asp-route-id="@item.ContraIndicationID" class="btn btn-outline-info"><i class="fas fa-eye"></i> Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ContraIndicationID" class="btn btn-danger text-white"><i class="fas fa-trash-alt"></i> Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+      </div>
+    </div>
+</div>
+
+<div style="right: 25px;" class="text-white">
+    <a asp-controller="ContraIndication" asp-action="Create" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Add New Contra-Indication </a>
+</div>

@@ -49,7 +49,7 @@ namespace EPrescribingSystem.Areas.Admin.Controllers
             return View(medicationViewModel);
         }
 
-        public string GetActiveIngredient(int Id)
+        public string GetActiveIngredient(int? Id)
         {
             string activeIngredientName;
 
